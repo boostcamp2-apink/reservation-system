@@ -137,11 +137,11 @@ CREATE TABLE RESERVATIONS(
 );
 
 CREATE TABLE RESERVATIONS_TICKETS(
-	`reservations_id` INT NOT NULL,
+	`reservation_id` INT NOT NULL,
     `product_price_id` INT NOT NULL,
     `count` INT NOT NULL,
-	primary key(`reservations_id`,`product_prices_id`),
-    foreign key(`reservations_id`) references RESERVATIONS(`id`) ON UPDATE CASCADE ON DELETE CASCADE,
+	primary key(`reservation_id`,`product_price_id`),
+    foreign key(`reservation_id`) references RESERVATIONS(`id`) ON UPDATE CASCADE ON DELETE CASCADE,
 	foreign key(`product_price_id`) references PRODUCTS_PRICES(`id`) ON UPDATE CASCADE ON DELETE CASCADE
 );
 
