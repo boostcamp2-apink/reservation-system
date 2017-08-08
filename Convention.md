@@ -51,6 +51,7 @@ URI|method|기능
 /products/{id}|GET|상품 상세 조회
 /products/{id}/images|GET|선택된 상품에 등록된 파일 조회
 
+
 2.3 images (file : 여기서는 image만 사용한다.) 
 
 
@@ -74,5 +75,27 @@ URI|method|기능
 URI|method|기능
 ----|-------|----
 /login|GET|네이버 아이디 로그인 화면으로 이동
-/login/check|GET|로그인이 유효한지 검사 이후 유효하면 redirect:/{다음페이지}  유효하지 않으면 login화면
+/login/check|GET|로그인이 유효한지 검사 이후 유효하면 redirect:/{다음페이지}  유효하지 않으면 login화면  
+  
+3.Controller
+==============
+
+추가(c): register  
+읽기(r): get  
+수정(u): modify  
+삭제(d): remove  
+
+3.1 products
+  
+method|내용
+------|-----
+getProducts|메인페이지 상품 목록
+
+
+
+
+
+
+
+
 
