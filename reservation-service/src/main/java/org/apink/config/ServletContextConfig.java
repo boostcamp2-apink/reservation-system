@@ -27,8 +27,8 @@ public class ServletContextConfig extends WebMvcConfigurerAdapter {
 	public ViewResolver viewResolver() {
 		InternalResourceViewResolver viewResolver = new InternalResourceViewResolver();
 		viewResolver.setViewClass(JstlView.class);
-		viewResolver.setPrefix("/WEB-INF/views/");
-		viewResolver.setSuffix(".jsp");
+		viewResolver.setPrefix("../resources/html/");
+		viewResolver.setSuffix(".html");
 		return viewResolver;
 	}
 
@@ -46,20 +46,5 @@ public class ServletContextConfig extends WebMvcConfigurerAdapter {
 		registry.addResourceHandler("/jsp_resources/**").addResourceLocations("/resources/");
 		registry.addResourceHandler("/fd/**").addResourceLocations(fileLocation);
 	}
-
-//	@Override
-//	public void addInterceptors(InterceptorRegistry registry) {
-//		// login interceptor
-//		registry.addInterceptor(new SecurityInterceptor()).addPathPatterns("/myreservation/**")
-//				.addPathPatterns("/reservation/**").addPathPatterns("/api/reservation/**")
-//				.addPathPatterns("/session/**");
-//	}
-//
-//	@Override
-//	public void addArgumentResolvers(List<HandlerMethodArgumentResolver> argumentResolvers) {
-//		argumentResolvers.add(new ReservationUserArgumentResolver());
-//	}
-	
-	
 
 }
