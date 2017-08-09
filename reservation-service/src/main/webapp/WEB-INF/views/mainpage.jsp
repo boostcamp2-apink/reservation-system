@@ -1,7 +1,7 @@
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page session="false"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-                 pageEncoding="UTF-8"%>
+         pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="ko">
 
@@ -33,7 +33,11 @@
                             <div class="prev_inn">
                                 <a href="#" class="btn_pre_e" title="이전"> <i class="spr_book_event spr_event_pre">이전</i> </a>
                             </div>
+<<<<<<< HEAD
                         </div>i
+=======
+                        </div>
+>>>>>>> C_apink
                         <div class="nxt_e">
                             <div class="nxt_inn">
                                 <a href="#" class="btn_nxt_e" title="다음"> <i class="spr_book_event spr_event_nxt">다음</i> </a>
