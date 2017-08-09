@@ -95,12 +95,12 @@ getProductByid|id값에 따른 상품 상세 정보
 
 
 
-4. DAO
-===============
-추가(c): insert
-읽기(r): select  
-수정(u): update  
-삭제(d): delete  
+4. DAO  
+===============  
+추가(c): insert  
+읽기(r): select    
+수정(u): update   
+삭제(d): delete   
 
 method|내용
 ------------
