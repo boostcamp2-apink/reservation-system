@@ -5,6 +5,8 @@
 	var taet = "teasdasd";
 })(window);
 
+
+
 var commonFunctions = {
 
     bindEventOnClick: function ($wrapperDom, $targetDom, func) {
