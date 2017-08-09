@@ -24,6 +24,15 @@ public class ServletContextConfig extends WebMvcConfigurerAdapter {
 	private String fileLocation;
 
 	@Bean
+	public ViewResolver viewResolver(){
+		InternalResourceViewResolver viewResolver = new InternalResourceViewResolver();
+		viewResolver.setViewClass(JstlView.class);
+		viewResolver.setPrefix("/WEB-INF/views/");
+		viewResolver.setSuffix(".jsp");
+		return viewResolver;
+	}
+
+	@Bean
 	public MultipartResolver multipartResolver() {
 		org.springframework.web.multipart.commons.CommonsMultipartResolver multipartResolver = new org.springframework.web.multipart.commons.CommonsMultipartResolver();
 		multipartResolver.setMaxUploadSize(1024*1024*10); // 10 mb

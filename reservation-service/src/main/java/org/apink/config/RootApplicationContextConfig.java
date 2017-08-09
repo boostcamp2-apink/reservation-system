@@ -7,8 +7,8 @@ import org.springframework.context.annotation.Import;
 
 @Configuration
 @ComponentScan(basePackages = {
-        "org.apink.reservation.mapper",
-        "org.apink.reservation.service"
+        "org.apink.mapper",
+        "org.apink.service"
 })
 @Import({DbConfig.class})
 public class RootApplicationContextConfig {
