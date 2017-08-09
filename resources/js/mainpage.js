@@ -17,7 +17,6 @@ var commonFunctions = {
             data: data
         })
     }
-
 }
 
 
