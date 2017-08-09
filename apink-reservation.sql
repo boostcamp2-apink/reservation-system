@@ -10,8 +10,8 @@ CREATE  TABLE USERS (
   `sns_type` varchar(10)  NULL,
   `sns_profile` varchar(255)  NULL,
   `admin_flag` INT NOT NULL,
-  `create_date` DATETIME NULL ,
-  `modify_date` DATETIME NULL ,
+  `create_date` DATETIME DEFAULT CURRENT_TIMESTAMP NOT NULL,
+  `modify_date` DATETIME DEFAULT CURRENT_TIMESTAMP NOT NULL ,
   PRIMARY KEY (`id`) ,
   INDEX `idx1_username` (`username` ASC) ,
   INDEX `idx2_email` (`email` ASC),
@@ -37,8 +37,8 @@ CREATE TABLE PRODUCTS (
   `sales_end` DATETIME NULL,
   `sales_flag` INT(1) NOT NULL,
   `event` VARCHAR(4000),
-  `create_date` DATETIME,
-  `modify_date` DATETIME,
+  `create_date` DATETIME DEFAULT CURRENT_TIMESTAMP NOT NULL,
+  `modify_date` DATETIME DEFAULT CURRENT_TIMESTAMP NOT NULL,
   `comment_count` INT default 0 NOT NULL,
   `total_score` INT default 0 NOT NULL,
   PRIMARY KEY(`id`),
@@ -58,8 +58,8 @@ CREATE TABLE PRODUCTS_DISPLAY(
   `tel` VARCHAR(20) ,
   `homepage` VARCHAR(255),
   `email` VARCHAR(255),
-  `create_date` DATETIME,
-  `modify_date` DATETIME,
+  `create_date` DATETIME DEFAULT CURRENT_TIMESTAMP NOT NULL,
+  `modify_date` DATETIME DEFAULT CURRENT_TIMESTAMP NOT NULL,
   PRIMARY KEY(`id`),
   FOREIGN KEY(`product_id`) REFERENCES PRODUCTS(`id`) ON UPDATE CASCADE ON DELETE CASCADE
 );
@@ -67,8 +67,8 @@ CREATE TABLE PRODUCTS_DISPLAY(
 CREATE TABLE PRODUCTS_DETAIL(
   `product_id` INT NOT NULL,
   `content` TEXT,
-  `create_date` DATETIME,
-  `modify_date` DATETIME,
+  `create_date` DATETIME DEFAULT CURRENT_TIMESTAMP NOT NULL,
+  `modify_date` DATETIME DEFAULT CURRENT_TIMESTAMP NOT NULL,
   PRIMARY KEY(`product_id`),
   FOREIGN KEY(`product_id`) REFERENCES PRODUCTS(`id`) ON UPDATE CASCADE ON DELETE CASCADE
 );
@@ -85,8 +85,8 @@ CREATE TABLE PRODUCTS_PRICES (
   `product_price_type_id` INT NOT NULL,
   `price` INT NOT NULL,
   `discount_rate` DECIMAL(5,2) NOT NULL,
-  `create_date` DATETIME,
-  `modify_date` DATETIME,
+  `create_date` DATETIME DEFAULT CURRENT_TIMESTAMP NOT NULL,
+  `modify_date` DATETIME DEFAULT CURRENT_TIMESTAMP NOT NULL,
   PRIMARY KEY(`id`),
   FOREIGN KEY(`product_id`) REFERENCES PRODUCTS(`id`) ON UPDATE CASCADE ON DELETE CASCADE,
   FOREIGN KEY(`product_price_type_id`) REFERENCES PRODUCTS_PRICES_TYPES(`id`) ON UPDATE CASCADE ON DELETE CASCADE
@@ -102,8 +102,8 @@ CREATE TABLE FILES (
   `file_length` INT NOT NULL,
   `content_type` VARCHAR(255) NOT NULL,
   `delete_flag` INT(1) NOT NULL,
-  `create_date` DATETIME,
-  `modify_date` DATETIME,
+  `create_date` DATETIME DEFAULT CURRENT_TIMESTAMP NOT NULL,
+  `modify_date` DATETIME DEFAULT CURRENT_TIMESTAMP NOT NULL,
   PRIMARY KEY(`id`),
   FOREIGN KEY(`user_id`) REFERENCES USERS(`id`)
 );
@@ -131,8 +131,8 @@ CREATE TABLE RESERVATIONS(
   `reservation_date` DATETIME NOT NULL,
   `reservation_type` INT,
   `total_price` INT,
-  `create_date` DATETIME,
-  `modify_date` DATETIME,
+  `create_date` DATETIME DEFAULT CURRENT_TIMESTAMP NOT NULL,
+  `modify_date` DATETIME DEFAULT CURRENT_TIMESTAMP NOT NULL,
   PRIMARY KEY(`id`),
   FOREIGN KEY(`product_id`) REFERENCES PRODUCTS(`id`) ON UPDATE CASCADE ON DELETE CASCADE,
   FOREIGN KEY(`user_id`) REFERENCES USERS(`id`) ON UPDATE CASCADE ON DELETE CASCADE
@@ -142,6 +142,8 @@ CREATE TABLE RESERVATIONS_TICKETS(
 	`reservation_id` INT NOT NULL,
     `product_price_id` INT NOT NULL,
     `count` INT NOT NULL,
+    `create_date` DATETIME DEFAULT CURRENT_TIMESTAMP NOT NULL,
+    `modify_date` DATETIME DEFAULT CURRENT_TIMESTAMP NOT NULL,
 	primary key(`reservation_id`,`product_price_id`),
     foreign key(`reservation_id`) references RESERVATIONS(`id`) ON UPDATE CASCADE ON DELETE CASCADE,
 	foreign key(`product_price_id`) references PRODUCTS_PRICES(`id`) ON UPDATE CASCADE ON DELETE CASCADE
@@ -154,8 +156,8 @@ CREATE TABLE COMMENTS (
   `user_id` INT NOT NULL,
   `score` DECIMAL(2,1) NOT NULL,
   `comment` TEXT NOT NULL,
-  `create_date` DATETIME,
-  `modify_date` DATETIME,
+  `create_date` DATETIME DEFAULT CURRENT_TIMESTAMP NOT NULL,
+  `modify_date` DATETIME DEFAULT CURRENT_TIMESTAMP NOT NULL,
   PRIMARY KEY(`id`),
   FOREIGN KEY(`product_id`) REFERENCES PRODUCTS(`id`) ON UPDATE CASCADE ON DELETE CASCADE,
   FOREIGN KEY(`user_id`) REFERENCES USERS(`id`) ON UPDATE CASCADE ON DELETE CASCADE
@@ -165,7 +167,10 @@ CREATE TABLE COMMENTS_IMAGES (
   `id` INT NOT NULL AUTO_INCREMENT,
   `comment_id` INT NOT NULL,
   `file_id` INT NOT NULL,
+  `create_date` DATETIME DEFAULT CURRENT_TIMESTAMP NOT NULL,
+  `modify_date` DATETIME DEFAULT CURRENT_TIMESTAMP NOT NULL,
   PRIMARY KEY(`id`),
   FOREIGN KEY(`comment_id`) REFERENCES COMMENTS(`id`) ON UPDATE CASCADE ON DELETE CASCADE,
   FOREIGN KEY(`file_id`) REFERENCES FILES(`id`) ON UPDATE CASCADE ON DELETE CASCADE
 );
+
