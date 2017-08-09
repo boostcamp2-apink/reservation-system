@@ -77,8 +77,8 @@ URI|method|기능
 /login|GET|네이버 아이디 로그인 화면으로 이동
 /login/check|GET|로그인이 유효한지 검사 이후 유효하면 redirect:/{다음페이지}  유효하지 않으면 login화면  
   
-3.Controller
-==============
+3.Controller, Service
+==================
 
 추가(c): register  
 읽기(r): get  
@@ -90,9 +90,20 @@ URI|method|기능
 method|내용
 ------|-----
 getProducts|메인페이지 상품 목록
+getProductByid|id값에 따른 상품 상세 정보
 
 
 
+
+4. DAO
+===============
+추가(c): insert
+읽기(r): select  
+수정(u): update  
+삭제(d): delete  
+
+method|내용
+------------
 
 
 
