@@ -1,6 +1,6 @@
 package org.apink.mapper;
 
-import org.apink.domain.Product;
+import org.apink.domain.vo.MainPageProductVo;
 import org.apink.util.PagingHandler;
 
 import java.util.List;
@@ -8,6 +8,7 @@ import java.util.List;
 
 public interface ProductMapper {
 
-    List<Product> selectByCategoryId(int categoryId, PagingHandler pagingHandler);
-    List<Product> selectAll(PagingHandler pagingHandler);
+    List<MainPageProductVo> selectByCategoryId(int categoryId, PagingHandler pagingHandler);
+
+    List<MainPageProductVo> selectAll(PagingHandler pagingHandler);
 }

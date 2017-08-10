@@ -1,7 +1,6 @@
 package org.apink.domain;
 
 import java.sql.Date;
-import java.util.List;
 
 @SuppressWarnings("unused")
 public class Product {
@@ -21,12 +20,25 @@ public class Product {
     private int commentCount;
     private int totalScore;
 
-    //In Products_Display Table
-    private String placeName;
 
-    //In Products_Image
-    private List<Integer> imageIdList;
-
+    @Override
+    public String toString() {
+        return "Product{" +
+                "id=" + id +
+                ", categoryId=" + categoryId +
+                ", representFileId=" + representFileId +
+                ", name='" + name + '\'' +
+                ", description='" + description + '\'' +
+                ", salesStart=" + salesStart +
+                ", salesEnd=" + salesEnd +
+                ", salesFlag=" + salesFlag +
+                ", event='" + event + '\'' +
+                ", createDate=" + createDate +
+                ", modifyDate=" + modifyDate +
+                ", commentCount=" + commentCount +
+                ", totalScore=" + totalScore +
+                '}';
+    }
 
     public int getId() {
         return id;
@@ -130,21 +142,5 @@ public class Product {
 
     public void setTotalScore(int totalScore) {
         this.totalScore = totalScore;
-    }
-
-    public String getPlaceName() {
-        return placeName;
-    }
-
-    public void setPlaceName(String placeName) {
-        this.placeName = placeName;
-    }
-
-    public List<Integer> getImageIdList() {
-        return imageIdList;
-    }
-
-    public void setImageIdList(List<Integer> imageIdList) {
-        this.imageIdList = imageIdList;
     }
 }

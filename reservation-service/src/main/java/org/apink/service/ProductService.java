@@ -1,13 +1,13 @@
 package org.apink.service;
 
-import org.apink.domain.Product;
+import org.apink.domain.vo.MainPageProductVo;
 import org.apink.util.PagingHandler;
 
 import java.util.List;
 
 public interface ProductService {
 
-    List<Product> getByCategoryId(int categoryId, PagingHandler pagingHandler);
+    List<MainPageProductVo> getByCategoryId(int categoryId, PagingHandler pagingHandler);
 
-    List<Product> getAll(PagingHandler pagingHandler);
+    List<MainPageProductVo> getAll(PagingHandler pagingHandler);
 }

@@ -1,6 +1,6 @@
 package org.apink.service.implement;
 
-import org.apink.domain.Product;
+import org.apink.domain.vo.MainPageProductVo;
 import org.apink.mapper.ProductMapper;
 import org.apink.service.ProductService;
 import org.apink.util.PagingHandler;
@@ -20,11 +20,11 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public List<Product> getByCategoryId(int categoryId, PagingHandler pagingHandler) {
+    public List<MainPageProductVo> getByCategoryId(int categoryId, PagingHandler pagingHandler) {
         if (pagingHandler == null) {
 
         }
-        List<Product> products;
+        List<MainPageProductVo> products;
         if (categoryId == 0) {
             products = getAll(pagingHandler);
         } else {
@@ -35,7 +35,7 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public List<Product> getAll( PagingHandler pagingHandler) {
+    public List<MainPageProductVo> getAll( PagingHandler pagingHandler) {
         return productMapper.selectAll(pagingHandler);
     }
 }
