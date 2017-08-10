@@ -20,7 +20,7 @@ public class ProductSql {
                     "ON products.id = products_display.product_id " +
                     "WHERE category_id=:category_id " +
                     "LIMIT :pagePerNum OFFSET :offset;";
-    public final static String COUNT_ALL = "SELECT count(*) count  FROM product";
+    public final static String COUNT_ALL = "SELECT count(*) AS count FROM products";
     public final static String COUNT_BY_CATEGORY = "SELECT count(*) count  FROM product WHERE category_id=:id";
 
     public final static String SELECT_PRODUCT_NAME_BY_PRODUCT_ID =
