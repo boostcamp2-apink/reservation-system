@@ -27,4 +27,6 @@ public class MainViewController {
         model.addAttribute("product", productService.getAll(new PagingHandler(1)));
         return "mainpage";
     }
+
+
 }
