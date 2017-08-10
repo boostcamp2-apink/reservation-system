@@ -4,6 +4,7 @@ import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.*;
 
 import org.apink.config.RootApplicationContextConfig;
+import org.apink.util.PagingHandler;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,8 +26,7 @@ public class ProductDaoTest {
 
 	@Test
 	public void shoudSelectAll() {
-		
-//		System.out.println(productDao.selectPlaceNameByProductId(13));
+		System.out.println(productDao.selectByCategoryId(1,new PagingHandler(1)).toString());
 	}
 	@Test
 	public void shouldPriceSelect() {

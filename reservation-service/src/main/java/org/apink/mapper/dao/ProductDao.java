@@ -1,6 +1,6 @@
 package org.apink.mapper.dao;
 
-import org.apink.domain.Product;
+import org.apink.domain.vo.MainPageProductVo;
 import org.apink.mapper.ProductMapper;
 import org.apink.mapper.dao.sql.ProductSql;
 import org.apink.util.PagingHandler;
@@ -20,7 +20,7 @@ public class ProductDao implements ProductMapper {
 
     private NamedParameterJdbcTemplate jdbc; // sql 을 실행하기 위해 사용되는 객체
     private SimpleJdbcInsert insertAction; // insert 를 편리하게 하기 위한 객체
-    private RowMapper<Product> rowMapper = BeanPropertyRowMapper.newInstance(Product.class); // 칼럼 이름을 보통 user_name 과 같이 '_'를 활용하는데 자바는 낙타표기법을 사용한다 이것을 자동 맵핑한다.
+    private RowMapper<MainPageProductVo> rowMapper = BeanPropertyRowMapper.newInstance(MainPageProductVo.class); // 칼럼 이름을 보통 user_name 과 같이 '_'를 활용하는데 자바는 낙타표기법을 사용한다 이것을 자동 맵핑한다.
 
     public ProductDao(DataSource dataSource) {
         this.jdbc = new NamedParameterJdbcTemplate(dataSource);
@@ -30,16 +30,16 @@ public class ProductDao implements ProductMapper {
     }
 
     @Override
-    public List<Product> selectByCategoryId(int categoryId, PagingHandler pagingHandler) {
+    public List<MainPageProductVo> selectByCategoryId(int categoryId, PagingHandler pagingHandler) {
         Map<String, Object> params = new HashMap<>();
-        params.put("id", categoryId);
+        params.put("category_id", categoryId);
         params.put("offset", pagingHandler.getOffset());
         params.put("pagePerNum", pagingHandler.getPagePerNum());
         return jdbc.query(ProductSql.SELECT_BY_CATEGORY_ID, params, rowMapper);
     }
 
     @Override
-    public List<Product> selectAll(PagingHandler pagingHandler) {
+    public List<MainPageProductVo> selectAll(PagingHandler pagingHandler) {
         Map<String, Object> params = new HashMap<>();
         params.put("offset", pagingHandler.getOffset());
         params.put("pagePerNum", pagingHandler.getPagePerNum());
