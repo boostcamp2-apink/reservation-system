@@ -10,4 +10,6 @@ public interface ProductService {
     List<MainPageProductVo> getByCategoryId(int categoryId, PagingHandler pagingHandler);
 
     List<MainPageProductVo> getAll(PagingHandler pagingHandler);
+
+    int countAll();
 }

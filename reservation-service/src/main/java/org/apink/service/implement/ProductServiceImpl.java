@@ -38,4 +38,9 @@ public class ProductServiceImpl implements ProductService {
     public List<MainPageProductVo> getAll( PagingHandler pagingHandler) {
         return productMapper.selectAll(pagingHandler);
     }
+
+    @Override
+    public int countAll() {
+        return productMapper.countAll();
+    }
 }

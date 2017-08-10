@@ -16,7 +16,7 @@ public class CategoryServiceImpl implements CategoryService {
 	CategoryDao dao;
 
 	@Override
-	public Category insert(Category category) {
+	public Category register(Category category) {
 		int id;
 		id = dao.insert(category);
 		
@@ -28,7 +28,7 @@ public class CategoryServiceImpl implements CategoryService {
 	}
 
 	@Override
-	public Category selectById(int id) {
+	public Category getById(int id) {
 		
 		if(id<=0) {
 			return null;
@@ -39,12 +39,12 @@ public class CategoryServiceImpl implements CategoryService {
 	}
 
 	@Override
-	public List<Category> selectAll() {
+	public List<Category> getAll() {
 		return dao.selectAll();
 	}
 
 	@Override
-	public boolean update(Category category) {
+	public boolean modify(Category category) {
 		if (dao.update(category) != 0)
 			return true;
 		else
@@ -52,7 +52,7 @@ public class CategoryServiceImpl implements CategoryService {
 	}
 
 	@Override
-	public boolean delete(int id) {
+	public boolean removeById(int id) {
 		if (dao.delete(id) != 0) {
 			return true;
 		} else {

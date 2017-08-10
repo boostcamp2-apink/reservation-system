@@ -45,4 +45,10 @@ public class ProductDao implements ProductMapper {
         params.put("pagePerNum", pagingHandler.getPagePerNum());
         return jdbc.query(ProductSql.SELECT_ALL, params, rowMapper);
     }
+
+    @Override
+    public int countAll() {
+        Map<String, ?> params = null;
+        return jdbc.queryForObject(ProductSql.COUNT_ALL, params, Integer.class);
+    }
 }

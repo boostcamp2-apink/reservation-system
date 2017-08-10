@@ -50,7 +50,7 @@ public class CategoryDao implements CategoryMapper{
 
 		@Override
 	    public List<Category> selectAll() {
-	    	return jdbc.query(CategorySqls.SELECT_ALL,rowMapper);
+	    	return jdbc.query(CategorySqls.SELECT_ALL, rowMapper);
 	    }
 
 

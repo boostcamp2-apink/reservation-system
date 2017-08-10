@@ -7,13 +7,13 @@ import java.util.List;
 
 public interface CategoryService {
 
-    Category insert(Category category);
+    Category register(Category category);
 
-    Category selectById(int id);
+    Category getById(int id);
 
-    List<Category> selectAll();
+    List<Category> getAll();
 
-    boolean update(Category category);
+    boolean modify(Category category);
 
-    boolean delete(int id);
+    boolean removeById(int id);
 }

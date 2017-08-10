@@ -11,4 +11,6 @@ public interface ProductMapper {
     List<MainPageProductVo> selectByCategoryId(int categoryId, PagingHandler pagingHandler);
 
     List<MainPageProductVo> selectAll(PagingHandler pagingHandler);
+
+    int countAll();
 }
