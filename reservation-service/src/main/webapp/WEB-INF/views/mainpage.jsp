@@ -80,7 +80,7 @@
             </div>
             <div class="section_event_tab">
                 <ul class="event_tab_lst tab_lst_min">
-                    <li class="item" data-category="${productCount}">
+                    <li class="item" data-category="0" data-productCount="${productCount}">
                         <a class="anchor active"> <span>전체</span> </a>
                     </li>
                     <c:forEach var="category" items="${categories}">
@@ -95,7 +95,7 @@
                 <div class="wrap_event_box">
                     <!-- [D] lst_event_box 가 2컬럼으로 좌우로 나뉨, 더보기를 클릭할때마다 좌우 ul에 li가 추가됨 -->
 
-                    <ul class="lst_event_box">
+                    <ul class="lst_event_box" id ="left_box">
                         <c:forEach var="product" items="${products}" begin="0" step="2" varStatus="status">
                             <li class="item">
                                 <a href="#" class="item_book">
@@ -110,7 +110,7 @@
                             </li>
                         </c:forEach>
                     </ul>
-                    <ul class="lst_event_box">
+                    <ul class="lst_event_box" id ="right_box">
                         <c:forEach var="product" items="${products}" begin="1" step="2" varStatus="status">
                             <li class="item">
                                 <a href="#" class="item_book">
@@ -143,8 +143,8 @@
         </div>
     </footer>
 
-    <script src='http://code.jquery.com/jquery-latest.min.js'></script>
-    <script src="/resources/js/mainpage.js"></script>
+    <script type="text/javascript" src="/resources/js/node_modules/requirejs/require.js"></script>
+    <script type="text/javascript" src="/resources/js/mainpage/mainpage.js"></script>
 </body>
 
 </html>
