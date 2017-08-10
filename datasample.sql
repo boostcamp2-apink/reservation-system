@@ -166,3 +166,8 @@ INSERT INTO products_detail
         (product_id, content)
     VALUES
             (10, "내용이 없습니다.");
+            
+--products_prices_types            
+insert into products_prices_types (product_price_type, description) values ("일반", "성인 (만 19세 이상) 덕수궁 입장료 포함");
+insert into products_prices_types (product_price_type, description) values ("청소년", "청소년(만7세~만18세) 덕수궁 입장료 포함");
+insert into products_prices_types (product_price_type, description) values ("어린이", "미취학 아동(만 48개월 이상) 덕수궁 입장료 포함");
