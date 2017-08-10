@@ -1,6 +1,6 @@
 package org.apink.mapper.dao.sql;
 
-public class CategorySqls {
+public class CategorySql {
 
 	public final static String SELECT_BY_ID =
 			"SELECT id, name, product_count " +
