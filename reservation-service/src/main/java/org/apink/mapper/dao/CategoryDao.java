@@ -3,7 +3,7 @@ package org.apink.mapper.dao;
 
 import org.apink.domain.Category;
 import org.apink.mapper.CategoryMapper;
-import org.apink.mapper.dao.sql.CategorySqls;
+import org.apink.mapper.dao.sql.CategorySql;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.namedparam.BeanPropertySqlParameterSource;
@@ -45,12 +45,12 @@ public class CategoryDao implements CategoryMapper{
 	    public Category selectById(int id){
 	        Map<String, Object> params = new HashMap<>();
 	        params.put("id", id);
-	        return jdbc.queryForObject(CategorySqls.SELECT_BY_ID,params,rowMapper);
+	        return jdbc.queryForObject(CategorySql.SELECT_BY_ID,params,rowMapper);
 	    }
 
 		@Override
 	    public List<Category> selectAll() {
-	    	return jdbc.query(CategorySqls.SELECT_ALL,rowMapper);
+	    	return jdbc.query(CategorySql.SELECT_ALL,rowMapper);
 	    }
 
 
@@ -59,7 +59,7 @@ public class CategoryDao implements CategoryMapper{
 		@Override
 	    public int update(Category category){
 	        SqlParameterSource params = new BeanPropertySqlParameterSource(category);
-	        return jdbc.update(CategorySqls.UPDATE_BY_ID, params);
+	        return jdbc.update(CategorySql.UPDATE_BY_ID, params);
 	    }
 
 	    
@@ -67,7 +67,7 @@ public class CategoryDao implements CategoryMapper{
 		@Override
 	    public int delete(int id){
 	        Map<String, ?> params = Collections.singletonMap("id", id);
-	        return jdbc.update(CategorySqls.DELETE_BY_ID, params);
+	        return jdbc.update(CategorySql.DELETE_BY_ID, params);
 	    }
 	    
 

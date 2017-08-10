@@ -7,7 +7,7 @@ public class ProductSql {
                     "name, " +
                     "description, " +
                     "place_name " +
-                    "FROM products INNER JOIN products_display " +
+                    "FROM products LEFT OUTER JOIN products_display " +
                     "ON products.id = products_display.product_id " +
                     "LIMIT :pagePerNum OFFSET :offset;";
     public final static String SELECT_BY_CATEGORY_ID =
@@ -16,7 +16,7 @@ public class ProductSql {
                     "name, " +
                     "description, " +
                     "place_name " +
-                    "FROM products INNER JOIN products_display " +
+                    "FROM products LEFT OUTER JOIN products_display " +
                     "ON products.id = products_display.product_id " +
                     "WHERE category_id=:category_id " +
                     "LIMIT :pagePerNum OFFSET :offset;";

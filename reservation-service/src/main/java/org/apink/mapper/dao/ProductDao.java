@@ -1,9 +1,12 @@
 package org.apink.mapper.dao;
 
+import org.apink.controller.api.CategoryRestController;
 import org.apink.domain.vo.MainPageProductVo;
 import org.apink.mapper.ProductMapper;
 import org.apink.mapper.dao.sql.ProductSql;
 import org.apink.util.PagingHandler;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
@@ -17,6 +20,8 @@ import java.util.Map;
 
 @Repository
 public class ProductDao implements ProductMapper {
+
+    public Logger logger = LoggerFactory.getLogger(ProductDao.class);
 
     private NamedParameterJdbcTemplate jdbc; // sql 을 실행하기 위해 사용되는 객체
     private SimpleJdbcInsert insertAction; // insert 를 편리하게 하기 위한 객체
@@ -41,6 +46,8 @@ public class ProductDao implements ProductMapper {
     @Override
     public List<MainPageProductVo> selectAll(PagingHandler pagingHandler) {
         Map<String, Object> params = new HashMap<>();
+        logger.debug(String.valueOf(pagingHandler.getOffset()));
+        logger.debug(String.valueOf(pagingHandler.getPagePerNum()));
         params.put("offset", pagingHandler.getOffset());
         params.put("pagePerNum", pagingHandler.getPagePerNum());
         return jdbc.query(ProductSql.SELECT_ALL, params, rowMapper);
