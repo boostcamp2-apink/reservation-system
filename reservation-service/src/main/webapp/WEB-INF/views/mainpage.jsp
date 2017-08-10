@@ -142,7 +142,21 @@
             <span class="copyright">© NAVER Corp.</span>
         </div>
     </footer>
-
+    <script id="product-main-template" type="text/apink-handlebars-template">
+        {{#each this}}
+        <li class="item">
+            <a href="#" class="item_book">
+                <div class="item_preview"> <img alt="{{name}}" class="img_thumb" src="https://ssl.phinf.net/naverbooking/20170303_271/1488514705030TuUK4_JPEG/17%B5%E5%B8%B2%B0%C9%C1%EE_%B8%DE%C0%CE%C6%F7%BD%BA%C5%CD_%C3%D6%C1%BE.jpg?type=l591_945">                                    <span class="img_border"></span> </div>
+                <div class="event_txt">
+                    <h4 class="event_txt_tit"> <span>{{name}}</span> <small class="sm">{{placeName}}</small> </h4>
+                    <p class="event_txt_dsc">
+                        {{description}}
+                    </p>
+                </div>
+            </a>
+        </li>
+        {{/each}}
+    </script>
     <script type="text/javascript" src="/resources/js/node_modules/requirejs/require.js"></script>
     <script type="text/javascript" src="/resources/js/mainpage/mainpage.js"></script>
 </body>
