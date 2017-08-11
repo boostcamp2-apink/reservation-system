@@ -11,12 +11,17 @@ require.config({
         MainpageModel:'mainpageModel',
         ProductList : 'ProductList',
         Rolling : '../components/Rolling',
-        Extend : '../utils/Extend'
+        Extend : '../utils/Extend',
+        MainTimeout : 'mainTimeout'
     }
 });
 
-require(['ProductList','Rolling'],function(ProductList,Rolling){
+require(['jquery','ProductList','Rolling','MainTimeout'],function($,ProductList,Rolling,MainTimeout){
 
     ProductList.init();
-    var rolling = new Rolling('div.container_visual',1,'div.prev_inn > a.btn_pre_e', 'div.nxt_inn > a.btn_nxt_e');
+    var rolling = new Rolling('ul.visual_img','div.prev_inn > a.btn_pre_e', 'div.nxt_inn > a.btn_nxt_e');
+
+    MainTimeout.init(rolling.animator.bind(rolling,"next"));
+    MainTimeout.setSafetySector('._safetySector');
+
 });

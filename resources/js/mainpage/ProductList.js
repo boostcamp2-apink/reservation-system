@@ -1,4 +1,4 @@
-define(['jquery','HandlebarsWrapper','MainpageModel'],function($,HandlebarsWrapper,mainpageModel){
+define(['HandlebarsWrapper','MainpageModel'],function(HandlebarsWrapper,mainpageModel){
 
     var page;
     var activeCategoryIndex;
