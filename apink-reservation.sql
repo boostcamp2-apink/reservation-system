@@ -74,9 +74,10 @@ CREATE TABLE PRODUCTS_DETAIL(
 );
 
 CREATE TABLE PRODUCTS_PRICES_TYPES(
-	`id` INT NOT NULL AUTO_INCREMENT,
-    `product_price_type` VARCHAR(255) NOT NULL,
-    PRIMARY KEY(`id`)
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `product_price_type` VARCHAR(50) NOT NULL,
+  `description` VARCHAR(250) NOT NULL,
+  PRIMARY KEY(`id`)
 );
 -- price_type : 1, 일반  2 :청소년 3: 어린이 , CODE 테이블이 사실 필요하다.
 CREATE TABLE PRODUCTS_PRICES (
