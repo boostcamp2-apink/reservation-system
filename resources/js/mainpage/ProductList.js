@@ -1,4 +1,4 @@
-define(['jquery','HandlebarsWrapper','mainpageModel'],function($,HandlebarsWrapper,mainpageModel){
+define(['HandlebarsWrapper','MainpageModel'],function(HandlebarsWrapper,mainpageModel){
 
     var page;
     var activeCategoryIndex;
@@ -29,7 +29,7 @@ define(['jquery','HandlebarsWrapper','mainpageModel'],function($,HandlebarsWrapp
     }
 
     function activeCategory(target) {
-        categories.find("li[data-category='" + activeCategoryIndex + "'] a").removeClass("active");
+        categories.find("li[data-category=" + activeCategoryIndex + "] a").removeClass("active");
         $(target).addClass("active");
         activeCategoryIndex = $(target).closest("li").data("category");
 
@@ -51,11 +51,12 @@ define(['jquery','HandlebarsWrapper','mainpageModel'],function($,HandlebarsWrapp
         }
 
 
-        HandlebarsWrapper.create("product-main-template",leftData,"append",left.selector);
-        HandlebarsWrapper.create("product-main-template",rightData,"append",right.selector);
+        HandlebarsWrapper.create("product-main-template",leftData,"append",left);
+        HandlebarsWrapper.create("product-main-template",rightData,"append",right);
+
 
         productCount
-            .html(categories.find("li[data-category=" + activeCategoryIndex +"']").data("productcount"));
+            .html(categories.find("li[data-category=" + activeCategoryIndex +"]").data("productcount"));
 
 
     }
