@@ -50,6 +50,7 @@ define(['jquery','HandlebarsWrapper','mainpageModel'],function($,HandlebarsWrapp
             }
         }
 
+
         HandlebarsWrapper.create("product-main-template",leftData,"append",left.selector);
         HandlebarsWrapper.create("product-main-template",rightData,"append",right.selector);
 
