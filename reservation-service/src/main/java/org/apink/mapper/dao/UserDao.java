@@ -1,13 +1,8 @@
 package org.apink.mapper.dao;
 
 import org.apink.domain.User;
-import org.apink.domain.vo.MainPageProductVo;
-import org.apink.domain.vo.ProductPriceVo;
-import org.apink.domain.vo.ReserveProductVo;
 import org.apink.mapper.UserMapper;
 import org.apink.mapper.dao.sql.UserSqls;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;

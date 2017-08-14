@@ -22,11 +22,11 @@ public class ReserveViewControllwe {
         this.userService = userService;
     }
 
-    @GetMapping("/{id}/reserve")
-    public String reserveView(@PathVariable int id, Model model){
-        model.addAttribute("id", id);
-        model.addAttribute("product", productService.getSummaryByProductId(id));
-        model.addAttribute("prices", productService.getPriceByProductId(id));
+    @GetMapping("/{productId}/reserve")
+    public String reserveView(@PathVariable int productId, Model model){
+        model.addAttribute("id", productId);
+        model.addAttribute("product", productService.getSummaryByProductId(productId));
+        model.addAttribute("prices", productService.getPriceByProductId(productId));
 
         //TODO Get userId from a session || argumentResolver
         int userId = 1;

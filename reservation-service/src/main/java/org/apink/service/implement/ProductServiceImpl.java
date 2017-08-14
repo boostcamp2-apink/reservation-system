@@ -1,7 +1,7 @@
 package org.apink.service.implement;
 
 import org.apink.domain.vo.MainPageProductVo;
-import org.apink.domain.vo.ProductPriceVo;
+import org.apink.domain.ProductPrice;
 import org.apink.domain.vo.ReserveProductVo;
 import org.apink.mapper.ProductMapper;
 import org.apink.service.ProductService;
@@ -52,7 +52,7 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public List<ProductPriceVo> getPriceByProductId(int productId) {
+    public List<ProductPrice> getPriceByProductId(int productId) {
         return productMapper.selectPricesByProductId(productId);
     }
 }

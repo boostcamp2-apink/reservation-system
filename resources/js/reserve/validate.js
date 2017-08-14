@@ -1,5 +1,4 @@
-
-var Validate = (function(){
+define([], function () {
 
     var name;
     var tel;
@@ -9,6 +8,8 @@ var Validate = (function(){
     var reservBtn;
 
     init = function(){
+
+       $("div.agreement > a.btn_agreement").on("click", showAgreement);
 
         reservBtn = $(".box_bk_btn .bk_btn_wrap");
         name = $(".form_wrap #name");
@@ -21,6 +22,16 @@ var Validate = (function(){
         ticket = $("span#total_ticket");
         isValid();
     },
+    showAgreement = function(e){
+        e.preventDefault();
+        var target = $(e.target).closest("div.agreement");
+        isOpen = target.hasClass("open");
+        if(isOpen == false){
+            target.addClass("open");
+        } else {
+            target.removeClass("open");
+        }
+    };
 
     isValid = function(){
 
@@ -42,4 +53,4 @@ var Validate = (function(){
         isValid : isValid
     }
 
-})();
+});

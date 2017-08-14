@@ -165,35 +165,9 @@
     </footer>
 
 
-    <script type="text/javascript" src="/resources/js/node_modules/jquery/dist/jquery.js"></script>
-    <script type="text/javascript" src="/resources/js/node_modules/handlebars/dist/handlebars.js"></script>
-    <script type="text/javascript" src="/resources/js/node_modules/@egjs/component/dist/component.js"></script>
-    <%--<script type="text/javascript" src="/resources/js/utils/Extend.js"></script>--%>
-    <script src="/resources/js/reserve/reserve.js"></script>
-    <script src="/resources/js/reserve/ticket.js"></script>
-    <script src="/resources/js/reserve/validate.js"></script>
-    <script>
-        InputForReserve.init();
+    <script type="text/javascript" src="/resources/js/node_modules/requirejs/require.js"></script>
+    <script type="text/javascript" src="/resources/js/reserve/reserve.js"></script>
 
-        var tickets = [];
-        <c:forEach items="${prices}" varStatus ="status">
-            var ticket = new Ticket("#ticket" + ${status.index});
-            tickets.push(ticket);
-
-            ticket.on("change",function(e){
-                var totalTicket = 0;
-                tickets.forEach(function(ticket){
-                    totalTicket += ticket.getCount();
-                });
-                $("#total_ticket").text(totalTicket);
-                Validate.isValid();
-        }   );
-        </c:forEach>
-
-        Validate.init();
-
-
-    </script>
 </body>
 
 

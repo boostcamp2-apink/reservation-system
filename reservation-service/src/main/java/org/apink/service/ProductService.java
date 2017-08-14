@@ -1,7 +1,7 @@
 package org.apink.service;
 
 import org.apink.domain.vo.MainPageProductVo;
-import org.apink.domain.vo.ProductPriceVo;
+import org.apink.domain.ProductPrice;
 import org.apink.domain.vo.ReserveProductVo;
 import org.apink.util.PagingHandler;
 
@@ -17,7 +17,7 @@ public interface ProductService {
 
     ReserveProductVo getSummaryByProductId(int productId);
 
-    List<ProductPriceVo> getPriceByProductId(int productId);
+    List<ProductPrice> getPriceByProductId(int productId);
 
 
 

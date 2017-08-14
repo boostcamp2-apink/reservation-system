@@ -1,6 +1,6 @@
-package org.apink.domain.vo;
+package org.apink.domain;
 
-public class ProductPriceVo {
+public class ProductPrice {
 
     private int price;
     private int discountRate;
@@ -9,7 +9,7 @@ public class ProductPriceVo {
 
     @Override
     public String toString() {
-        return "ProductPriceVo{" +
+        return "ProductPrice{" +
                 "price=" + price +
                 ", discountRate=" + discountRate +
                 ", productPriceType=" + productPriceType +

@@ -18,11 +18,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User getByUserId(int userId) {
-        User user = userDao.selectByUserId(userId);
-        if(user.isValid()){
-            return user;
-        } else {
-            return null;
-        }
+        return userDao.selectByUserId(userId);
+
     }
 }

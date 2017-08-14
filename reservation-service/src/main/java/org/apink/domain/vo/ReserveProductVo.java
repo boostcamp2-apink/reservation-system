@@ -4,7 +4,7 @@ import org.apink.domain.Product;
 
 import java.sql.Date;
 
-public class ReserveProductVo extends Product{
+public class ReserveProductVo extends Product {
 
     private Date displayStart;
     private Date displayEnd;

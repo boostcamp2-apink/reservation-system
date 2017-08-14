@@ -1,8 +1,7 @@
 package org.apink.mapper.dao;
 
-import org.apink.controller.api.CategoryRestController;
 import org.apink.domain.vo.MainPageProductVo;
-import org.apink.domain.vo.ProductPriceVo;
+import org.apink.domain.ProductPrice;
 import org.apink.domain.vo.ReserveProductVo;
 import org.apink.mapper.ProductMapper;
 import org.apink.mapper.dao.sql.ProductSql;
@@ -29,7 +28,7 @@ public class ProductDao implements ProductMapper {
     private SimpleJdbcInsert insertAction; // insert 를 편리하게 하기 위한 객체
     private RowMapper<MainPageProductVo> rowMapper = BeanPropertyRowMapper.newInstance(MainPageProductVo.class);
     private RowMapper<ReserveProductVo> reserveProductVoRowMapper = BeanPropertyRowMapper.newInstance(ReserveProductVo.class);
-    private RowMapper<ProductPriceVo> productPriceVoRowMapper = BeanPropertyRowMapper.newInstance(ProductPriceVo.class);
+    private RowMapper<ProductPrice> productPriceVoRowMapper = BeanPropertyRowMapper.newInstance(ProductPrice.class);
 
     public ProductDao(DataSource dataSource) {
         this.jdbc = new NamedParameterJdbcTemplate(dataSource);
@@ -71,7 +70,7 @@ public class ProductDao implements ProductMapper {
     }
 
     @Override
-    public List<ProductPriceVo> selectPricesByProductId(int productId) {
+    public List<ProductPrice> selectPricesByProductId(int productId) {
         Map<String, Object> params = new HashMap<>();
         params.put("product_id", productId);
         return jdbc.query(ProductSql.SELECT_PRICES_BY_PRODUCT_TD, params, productPriceVoRowMapper);

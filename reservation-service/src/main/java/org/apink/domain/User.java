@@ -15,13 +15,6 @@ public class User {
     private Date createDate;
     private Date modifyDate;
 
-    public Boolean isValid(){
-        if(username != null || email != null || tel != null){
-            return true;
-        }
-        return false;
-    }
-
     @Override
     public String toString() {
         return "User{" +

@@ -1,21 +1,21 @@
 
-var InputForReserve = (function(){
+require.config({
 
-    function showAgreement(e){
-        e.preventDefault();
-        var target = $(e.target).closest("div.agreement");
-        isOpen = target.hasClass("open");
-        if(isOpen == false){
-            target.addClass("open");
-        } else {
-            target.removeClass("open");
-        }
-    };
+    baseUrl:"/resources/js/reserve",
 
-    function init(){
-       $("div.agreement > a.btn_agreement").on("click", showAgreement);
+    paths: {
+        jquery: '../node_modules/jquery/dist/jquery',
+        Component: '../node_modules/@egjs/component/dist/component',
+        AjaxWrapper : '../utils/AjaxWrapper',
+        Extend : '../utils/Extend',
+        Validate : 'validate',
+        ReserveTicket : 'reserveTicket'
     }
-    return {
-        init : init
-    }
-})();
+});
+
+require(['jquery','Ticket','Validate', 'ReserveTicket'],function($,Ticket, Validate, ReserveTicket){
+
+    Validate.init();
+    ReserveTicket.init();
+
+});
