@@ -63,7 +63,7 @@
                     </div>
                 </div>
                 <div class="section_booking_ticket">
-                    <div class="ticket_body">
+                    <div class="ticket_body _ticketContainer">
                         <%-- jstl 티켓 추가 --%>
                         <c:forEach var="price" items="${prices}" varStatus ="status">
                             <div class="qty" id="ticket${status.index}">
@@ -96,7 +96,6 @@
                                     </em>
                                 </div>
                             </div>
-
                         </c:forEach>
 
                     </div>
@@ -118,8 +117,9 @@
                                 </div>
                                 <div class="inline_form last"> <label class="label" for="message">예매내용</label>
                                     <div class="inline_control">
-                                        <p class="inline_txt selected">2017.2.17.(금)~2017.4.18.(화), 총
-                                            <span id="total_ticket">0</span>매
+                                        <p class="inline_txt selected">2017.2.17.(금)~2017.4.18.(화) <br>
+                                            총 <span id="total_ticket">0</span>매,
+                                            <span id="total_price">0</span>원
                                         </p>
                                     </div>
                                 </div>
@@ -163,7 +163,6 @@
             <span class="copyright">© NAVER Corp.</span>
         </div>
     </footer>
-
 
     <script type="text/javascript" src="/resources/js/node_modules/requirejs/require.js"></script>
     <script type="text/javascript" src="/resources/js/reserve/reserve.js"></script>
