@@ -31,8 +31,8 @@ define(['Slider'],function(Slider){
         slider.on("change",updateImageCount);
     }
 
-    function updateImageCount(){
-        $imageNum.text(slider.currentChildIndex);
+    function updateImageCount(data){
+        $imageNum.text(data.currentIndex);
     }
 
     return {
