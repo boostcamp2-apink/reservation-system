@@ -185,3 +185,6 @@ values (2, 1, 12000, 5);
 insert into products_prices (product_id, product_price_type_id, price, discount_rate)
 values (2, 2, 8000, 5);
 
+--users 
+insert into users (username, email, tel, nickname, sns_id, sns_type, sns_profile, admin_flag)
+values ("윤주형", "juhyung@naver.com", "010-2222-2222", "pink", "Facebook", "Facebook", "Facebook", 0);
