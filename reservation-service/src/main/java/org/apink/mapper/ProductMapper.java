@@ -1,8 +1,9 @@
 package org.apink.mapper;
 
+import org.apink.domain.vo.DetailPageProductVo;
 import org.apink.domain.vo.MainPageProductVo;
 import org.apink.domain.ProductPrice;
-import org.apink.domain.vo.ReserveProductVo;
+import org.apink.domain.vo.ReservePageProductVo;
 import org.apink.util.PagingHandler;
 
 import java.util.List;
@@ -14,9 +15,11 @@ public interface ProductMapper {
 
     List<MainPageProductVo> selectAll(PagingHandler pagingHandler);
 
+    DetailPageProductVo selectById(int productId);
+
     int countAll();
 
-    ReserveProductVo selectSummaryByProductId(int productId);
+    ReservePageProductVo selectSummaryByProductId(int productId);
 
     List<ProductPrice> selectPricesByProductId(int productId);
 }

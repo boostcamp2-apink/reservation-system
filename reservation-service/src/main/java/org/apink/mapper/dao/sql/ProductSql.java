@@ -21,37 +21,27 @@ public class ProductSql {
                     "WHERE category_id=:category_id " +
                     "LIMIT :pagePerNum OFFSET :offset;";
     public final static String COUNT_ALL = "SELECT count(*) AS count FROM products";
-    public final static String COUNT_BY_CATEGORY = "SELECT count(*) count  FROM product WHERE category_id=:id";
+    public final static String SELECT_BY_ID =
+            "SELECT products.id AS id, " +
+                    "represent_file_id, " +
+                    "name, " +
+                    "description, " +
+                    "event, "+
+                    "comment_count, "+
+                    "total_score, "+
+                    "place_name, " +
+                    "place_lot, "+
+                    "place_street, "+
+                    "tel, "+
+                    "homepage, "+
+                    "email, "+
+                    "content "+
+                    "FROM products LEFT OUTER JOIN products_display " +
+                    "ON products.id = products_display.product_id " +
+                    "LEFT OUTER JOIN products_detail " +
+                    "ON products.id = products_detail.product_id " +
+                    "WHERE products.id=:product_id ";
 
-    public final static String SELECT_PRODUCT_NAME_BY_PRODUCT_ID =
-            "SELECT name "
-                    + "FROM product "
-                    + "WHERE id = :productId";
-    public final static String SELECT_PLACE_NAME_BY_PRODUCT_ID =
-            "SELECT place_name "
-                    + "FROM display_info "
-                    + "WHERE product_id = :productId";
-    public static final String SELECT_BY_PRODUCT_ID =
-            "SELECT * "
-                    + "FROM  (display_info A right outer join product_detail B on A.product_id = B.product_id ) right outer join product C on B.product_id= C.id "
-                    + "WHERE C.id = :id ";
-    public static final String SELECT_REPRSENT_IMG_BY_PRODUCT_ID =
-            "SELECT file_id "
-                    + "FROM product_image "
-                    + "WHERE product_id=:id and type = 1 ;";
-    public static final String SELECT_IMAGES_BY_PRODUCT_ID =
-            "SELECT file_id "
-                    + "FROM product_image "
-                    + "WHERE product_id = :productId "
-                    + "order by type DESC ;";
-
-    public static final String SELECT_PLACE_NAME_BY_PRODUCT_ID_LIST =
-            "SELECT product_id, place_name "
-                    + "FROM display_info "
-                    + "WHERE product_id in (:productIdList)";
-
-
-    //TODO - juhyung
     public static final String SELECT_SUMMARY_BY_PRODUCT_ID =
             "SELECT p.id, p.name, p.represent_file_id, p.description, p.sales_start, p.sales_end, " +
                     "pd.display_start, pd.display_end, pd.place_name, pd.place_lot, pd.place_street " +

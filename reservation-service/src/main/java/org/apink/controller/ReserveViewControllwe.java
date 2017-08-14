@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
-@RequestMapping("/products")
+@RequestMapping("/reservations")
 public class ReserveViewControllwe {
 
     private ProductService productService;
@@ -22,7 +22,7 @@ public class ReserveViewControllwe {
         this.userService = userService;
     }
 
-    @GetMapping("/{productId}/reserve")
+    @GetMapping("/products/{productId}")
     public String reserveView(@PathVariable int productId, Model model){
         model.addAttribute("id", productId);
         model.addAttribute("product", productService.getSummaryByProductId(productId));

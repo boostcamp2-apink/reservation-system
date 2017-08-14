@@ -50,8 +50,10 @@ define(['HandlebarsWrapper','MainpageModel'],function(HandlebarsWrapper,mainpage
             }
         }
 
+
         HandlebarsWrapper.create("product-main-template",leftData,"append",left);
         HandlebarsWrapper.create("product-main-template",rightData,"append",right);
+
 
         productCount
             .html(categories.find("li[data-category=" + activeCategoryIndex +"]").data("productcount"));

@@ -4,7 +4,7 @@ import org.apink.domain.Product;
 
 import java.sql.Date;
 
-public class ReserveProductVo extends Product {
+public class ReservePageProductVo extends Product {
 
     private Date displayStart;
     private Date displayEnd;
@@ -15,7 +15,7 @@ public class ReserveProductVo extends Product {
     @Override
     public String toString() {
         return  super.toString() +
-                "ReserveProductVo{" +
+                "ReservePageProductVo{" +
                 "displayStart=" + displayStart +
                 ", displayEnd=" + displayEnd +
                 ", placeName='" + placeName + '\'' +

@@ -1,20 +1,30 @@
 define(['Extend', 'Component'], function (extend, Component) {
 
-    var Rolling = extend(Component, {
-        "init": function (rootTarget, prev, next) {
-            this.rootTarget = $(rootTarget);
-            this.prev = $(prev);
-            this.next = $(next);
-            this.rollingTargets = this.rootTarget.children();
-            this.targetCount = this.rollingTargets.length;
-            this.width = this.rollingTargets.width();
+    var Slider = extend(Component, {
+        "init": function (rootTarget) {
+            this.rootTarget = $(rootTarget) || this.rootTarget;
+            this.SliderTargets = this.rootTarget.children();
+            this.targetCount = this.SliderTargets.length;
+            this.width = this.SliderTargets.width();
             this.currentChildIndex;
             this.isAnimating = false;
             this.createFakeTarget();
-            this.setEvent();
+            console.log(this.rootTarget);
+
         }
     });
-    Rolling.prototype.createFakeTarget = function() {
+    
+    Slider.prototype.setButton = function(prev, next){
+        this.prev = $(prev);
+        this.next = $(next);
+        this.clickEvent();
+    };
+
+    Slider.prototype.setFlicking = function(){
+
+    };
+
+    Slider.prototype.createFakeTarget = function() {
         var fakeFirstChild = this.rootTarget.children(':first-child').clone();
         var fakeLastChild = this.rootTarget.children(':last-child').clone();
         this.rootTarget.append(fakeFirstChild);
@@ -24,11 +34,13 @@ define(['Extend', 'Component'], function (extend, Component) {
 
     };
 
-    Rolling.prototype.setEvent = function () {
+    Slider.prototype.clickEvent = function(){
         $(this.prev).on("click", this.clickPrev.bind(this));
         $(this.next).on("click", this.clickNext.bind(this));
     };
-    Rolling.prototype.clickPrev = function (){
+
+    Slider.prototype.clickPrev = function (e){
+        e.preventDefault();
         if (this.isAnimating) {
             return ;
         } else {
@@ -37,17 +49,19 @@ define(['Extend', 'Component'], function (extend, Component) {
         }
 
     };
-    Rolling.prototype.clickNext = function (){
+    Slider.prototype.clickNext = function (e){
+        e.preventDefault();
             if (this.isAnimating) {
                 return ;
             } else {
                 this.isAnimating = true;
                 this.animator('next');
             }
+
     };
 
     //direction value is "next" or "prev"
-    Rolling.prototype.animator = function(direction) {
+    Slider.prototype.animator = function(direction) {
         var moveSize;
         var moveIndex;
         if(direction === "next") {
@@ -76,9 +90,14 @@ define(['Extend', 'Component'], function (extend, Component) {
                     }
                     delete this.rootTarget.get(0).move;
                     this.isAnimating = false;
+                    this.trigger("change",{
+                        currentIndex : this.currentChildIndex
+                    });
                 }.bind(this)
             });
     };
 
-    return Rolling;
+
+
+    return Slider;
 });

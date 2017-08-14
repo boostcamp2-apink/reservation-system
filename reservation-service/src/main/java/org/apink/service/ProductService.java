@@ -1,8 +1,9 @@
 package org.apink.service;
 
+import org.apink.domain.vo.DetailPageProductVo;
 import org.apink.domain.vo.MainPageProductVo;
 import org.apink.domain.ProductPrice;
-import org.apink.domain.vo.ReserveProductVo;
+import org.apink.domain.vo.ReservePageProductVo;
 import org.apink.util.PagingHandler;
 
 import java.util.List;
@@ -13,9 +14,11 @@ public interface ProductService {
 
     List<MainPageProductVo> getAll(PagingHandler pagingHandler);
 
+    DetailPageProductVo getById(int productId);
+
     int countAll();
 
-    ReserveProductVo getSummaryByProductId(int productId);
+    ReservePageProductVo getSummaryByProductId(int productId);
 
     List<ProductPrice> getPriceByProductId(int productId);
 
