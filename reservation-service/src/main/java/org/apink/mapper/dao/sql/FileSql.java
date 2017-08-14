@@ -1,0 +1,11 @@
+package org.apink.mapper.dao.sql;
+
+public class FileSql {
+
+	public final static String SELECT_BY_ID =
+			"SELECT id, content_type, create_date, delete_flag, file_length, file_name, modify_date, save_file_name, user_id "+
+			"FROM files "+
+			"WHERE id=:id ;";
+	
+}
+
