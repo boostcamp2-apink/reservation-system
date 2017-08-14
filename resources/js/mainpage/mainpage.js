@@ -10,18 +10,20 @@ require.config({
         AjaxWrapper : '../utils/AjaxWrapper',
         MainpageModel:'mainpageModel',
         ProductList : 'ProductList',
-        Rolling : '../components/Rolling',
+        Slider : '../components/Slider',
         Extend : '../utils/Extend',
         MainTimeout : 'mainTimeout'
     }
 });
 
-require(['jquery','ProductList','Rolling','MainTimeout'],function($,ProductList,Rolling,MainTimeout){
+require(['jquery','ProductList','Slider','MainTimeout'],function($,ProductList,Slider,MainTimeout){
 
     ProductList.init();
-    var rolling = new Rolling('ul.visual_img','div.prev_inn > a.btn_pre_e', 'div.nxt_inn > a.btn_nxt_e');
+    var slider = new Slider('ul.visual_img');
+    slider.setButton('div.prev_inn > a.btn_pre_e', 'div.nxt_inn > a.btn_nxt_e');
 
-    MainTimeout.init(rolling.animator.bind(rolling,"next"));
+
+    MainTimeout.init(slider.animator.bind(slider,"next"));
     MainTimeout.setSafetySector('._safetySector');
 
 });

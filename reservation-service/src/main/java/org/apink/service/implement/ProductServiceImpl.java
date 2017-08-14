@@ -1,5 +1,6 @@
 package org.apink.service.implement;
 
+import org.apink.domain.vo.DetailPageProductVo;
 import org.apink.domain.vo.MainPageProductVo;
 import org.apink.mapper.ProductMapper;
 import org.apink.service.ProductService;
@@ -37,6 +38,11 @@ public class ProductServiceImpl implements ProductService {
     @Override
     public List<MainPageProductVo> getAll( PagingHandler pagingHandler) {
         return productMapper.selectAll(pagingHandler);
+    }
+
+    @Override
+    public DetailPageProductVo getById(int productId) {
+        return productMapper.selectById(productId);
     }
 
     @Override

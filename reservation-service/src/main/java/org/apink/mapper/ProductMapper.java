@@ -1,5 +1,6 @@
 package org.apink.mapper;
 
+import org.apink.domain.vo.DetailPageProductVo;
 import org.apink.domain.vo.MainPageProductVo;
 import org.apink.util.PagingHandler;
 
@@ -11,6 +12,8 @@ public interface ProductMapper {
     List<MainPageProductVo> selectByCategoryId(int categoryId, PagingHandler pagingHandler);
 
     List<MainPageProductVo> selectAll(PagingHandler pagingHandler);
+
+    DetailPageProductVo selectById(int productId);
 
     int countAll();
 }
