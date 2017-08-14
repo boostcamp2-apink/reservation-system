@@ -8,14 +8,15 @@ require.config({
         Component: '../node_modules/@egjs/component/dist/component',
         AjaxWrapper : '../utils/AjaxWrapper',
         Extend : '../utils/Extend',
-        Validate : 'validate',
-        ReserveTicket : 'reserveTicket'
+        Booker : 'Booker',
+        Ticket : '../components/Ticket',
+        TicketContainer : 'ticketContainer'
     }
 });
 
-require(['jquery','Ticket','Validate', 'ReserveTicket'],function($,Ticket, Validate, ReserveTicket){
+require(['jquery', 'Booker', 'TicketContainer'],function($, Booker, TicketContainer){
 
-    Validate.init();
-    ReserveTicket.init();
+    Booker.init();
+    TicketContainer.init(Booker.updateTicket);
 
 });
