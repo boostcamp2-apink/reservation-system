@@ -1,6 +1,8 @@
 package org.apink.service.implement;
 
 import org.apink.domain.vo.MainPageProductVo;
+import org.apink.domain.vo.ProductPriceVo;
+import org.apink.domain.vo.ReserveProductVo;
 import org.apink.mapper.ProductMapper;
 import org.apink.service.ProductService;
 import org.apink.util.PagingHandler;
@@ -42,5 +44,15 @@ public class ProductServiceImpl implements ProductService {
     @Override
     public int countAll() {
         return productMapper.countAll();
+    }
+
+    @Override
+    public ReserveProductVo getSummaryByProductId(int productId) {
+        return productMapper.selectSummaryByProductId(productId);
+    }
+
+    @Override
+    public List<ProductPriceVo> getPriceByProductId(int productId) {
+        return productMapper.selectPricesByProductId(productId);
     }
 }

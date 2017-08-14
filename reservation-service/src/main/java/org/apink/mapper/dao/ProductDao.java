@@ -2,6 +2,8 @@ package org.apink.mapper.dao;
 
 import org.apink.controller.api.CategoryRestController;
 import org.apink.domain.vo.MainPageProductVo;
+import org.apink.domain.vo.ProductPriceVo;
+import org.apink.domain.vo.ReserveProductVo;
 import org.apink.mapper.ProductMapper;
 import org.apink.mapper.dao.sql.ProductSql;
 import org.apink.util.PagingHandler;
@@ -25,7 +27,9 @@ public class ProductDao implements ProductMapper {
 
     private NamedParameterJdbcTemplate jdbc; // sql 을 실행하기 위해 사용되는 객체
     private SimpleJdbcInsert insertAction; // insert 를 편리하게 하기 위한 객체
-    private RowMapper<MainPageProductVo> rowMapper = BeanPropertyRowMapper.newInstance(MainPageProductVo.class); // 칼럼 이름을 보통 user_name 과 같이 '_'를 활용하는데 자바는 낙타표기법을 사용한다 이것을 자동 맵핑한다.
+    private RowMapper<MainPageProductVo> rowMapper = BeanPropertyRowMapper.newInstance(MainPageProductVo.class);
+    private RowMapper<ReserveProductVo> reserveProductVoRowMapper = BeanPropertyRowMapper.newInstance(ReserveProductVo.class);
+    private RowMapper<ProductPriceVo> productPriceVoRowMapper = BeanPropertyRowMapper.newInstance(ProductPriceVo.class);
 
     public ProductDao(DataSource dataSource) {
         this.jdbc = new NamedParameterJdbcTemplate(dataSource);
@@ -58,4 +62,19 @@ public class ProductDao implements ProductMapper {
         Map<String, ?> params = null;
         return jdbc.queryForObject(ProductSql.COUNT_ALL, params, Integer.class);
     }
+
+    @Override
+    public ReserveProductVo selectSummaryByProductId(int productId) {
+        Map<String, Object> params = new HashMap<>();
+        params.put("product_id", productId);
+        return jdbc.queryForObject(ProductSql.SELECT_SUMMARY_BY_PRODUCT_ID, params, reserveProductVoRowMapper);
+    }
+
+    @Override
+    public List<ProductPriceVo> selectPricesByProductId(int productId) {
+        Map<String, Object> params = new HashMap<>();
+        params.put("product_id", productId);
+        return jdbc.query(ProductSql.SELECT_PRICES_BY_PRODUCT_TD, params, productPriceVoRowMapper);
+    }
+
 }

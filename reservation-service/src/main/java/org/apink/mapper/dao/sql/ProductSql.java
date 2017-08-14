@@ -44,12 +44,26 @@ public class ProductSql {
                     + "FROM product_image "
                     + "WHERE product_id = :productId "
                     + "order by type DESC ;";
-    public static final String SELECT_PRICES_BY_PRODUCT_ID =
-            "SELECT * "
-                    + "FROM product_price "
-                    + "WHERE product_id = :productId ";
+
     public static final String SELECT_PLACE_NAME_BY_PRODUCT_ID_LIST =
             "SELECT product_id, place_name "
                     + "FROM display_info "
                     + "WHERE product_id in (:productIdList)";
+
+
+    //TODO - juhyung
+    public static final String SELECT_SUMMARY_BY_PRODUCT_ID =
+            "SELECT p.id, p.name, p.represent_file_id, p.description, p.sales_start, p.sales_end, " +
+                    "pd.display_start, pd.display_end, pd.place_name, pd.place_lot, pd.place_street " +
+                    "FROM products AS p LEFT OUTER JOIN products_display AS pd " +
+                    "ON p.id = pd.product_id " +
+                    "WHERE p.id = :product_id";
+
+    public static final String SELECT_PRICES_BY_PRODUCT_TD =
+            "SELECT pp.price, pp.discount_rate, " +
+                    "ppt.product_price_type, ppt.description " +
+                    "FROM products_prices AS pp INNER JOIN products_prices_types AS ppt " +
+                    "ON pp.product_price_type_id = ppt.id " +
+                    "WHERE pp.product_id = :product_id ";
+
 }
