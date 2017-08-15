@@ -11,19 +11,19 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
 @RequestMapping("/reservations")
-public class ReserveViewControllwe {
+public class ReserveViewController {
 
     private ProductService productService;
     private UserService userService;
 
     @Autowired
-    public ReserveViewControllwe(ProductService productService, UserService userService){
+    public ReserveViewController(ProductService productService, UserService userService) {
         this.productService = productService;
         this.userService = userService;
     }
 
     @GetMapping("/products/{productId}")
-    public String reserveView(@PathVariable int productId, Model model){
+    public String reserveView(@PathVariable int productId, Model model) {
         model.addAttribute("id", productId);
         model.addAttribute("product", productService.getSummaryByProductId(productId));
         model.addAttribute("prices", productService.getPriceByProductId(productId));

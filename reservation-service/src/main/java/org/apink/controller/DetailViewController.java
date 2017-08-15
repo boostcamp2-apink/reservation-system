@@ -19,16 +19,16 @@ public class DetailViewController {
     private CommentService commentService;
 
     @Autowired
-    public DetailViewController(ProductService productService,CommentService commentService) {
+    public DetailViewController(ProductService productService, CommentService commentService) {
 
         this.productService = productService;
         this.commentService = commentService;
     }
 
     @GetMapping("/{productId}")
-    public String detailView(Model model,@PathVariable Integer productId) {
-        model.addAttribute("product",productService.getById(productId));
-        model.addAttribute("comments",commentService.getByProductId(productId,new PagingHandler(1,3)));
+    public String detailView(Model model, @PathVariable Integer productId) {
+        model.addAttribute("product", productService.getById(productId));
+        model.addAttribute("comments", commentService.getByProductId(productId, new PagingHandler(1, 3)));
         return "detail";
     }
 }

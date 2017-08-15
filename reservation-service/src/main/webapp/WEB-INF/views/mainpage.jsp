@@ -91,13 +91,13 @@
                 </ul>
             </div>
             <div class="section_event_lst">
-                <p class="event_lst_txt">바로 예매 가능한 전시, 공연, 행사가 <span class="pink">${productCount}개</span> 있습니다</p>
+                <p class="event_lst_txt">바로 예매 가능한 전시, 공연, 행사가 <span class="pink">${productCount}</span>개 있습니다</p>
                 <div class="wrap_event_box">
                     <!-- [D] lst_event_box 가 2컬럼으로 좌우로 나뉨, 더보기를 클릭할때마다 좌우 ul에 li가 추가됨 -->
 
                     <ul class="lst_event_box" id ="left_box">
                         <c:forEach var="product" items="${products}" begin="0" step="2" varStatus="status">
-                            <li class="item">
+                            <li class="item" data_productId = ${product.id}>
                                 <a href="#" class="item_book">
                                     <div class="item_preview"> <img alt="${product.name}" class="img_thumb" src="https://ssl.phinf.net/naverbooking/20170303_271/1488514705030TuUK4_JPEG/17%B5%E5%B8%B2%B0%C9%C1%EE_%B8%DE%C0%CE%C6%F7%BD%BA%C5%CD_%C3%D6%C1%BE.jpg?type=l591_945">                                    <span class="img_border"></span> </div>
                                     <div class="event_txt">
@@ -112,7 +112,7 @@
                     </ul>
                     <ul class="lst_event_box" id ="right_box">
                         <c:forEach var="product" items="${products}" begin="1" step="2" varStatus="status">
-                            <li class="item">
+                            <li class="item" data_productId = ${product.id}>
                                 <a href="#" class="item_book">
                                     <div class="item_preview"> <img alt="${product.name}" class="img_thumb" src="https://ssl.phinf.net/naverbooking/20170303_271/1488514705030TuUK4_JPEG/17%B5%E5%B8%B2%B0%C9%C1%EE_%B8%DE%C0%CE%C6%F7%BD%BA%C5%CD_%C3%D6%C1%BE.jpg?type=l591_945">                                    <span class="img_border"></span> </div>
                                     <div class="event_txt">
@@ -144,7 +144,7 @@
     </footer>
     <script id="product-main-template" type="text/apink-handlebars-template">
         {{#each this}}
-        <li class="item">
+        <li class="item" data_prdoductId = {{id}}>
             <a href="#" class="item_book">
                 <div class="item_preview"> <img alt="{{name}}" class="img_thumb" src="https://ssl.phinf.net/naverbooking/20170303_271/1488514705030TuUK4_JPEG/17%B5%E5%B8%B2%B0%C9%C1%EE_%B8%DE%C0%CE%C6%F7%BD%BA%C5%CD_%C3%D6%C1%BE.jpg?type=l591_945">                                    <span class="img_border"></span> </div>
                 <div class="event_txt">
