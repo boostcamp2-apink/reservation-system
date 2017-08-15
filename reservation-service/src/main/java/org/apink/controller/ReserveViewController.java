@@ -22,6 +22,11 @@ public class ReserveViewController {
         this.userService = userService;
     }
 
+    @GetMapping
+    public String reservation() {
+        return "myreservation";
+    }
+
     @GetMapping("/products/{productId}")
     public String reserveView(@PathVariable int productId, Model model) {
         model.addAttribute("id", productId);
