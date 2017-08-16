@@ -71,7 +71,7 @@ define(['Extend', 'Component'], function (extend, Component) {
                 moveSize = this.width;
                 moveIndex = -1;
             }
-            this.transformAnimate(moveSize,moveIndex);
+            this.transformAnimate(moveSize, moveIndex);
 
         },
         transformAnimate: function (moveSize, moveIndex) {
