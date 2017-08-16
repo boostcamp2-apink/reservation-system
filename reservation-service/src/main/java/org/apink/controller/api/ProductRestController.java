@@ -1,6 +1,9 @@
 package org.apink.controller.api;
 
+import org.apink.domain.Comment;
+import org.apink.domain.vo.CommentVo;
 import org.apink.domain.vo.MainPageProductVo;
+import org.apink.service.CommentService;
 import org.apink.service.ProductService;
 import org.apink.util.PagingHandler;
 import org.slf4j.Logger;
@@ -14,12 +17,14 @@ import java.util.List;
 @RequestMapping("/api/products")
 public class ProductRestController {
 
-    public Logger logger = LoggerFactory.getLogger(ProductRestController.class);
     private ProductService productService;
+    private CommentService commentService;
+
 
     @Autowired
-    public ProductRestController(ProductService productService) {
+    public ProductRestController(ProductService productService, CommentService commentService) {
         this.productService = productService;
+        this.commentService = commentService;
     }
 
 
@@ -27,5 +32,11 @@ public class ProductRestController {
     public List<MainPageProductVo> getProductById(@PathVariable Integer productId) {
 
         return null;
+    }
+
+    @GetMapping("/{productId}/comments")
+    public List<CommentVo> getCommentsByProductId(@PathVariable int productId,
+                                                  @RequestParam int page, @RequestParam int pagePerNum){
+        return commentService.getByProductId(productId, new PagingHandler(page, pagePerNum));
     }
 }

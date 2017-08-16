@@ -6,6 +6,7 @@ import java.util.List;
 
 public class CommentVo extends Comment {
 
+    private String username;
     private List<Integer> images;
 
     public List<Integer> getImages() {
@@ -14,5 +15,12 @@ public class CommentVo extends Comment {
 
     public void setImages(List<Integer> images) {
         this.images = images;
+    }
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
     }
 }

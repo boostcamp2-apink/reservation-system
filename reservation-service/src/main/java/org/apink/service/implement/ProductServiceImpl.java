@@ -1,5 +1,6 @@
 package org.apink.service.implement;
 
+import org.apink.domain.Product;
 import org.apink.domain.vo.DetailPageProductVo;
 import org.apink.domain.vo.MainPageProductVo;
 import org.apink.domain.ProductPrice;
@@ -60,5 +61,10 @@ public class ProductServiceImpl implements ProductService {
     @Override
     public List<ProductPrice> getPriceByProductId(int productId) {
         return productMapper.selectPricesByProductId(productId);
+    }
+
+    @Override
+    public Product getByProductId(int productId) {
+        return productMapper.selectByProductId(productId);
     }
 }

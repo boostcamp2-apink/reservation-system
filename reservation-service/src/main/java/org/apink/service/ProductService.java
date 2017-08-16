@@ -1,5 +1,6 @@
 package org.apink.service;
 
+import org.apink.domain.Product;
 import org.apink.domain.vo.DetailPageProductVo;
 import org.apink.domain.vo.MainPageProductVo;
 import org.apink.domain.ProductPrice;
@@ -22,6 +23,6 @@ public interface ProductService {
 
     List<ProductPrice> getPriceByProductId(int productId);
 
-
+    Product getByProductId(int productId);
 
 }
