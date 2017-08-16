@@ -94,7 +94,6 @@ CREATE TABLE PRODUCTS_PRICES (
 );
 
 
-
 CREATE TABLE FILES (
   `id` INT NOT NULL AUTO_INCREMENT,
   `user_id` INT NOT NULL,
@@ -103,11 +102,12 @@ CREATE TABLE FILES (
   `file_length` INT NOT NULL,
   `content_type` VARCHAR(255) NOT NULL,
   `delete_flag` INT(1) NOT NULL,
-  `create_date` DATETIME DEFAULT CURRENT_TIMESTAMP NOT NULL,
-  `modify_date` DATETIME DEFAULT CURRENT_TIMESTAMP NOT NULL,
+  `create_date` DATETIME DEFAULT CURRENT_TIMESTAMP,
+  `modify_date` DATETIME DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY(`id`),
   FOREIGN KEY(`user_id`) REFERENCES USERS(`id`)
 );
+
 
 -- type : 대표이미지 - 1 , 부가이미지 - 2
 -- delete_flag 0 :삭제안됨, 1: 삭제된 이미지
