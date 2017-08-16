@@ -1,7 +1,7 @@
 
 define(['Extend', 'Component'], function (extend, Component) {
 
-    var Ticket = extend(Component, {
+    return extend(Component, {
         "init" : function(rootTarget){
             this.rootTarget = $(rootTarget);
             this.countEle = $(rootTarget + " .count_control_input");
@@ -63,7 +63,6 @@ define(['Extend', 'Component'], function (extend, Component) {
             return this.count * this.price;
         }
     });
-    return Ticket;
 });
 
 

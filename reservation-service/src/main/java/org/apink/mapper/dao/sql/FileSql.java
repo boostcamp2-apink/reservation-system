@@ -6,6 +6,11 @@ public class FileSql {
 			"SELECT id, content_type, create_date, delete_flag, file_length, file_name, modify_date, save_file_name, user_id "+
 			"FROM files "+
 			"WHERE id=:id ;";
+	public final static String SELECT_BY_COMMENTS_ID =
+			"SELECT comment_id,file_id "
+					+ "FROM comments_images "
+					+ "WHERE comment_id IN (:comments); ";
+
 	
 }
 

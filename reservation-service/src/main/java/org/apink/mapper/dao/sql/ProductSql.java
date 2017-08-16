@@ -10,6 +10,7 @@ public class ProductSql {
                     "FROM products LEFT OUTER JOIN products_display " +
                     "ON products.id = products_display.product_id " +
                     "LIMIT :pagePerNum OFFSET :offset;";
+
     public final static String SELECT_BY_CATEGORY_ID =
             "SELECT products.id AS id, " +
                     "represent_file_id, " +
@@ -20,7 +21,11 @@ public class ProductSql {
                     "ON products.id = products_display.product_id " +
                     "WHERE category_id=:category_id " +
                     "LIMIT :pagePerNum OFFSET :offset;";
-    public final static String COUNT_ALL = "SELECT count(*) AS count FROM products";
+
+    public final static String COUNT_ALL =
+            "SELECT count(*) AS count " +
+                    "FROM products";
+
     public final static String SELECT_BY_ID =
             "SELECT products.id AS id, " +
                     "represent_file_id, " +
@@ -49,11 +54,15 @@ public class ProductSql {
                     "ON p.id = pd.product_id " +
                     "WHERE p.id = :product_id";
 
-    public static final String SELECT_PRICES_BY_PRODUCT_TD =
+    public static final String SELECT_PRICES_BY_PRODUCT_ID =
             "SELECT pp.price, pp.discount_rate, " +
                     "ppt.product_price_type, ppt.description " +
                     "FROM products_prices AS pp INNER JOIN products_prices_types AS ppt " +
                     "ON pp.product_price_type_id = ppt.id " +
                     "WHERE pp.product_id = :product_id ";
 
+    public static final String SELECT_BY_PRODUCT_ID =
+            "SELECT name, comment_count, total_score " +
+                    "FROM products " +
+                    "WHERE id= :id";
 }

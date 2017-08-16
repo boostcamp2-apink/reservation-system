@@ -147,8 +147,8 @@
                                     <li class="list_item">
                                         <div>
                                             <div class="review_area">
-                                                <div class="thumb_area" data-images="[1,2,3,4]"> <!-- data-images=${comment.images} -->
-                                                    <a href="#" class="thumb" title="이미지 크게 보기"> <img width="90" height="90" class="img_vertical_top" src="http://naverbooking.phinf.naver.net/20170306_3/1488772023601A4195_JPEG/image.jpg?type=f300_300" alt="리뷰이미지"> </a> <span class="img_count">1</span>                                                </div>
+                                                <div class="thumb_area" data-images="${comment.images}">
+                                                    <a href="#" class="thumb" title="이미지 크게 보기"> <img width="90" height="90" class="img_vertical_top" src="/files/${comment.images[0]}" alt="리뷰이미지"> </a> <span class="img_count">${comment.images.size()}</span>                                                </div>
                                                 <h4 class="resoc_name">${product.name}</h4>
                                                 <p class="review">${comment.comment}</p>
                                             </div>
@@ -163,7 +163,7 @@
                         <p class="guide"> <i class="spr_book2 ico_bell"></i> <span>네이버 예약을 통해 실제 방문한 이용자가 남긴 평가입니다.</span> </p>
                     </div>
                 <c:if test="${product.commentCount > 3}">
-                    <a class="btn_review_more" href="#"> <span>예매자 한줄평 더보기</span> <i class="fn fn-forward1"></i> </a>
+                    <a class="btn_review_more" href="/products/${product.id}/comments"> <span>예매자 한줄평 더보기</span> <i class="fn fn-forward1"></i> </a>
                 </c:if>
                 </div>
                 <div class="section_info_tab">
@@ -248,7 +248,7 @@
         </div>
     </footer>
     <div id="photoview" style="display:none;">
-        <a class="popup_close">닫기</a>
+        <a class="popup_close" style = "color:white;">닫기</a>
         <div class="pagination">
             <div class="bg_pagination"></div>
             <div class="figure_pagination">
@@ -286,7 +286,7 @@
     <script id="comment-image-template" type="text/apink-handlebars-template">
         {{#each this}}
         <li class="item" style="width: 414px;">
-            <img alt="" class="img_thumb" src="https://ssl.phinf.net/naverbooking/20170119_135/1484789767866RPO6o_JPEG/%B7%CE%B9%CC%BF%C0%C1%D9%B8%AE%BF%A7_1242.jpg?type=ff1242_1242"> <span class="img_bg"></span>
+            <img alt="" class="img_thumb" src="/files/{{this}}"> <span class="img_bg"></span>
         </li>
         {{/each}}
     </script>

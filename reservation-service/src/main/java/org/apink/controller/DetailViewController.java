@@ -25,10 +25,20 @@ public class DetailViewController {
         this.commentService = commentService;
     }
 
-    @GetMapping("/{productId}")
-    public String detailView(Model model, @PathVariable Integer productId) {
-        model.addAttribute("product", productService.getById(productId));
-        model.addAttribute("comments", commentService.getByProductId(productId, new PagingHandler(1, 3)));
+
+    @GetMapping("/{productId}") //TODO Integer를 int로??
+    public String detailView(Model model,@PathVariable Integer productId) {
+        model.addAttribute("product",productService.getById(productId));
+        model.addAttribute("comments",commentService.getByProductId(productId,new PagingHandler(1,3)));
         return "detail";
+    }
+
+    //TODO 이 컨트롤러를 ProductController로 바꿀 필요가 있어보임
+    @GetMapping("/{productId}/comments")
+    public String conmmentsView(Model model, @PathVariable int productId){
+        model.addAttribute("id", productId);
+        model.addAttribute("product", productService.getByProductId(productId));
+        model.addAttribute("comments", commentService.getByProductId(productId, new PagingHandler(1,10)));
+        return "review";
     }
 }
