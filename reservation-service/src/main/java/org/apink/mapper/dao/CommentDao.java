@@ -1,6 +1,8 @@
 package org.apink.mapper.dao;
 
 
+import javafx.util.Pair;
+import org.apink.domain.vo.CommentImageVo;
 import org.apink.domain.vo.CommentVo;
 import org.apink.mapper.CommentMapper;
 import org.apink.mapper.dao.sql.CommentSql;
@@ -43,5 +45,7 @@ public class CommentDao implements CommentMapper {
         params.put("pagePerNum", pagingHandler.getPagePerNum());
         return jdbc.query(CommentSql.SELECT_BY_PRODUCT_ID, params, rowMapper);
     }
+
+
 
 }
