@@ -32,10 +32,6 @@ define(['HandlebarsWrapper','MainpageModel'],function(HandlebarsWrapper,mainpage
             page++;
             mainpageModel.getProductsByCategoryId(activeCategoryIndex,page,drawProducts);
         }
-        else {
-            console.log(productCount);
-        }
-
     }
     function changeCategory(e){
         activeCategory(e.currentTarget);

@@ -1,25 +1,48 @@
 package org.apink.controller;
 
+import org.apink.domain.Reservation;
 import org.apink.service.ProductService;
+import org.apink.service.ReservationService;
 import org.apink.service.UserService;
+import org.apink.util.PagingHandler;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
+
+import java.util.List;
 
 @Controller
 @RequestMapping("/reservations")
-public class ReserveViewController {
+public class ReservationController {
 
     private ProductService productService;
     private UserService userService;
+    private ReservationService reservationService;
 
     @Autowired
-    public ReserveViewController(ProductService productService, UserService userService) {
+    public ReservationController(ProductService productService, UserService userService, ReservationService reservationService) {
         this.productService = productService;
         this.userService = userService;
+        this.reservationService = reservationService;
+    }
+
+    @GetMapping
+    public String reservation(Model model) {
+        //TODO Get userId from a session || argumentResolver
+        int userId = 1;
+        model.addAttribute("reservations",reservationService.getByUserId(userId,new PagingHandler(1)));
+        return "myreservation";
+    }
+
+    @GetMapping("/test")
+    @ResponseBody
+    public List<Reservation> test() {
+        System.out.println(reservationService.getByUserId(1,new PagingHandler(1)).toString());
+        return reservationService.getByUserId(1,new PagingHandler(1));
     }
 
     @GetMapping("/products/{productId}")

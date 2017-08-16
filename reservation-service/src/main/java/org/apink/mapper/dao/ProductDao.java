@@ -7,6 +7,7 @@ import org.apink.domain.ProductPrice;
 import org.apink.domain.vo.ReservePageProductVo;
 import org.apink.mapper.ProductMapper;
 import org.apink.mapper.dao.sql.ProductSql;
+import org.apink.util.NamedParameterJdbcTemplateHandlingNull;
 import org.apink.util.PagingHandler;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -26,7 +27,7 @@ public class ProductDao implements ProductMapper {
 
     public Logger logger = LoggerFactory.getLogger(ProductDao.class);
 
-    private NamedParameterJdbcTemplate jdbc; // sql 을 실행하기 위해 사용되는 객체
+    private NamedParameterJdbcTemplateHandlingNull jdbc; // sql 을 실행하기 위해 사용되는 객체
     private SimpleJdbcInsert insertAction; // insert 를 편리하게 하기 위한 객체
 
     private RowMapper<MainPageProductVo> rowMapper = BeanPropertyRowMapper.newInstance(MainPageProductVo.class);
@@ -36,7 +37,7 @@ public class ProductDao implements ProductMapper {
     private RowMapper<Product> productRowMapper = BeanPropertyRowMapper.newInstance(Product.class);
 
     public ProductDao(DataSource dataSource) {
-        this.jdbc = new NamedParameterJdbcTemplate(dataSource);
+        this.jdbc = new NamedParameterJdbcTemplateHandlingNull(dataSource);
         this.insertAction = new SimpleJdbcInsert(dataSource)
                 .withTableName("products")
                 .usingGeneratedKeyColumns("id");
