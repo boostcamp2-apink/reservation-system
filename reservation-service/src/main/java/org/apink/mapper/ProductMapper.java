@@ -1,5 +1,6 @@
 package org.apink.mapper;
 
+import org.apink.domain.Product;
 import org.apink.domain.vo.DetailPageProductVo;
 import org.apink.domain.vo.MainPageProductVo;
 import org.apink.domain.ProductPrice;
@@ -22,4 +23,6 @@ public interface ProductMapper {
     ReservePageProductVo selectSummaryByProductId(int productId);
 
     List<ProductPrice> selectPricesByProductId(int productId);
+
+    Product selectByProductId(int productId);
 }

@@ -1,5 +1,6 @@
 package org.apink.mapper.dao;
 
+import org.apink.domain.Product;
 import org.apink.domain.vo.DetailPageProductVo;
 import org.apink.domain.vo.MainPageProductVo;
 import org.apink.domain.ProductPrice;
@@ -31,7 +32,8 @@ public class ProductDao implements ProductMapper {
     private RowMapper<MainPageProductVo> rowMapper = BeanPropertyRowMapper.newInstance(MainPageProductVo.class);
     private RowMapper<ProductPrice> productPriceVoRowMapper = BeanPropertyRowMapper.newInstance(ProductPrice.class);
     private RowMapper<ReservePageProductVo> reserveProductVoRowMapper = BeanPropertyRowMapper.newInstance(ReservePageProductVo.class);
-    private RowMapper<DetailPageProductVo> detailRowMapper = BeanPropertyRowMapper.newInstance(DetailPageProductVo.class); // 칼럼 이름을 보통 user_name 과 같이 '_'를 활용하는데 자바는 낙타표기법을 사용한다 이것을 자동 맵핑한다.
+    private RowMapper<DetailPageProductVo> detailRowMapper = BeanPropertyRowMapper.newInstance(DetailPageProductVo.class);
+    private RowMapper<Product> productRowMapper = BeanPropertyRowMapper.newInstance(Product.class);
 
     public ProductDao(DataSource dataSource) {
         this.jdbc = new NamedParameterJdbcTemplate(dataSource);
@@ -64,9 +66,7 @@ public class ProductDao implements ProductMapper {
         Map<String, Object> params = new HashMap<>();
         params.put("product_id", productId);
         return jdbc.queryForObject(ProductSql.SELECT_BY_ID, params, detailRowMapper);
-
     }
-
 
     @Override
     public int countAll() {
@@ -85,7 +85,14 @@ public class ProductDao implements ProductMapper {
     public List<ProductPrice> selectPricesByProductId(int productId) {
         Map<String, Object> params = new HashMap<>();
         params.put("product_id", productId);
-        return jdbc.query(ProductSql.SELECT_PRICES_BY_PRODUCT_TD, params, productPriceVoRowMapper);
+        return jdbc.query(ProductSql.SELECT_PRICES_BY_PRODUCT_ID, params, productPriceVoRowMapper);
+    }
+
+    @Override
+    public Product selectByProductId(int productId) {
+        Map<String, Object> params = new HashMap<>();
+        params.put("id", productId);
+        return jdbc.queryForObject(ProductSql.SELECT_BY_PRODUCT_ID, params, productRowMapper);
     }
 
 }
