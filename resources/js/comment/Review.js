@@ -35,6 +35,10 @@ define(['HandlebarsWrapper','CommentModel'],function(HandlebarsWrapper, commentM
 
                 url = "/api/products/" + productId + "/comments?page=" + nextPage + "&pagePerNum=" + pagePerNum;
                 commentModel.getCommentsByProductId(url, productId, nextPage, drawComments);
+
+                if(nextPage > 2){
+                    deleteElement("._comment", 0);
+                }
             }
         })
     },
@@ -53,6 +57,10 @@ define(['HandlebarsWrapper','CommentModel'],function(HandlebarsWrapper, commentM
                 lock = true;
             }
         })
+    },
+
+    deleteElement = function(id, index){
+        $(id).eq(index).empty();
     },
 
     incrementPage = function(){

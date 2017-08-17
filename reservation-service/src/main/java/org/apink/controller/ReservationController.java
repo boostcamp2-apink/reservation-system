@@ -8,12 +8,11 @@ import org.apink.util.PagingHandler;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
+import java.sql.Date;
 import java.util.List;
+
 
 @Controller
 @RequestMapping("/reservations")
@@ -55,5 +54,15 @@ public class ReservationController {
         int userId = 1;
         model.addAttribute("user", userService.getByUserId(userId));
         return "reserve";
+    }
+
+    @PostMapping
+    @ResponseBody
+    public Reservation addReservation(@RequestBody Reservation reservation){
+        //TODO Get userId from a session || argumentResolver
+        int userId = 1;
+        reservation.setUserId(userId);
+        reservation.setReservationDate(new Date(System.currentTimeMillis()));
+        return reservationService.addReservation(reservation);
     }
 }

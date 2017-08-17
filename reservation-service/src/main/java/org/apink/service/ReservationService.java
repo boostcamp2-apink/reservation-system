@@ -8,4 +8,6 @@ import java.util.List;
 public interface ReservationService {
 
     List<Reservation> getByUserId(int userId, PagingHandler pagingHandler);
+
+    Reservation addReservation(Reservation reservation);
 }

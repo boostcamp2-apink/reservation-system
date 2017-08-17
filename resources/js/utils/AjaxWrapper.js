@@ -7,12 +7,20 @@ define(['jquery'],function($){
             dataType:'json',
             type:'GET'
         })
+    };
 
+    var postData = function(url, bodyData){
+        return $.ajax({
+            url : url,
+            contentType : "application/json",
+            data : JSON.stringify(bodyData),
+            type : 'POST'
+        })
     };
 
     return {
-        getData:getData
+        getData : getData,
+        postData : postData
     }
-
 
 });

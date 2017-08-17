@@ -1,6 +1,7 @@
 package org.apink.domain;
 
 import java.sql.Date;
+import java.util.List;
 
 public class Reservation {
     private int id;
@@ -12,6 +13,16 @@ public class Reservation {
     private Date reservationDate;
     private int reservationType;
     private int totalPrice;
+
+    private List<ReservationTicket> reservationTickets;
+
+    public List<ReservationTicket> getReservationTickets() {
+        return reservationTickets;
+    }
+
+    public void setReservationTickets(List<ReservationTicket> reservationTickets) {
+        this.reservationTickets = reservationTickets;
+    }
 
     public int getId() {
         return id;
@@ -83,5 +94,21 @@ public class Reservation {
 
     public void setTotalPrice(int totalPrice) {
         this.totalPrice = totalPrice;
+    }
+
+    @Override
+    public String toString() {
+        return "Reservation{" +
+                "id=" + id +
+                ", productId=" + productId +
+                ", userId=" + userId +
+                ", reservationName='" + reservationName + '\'' +
+                ", reservationTel='" + reservationTel + '\'' +
+                ", reservationEmail='" + reservationEmail + '\'' +
+                ", reservationDate=" + reservationDate +
+                ", reservationType=" + reservationType +
+                ", totalPrice=" + totalPrice +
+                ", reservationTickets=" + reservationTickets +
+                '}';
     }
 }

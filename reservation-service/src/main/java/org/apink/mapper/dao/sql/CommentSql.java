@@ -7,8 +7,8 @@ public class CommentSql {
             "SELECT c.id, "+
                     "c.score, "+
                     "c.comment, "+
-                    "c.product_id " +
-                    "c.create_date " +
+                    "c.product_id, " +
+                    "c.create_date, " +
                     "u.username "+
                     "FROM comments AS c JOIN Users AS u " +
                     "ON c.user_id = u.id "+
