@@ -87,7 +87,7 @@ public class NaverLoginController {
 						NaverToken.class);
 
 		HttpHeaders header = new HttpHeaders();
-		header.set("Authorization", naverToken.getToken_type() + " " + naverToken.getAccess_token());
+		header.set("Authorization", naverToken.getTokenType() + " " + naverToken.getAccessToken());
 		ResponseEntity<NaverLoginToken> loginToken;
 		loginToken = restTemplate.exchange(USER_INFO_URI, HttpMethod.GET, new HttpEntity(header),
 				NaverLoginToken.class);

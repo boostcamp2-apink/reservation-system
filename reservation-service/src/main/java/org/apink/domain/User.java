@@ -60,9 +60,4 @@ public class User {
 	public void setSnsProfile(String snsProfile) {
 		this.snsProfile = snsProfile;
 	}
-	
-	
-//	Integer getSnsId();
-	
-//	String getSnsType();
 }
