@@ -1,6 +1,7 @@
 package org.apink.domain;
 
 import java.sql.Date;
+import java.util.List;
 
 public class Reservation {
     private int id;
@@ -12,6 +13,8 @@ public class Reservation {
     private Date reservationDate;
     private int reservationType;
     private int totalPrice;
+
+    private List<ReservationTicket> reservationTickets;
 
     public int getId() {
         return id;

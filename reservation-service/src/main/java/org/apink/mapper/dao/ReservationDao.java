@@ -27,7 +27,7 @@ public class ReservationDao implements ReservationMapper {
     private SimpleJdbcInsert reservationInsertAction;
     private SimpleJdbcInsert reservationTicketInsertAction;
     private RowMapper<Reservation> rowMapper = BeanPropertyRowMapper.newInstance(Reservation.class); // 칼럼 이름을 보통 user_name 과 같이 '_'를 활용하는데 자바는 낙타표기법을 사용한다 이것을 자동 맵핑한다.
-
+    private RowMapper<ReservationTicketVo> ticketRowMapper = BeanPropertyRowMapper.newInstance(ReservationTicketVo.class);
 
     public ReservationDao(DataSource dataSource) {
         this.jdbc = new NamedParameterJdbcTemplate(dataSource);
@@ -46,7 +46,9 @@ public class ReservationDao implements ReservationMapper {
     }
 
     @Override
-    public List<ReservationTicketVo> selectTicketsByReservationId(int reservationId) {
-        return null;
+    public List<ReservationTicketVo> selectTicketsByReservationIds(List<Integer> reservationIds) {
+        Map<String, Object> params = new HashMap<>();
+        params.put("reservationIds", reservationIds);
+        return jdbc.query(ReservationSql.SELECT_BY_RESERVATAION_ID_LIST, params, ticketRowMapper);
     }
 }

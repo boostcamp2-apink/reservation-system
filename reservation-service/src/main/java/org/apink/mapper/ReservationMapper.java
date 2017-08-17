@@ -10,5 +10,5 @@ public interface ReservationMapper {
 
     List<Reservation> selectByUserId(int userId, PagingHandler pagingHandler );
 
-    List<ReservationTicketVo> selectTicketsByReservationId(int reservationId);
+    List<ReservationTicketVo> selectTicketsByReservationIds(List<Integer> reservationIds);
 }
