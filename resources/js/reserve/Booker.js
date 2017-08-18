@@ -1,4 +1,4 @@
-define(['AjaxWrapper'],function(AjaxWrapper){
+define(['ReservationModel'],function(reservationModel){
 
     var name;
     var tel;
@@ -47,43 +47,34 @@ define(['AjaxWrapper'],function(AjaxWrapper){
         if((name.val() != undefined) && nf_tel.test(tel.val()) &&
             nf_email.test(email.val()) && (totalTicket > 0) && agreement.is(":checked")){
             reservBtn.removeClass("disable");
-
-             $(".bk_btn").on("click", function(){
-
-                var reservationTickets =[];
-
-                for(var i = 0; i<$(".qty").length; i++){
-                    reservationTickets[i] = {
-                        count : $(".count_control_input").eq(i).val(),
-                        productPriceId : $(".qty").eq(i).data("pid")
-                    }
-                }
-
-                var data = {
-                    productId : 1,
-                    reservationName : name.val(),
-                    reservationTel : tel.val(),
-                    reservationEmail : email.val(),
-                    reservationType : 0,
-                    totalPrice : totalPrice,
-                    reservationTickets : reservationTickets
-                };
-                addData("/reservations",data);
-            });
-
+             $(".bk_btn").on("click", postData());
         } else {
             reservBtn.addClass("disable");
             $(".bk_btn").off("click");
         }
     },
 
-    addData = function(url, data) {
-        console.log("hello");
-        AjaxWrapper.postData("/reservations", data).then(function(result){
-            $(location).attr('href', "/reservations");
-        });
-        console.log("bye");
-    },
+    postData = function(){
+
+        var reservationTickets =[];
+        for(var i = 0; i<$(".qty").length; i++){
+            reservationTickets[i] = {
+                count : $(".count_control_input").eq(i).val(),
+                productPriceId : $(".qty").eq(i).data("pid")
+            }
+        }
+        var data = {
+            productId : 1,
+            reservationName : name.val(),
+            reservationTel : tel.val(),
+            reservationEmail : email.val(),
+            reservationType : 0,
+            totalPrice : totalPrice,
+            reservationTickets : reservationTickets
+        };
+
+        reservationModel.addReservation(data);
+    }
 
     updateTicket = function(sign, price){
         totalTicket += sign;

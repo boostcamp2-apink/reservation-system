@@ -1,16 +1,20 @@
 define(['AjaxWrapper'],function(AjaxWrapper){
     var cache = {};
 
-    function getCommentsByProductId(url, productId, page, callback){
+    function getCommentsByProductId(productId, page, pagePerNum, callback){
 
-        var data = cache[page + " of " + productId];
+        var data = cache[page];
+        var url = "/api/products/" + productId + "/comments?page=" + page + "&pagePerNum=" + pagePerNum;
 
         if(data){
             callback(data);
         }else{
             AjaxWrapper.getData(url).then(function(result){
-                cache[page + " of " + productId] = result;
-                callback(result);
+                cache[page] = result;
+                callback(result, true);
+            }).catch(function(result){
+                console.log(result, false);
+                callback(0);
             });
         }
     }
@@ -18,6 +22,4 @@ define(['AjaxWrapper'],function(AjaxWrapper){
     return {
         getCommentsByProductId : getCommentsByProductId
     }
-
-
 });
