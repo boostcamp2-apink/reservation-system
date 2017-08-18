@@ -41,4 +41,11 @@ public class DetailViewController {
         model.addAttribute("comments", commentService.getByProductId(productId, new PagingHandler(1,10)));
         return "review";
     }
+
+    @GetMapping("/{productId}/commentWrite")
+    public String conmmentWriteView(Model model, @PathVariable int productId){
+        model.addAttribute("id", productId);
+        model.addAttribute("product", productService.getByProductId(productId));
+        return "reviewWrite";
+    }
 }

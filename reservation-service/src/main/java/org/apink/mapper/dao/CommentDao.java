@@ -2,6 +2,7 @@ package org.apink.mapper.dao;
 
 
 import javafx.util.Pair;
+import org.apink.domain.Comment;
 import org.apink.domain.vo.CommentImageVo;
 import org.apink.domain.vo.CommentVo;
 import org.apink.mapper.CommentMapper;
@@ -11,7 +12,9 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.RowMapper;
+import org.springframework.jdbc.core.namedparam.BeanPropertySqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
+import org.springframework.jdbc.core.namedparam.SqlParameterSource;
 import org.springframework.jdbc.core.simple.SimpleJdbcInsert;
 import org.springframework.stereotype.Repository;
 
@@ -34,7 +37,13 @@ public class CommentDao implements CommentMapper {
         this.jdbc = new NamedParameterJdbcTemplate(dataSource);
         this.insertAction = new SimpleJdbcInsert(dataSource)
                 .withTableName("comments")
-                .usingGeneratedKeyColumns("id");
+                .usingGeneratedKeyColumns("id","create_date","modify_date");
+    }
+
+    @Override
+    public int insert(Comment comment) {
+        SqlParameterSource params = new BeanPropertySqlParameterSource(comment);
+        return insertAction.executeAndReturnKey(params).intValue();
     }
 
     @Override

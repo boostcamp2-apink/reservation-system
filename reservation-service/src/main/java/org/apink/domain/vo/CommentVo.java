@@ -8,7 +8,6 @@ public class CommentVo extends Comment {
 
     private String username;
     private List<Integer> images;
-    private String userName;
 
     public List<Integer> getImages() {
         return images;
@@ -24,5 +23,13 @@ public class CommentVo extends Comment {
 
     public void setUsername(String username) {
         this.username = username;
+    }
+
+    @Override
+    public String toString() {
+        return super.toString()+"CommentVo{" +
+                "username='" + username + '\'' +
+                ", images=" + images +
+                '}';
     }
 }
