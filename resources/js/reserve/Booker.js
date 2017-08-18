@@ -1,4 +1,4 @@
-define([], function () {
+define(['ReservationModel'],function(reservationModel){
 
     var name;
     var tel;
@@ -37,7 +37,7 @@ define([], function () {
         } else {
             target.removeClass("open");
         }
-    };
+    },
 
     isValid = function(){
 
@@ -47,11 +47,34 @@ define([], function () {
         if((name.val() != undefined) && nf_tel.test(tel.val()) &&
             nf_email.test(email.val()) && (totalTicket > 0) && agreement.is(":checked")){
             reservBtn.removeClass("disable");
-        } else{
+             $(".bk_btn").on("click", postData());
+        } else {
             reservBtn.addClass("disable");
+            $(".bk_btn").off("click");
         }
-
     },
+
+    postData = function(){
+
+        var reservationTickets =[];
+        for(var i = 0; i<$(".qty").length; i++){
+            reservationTickets[i] = {
+                count : $(".count_control_input").eq(i).val(),
+                productPriceId : $(".qty").eq(i).data("pid")
+            }
+        }
+        var data = {
+            productId : 1,
+            reservationName : name.val(),
+            reservationTel : tel.val(),
+            reservationEmail : email.val(),
+            reservationType : 0,
+            totalPrice : totalPrice,
+            reservationTickets : reservationTickets
+        };
+
+        reservationModel.addReservation(data);
+    }
 
     updateTicket = function(sign, price){
         totalTicket += sign;

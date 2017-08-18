@@ -1,6 +1,7 @@
 package org.apink.mapper.dao;
 
 import org.apink.domain.Reservation;
+import org.apink.domain.ReservationTicket;
 import org.apink.domain.vo.ReservationTicketVo;
 import org.apink.mapper.ReservationMapper;
 import org.apink.mapper.dao.sql.ReservationSql;
@@ -9,7 +10,9 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.RowMapper;
+import org.springframework.jdbc.core.namedparam.BeanPropertySqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
+import org.springframework.jdbc.core.namedparam.SqlParameterSource;
 import org.springframework.jdbc.core.simple.SimpleJdbcInsert;
 import org.springframework.stereotype.Repository;
 
@@ -32,10 +35,33 @@ public class ReservationDao implements ReservationMapper {
     public ReservationDao(DataSource dataSource) {
         this.jdbc = new NamedParameterJdbcTemplate(dataSource);
         this.reservationInsertAction = new SimpleJdbcInsert(dataSource)
-                .withTableName("reservations").usingGeneratedKeyColumns("id");
+                .withTableName("reservations").usingGeneratedKeyColumns("id", "create_date", "modify_date");
+//                .usingGeneratedKeyColumns("reservation_date")
+
         this.reservationTicketInsertAction = new SimpleJdbcInsert(dataSource)
-                .withTableName("reservations_tickets").usingGeneratedKeyColumns("id");
+                .withTableName("reservations_tickets")
+                .usingGeneratedKeyColumns("create_date", "modify_date");
     }
+
+    @Override
+    public int insertReservation(Reservation reservation) {
+        SqlParameterSource params = new BeanPropertySqlParameterSource(reservation);
+        return reservationInsertAction.executeAndReturnKey(params).intValue();
+    }
+
+    @Override
+    public void insertReservationTicket(ReservationTicket reservationTicket) {
+        SqlParameterSource params = new BeanPropertySqlParameterSource(reservationTicket);
+        reservationTicketInsertAction.execute(params);
+    }
+
+    @Override
+    public Reservation selectByReservationId(int reservationId) {
+        Map<String, Object> params = new HashMap<>();
+        params.put("id", reservationId);
+        return jdbc.queryForObject(ReservationSql.SELECT_BY_RESERVATION_ID, params, rowMapper);
+    }
+
     @Override
     public List<Reservation> selectByUserId(int userId, PagingHandler pagingHandler) {
         Map<String, Object> params = new HashMap<>();

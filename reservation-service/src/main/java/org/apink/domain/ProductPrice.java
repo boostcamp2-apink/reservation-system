@@ -2,6 +2,7 @@ package org.apink.domain;
 
 public class ProductPrice {
 
+    private int id;
     private int price;
     private int discountRate;
     private String productPriceType;
@@ -10,11 +11,20 @@ public class ProductPrice {
     @Override
     public String toString() {
         return "ProductPrice{" +
-                "price=" + price +
+                "id=" + id +
+                ", price=" + price +
                 ", discountRate=" + discountRate +
-                ", productPriceType=" + productPriceType +
+                ", productPriceType='" + productPriceType + '\'' +
                 ", description='" + description + '\'' +
                 '}';
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public int getPrice() {

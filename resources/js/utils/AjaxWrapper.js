@@ -7,7 +7,6 @@ define(['jquery'],function($){
             dataType:'json',
             type:'GET'
         })
-
     };
 
     var postData = function(url,data){
@@ -36,11 +35,12 @@ define(['jquery'],function($){
     };
 
     return {
+
         getData:getData,
         postData : postData,
         postFormFileData : postFormFileData
 
-    }
 
+    }
 
 });

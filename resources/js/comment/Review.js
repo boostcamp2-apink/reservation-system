@@ -1,77 +1,97 @@
-define(['HandlebarsWrapper','CommentModel'],function(HandlebarsWrapper, commentModel){
+define(['HandlebarsWrapper', 'CommentModel'], function (HandlebarsWrapper, commentModel) {
 
-    var url;
     var productId;
     var prevPage;
     var nextPage;
     var pagePerNum;
     var target;
+    var commentDivSize;
+    var nextLock;
+    var prevLock;
 
-
-    init = function(){
+    init = function () {
 
         productId = 1;
         prevPage = 0;
         nextPage = 1;
         pagePerNum = 10;
         target = $("ul.list_short_review");
+        commentDivSize = $("div._comment").height;
+        nextLock = false;
+        prevLock = true;
     }
-    drawComments = function(result){
-        if(result.length != 0){
+
+    appendComments = function (result, flag) {
+        console.log(result);
+        if (flag) {
+            if (prevPage > 1) {
+                deleteElement("._comment", 0);
+            }
             HandlebarsWrapper.create("comment-comment-template", result, "append", target);
+        } else {
+            nextLock = true;
+            decrementPage();
         }
     },
 
-    preppendComments = function(){
-        HandlebarsWrapper.create("comment-comment-template", result, "preppend", target);
+    preppendComments = function (result) {
+        HandlebarsWrapper.create("comment-comment-template", result, "prepend", target);
     },
 
-    setDownScroll = function(){
-        $(window).scroll(function() {
-            if ($(window).scrollTop() == $(document).height() - $(window).height()) {
-
-                incrementPage();
-                console.log(prevPage + " " + nextPage);
-
-                url = "/api/products/" + productId + "/comments?page=" + nextPage + "&pagePerNum=" + pagePerNum;
-                commentModel.getCommentsByProductId(url, productId, nextPage, drawComments);
+    setDownScroll = function () {
+        $(window).scroll(function () {
+            if (!nextLock) {
+                if ($(document).height() == $(window).scrollTop() + $(window).height()) {
+                    incrementPage();
+                    prevLock = false;
+                    console.log(prevPage + " " + nextPage);
+                    commentModel.getCommentsByProductId(productId, nextPage, pagePerNum, appendComments);
+                }
             }
         })
     },
 
-    setUpScroll = function(){
+    setUpScroll = function () {
         $(window).scroll(function() {
-            var height = $(window).scrollTop();
-            var lock = true;
-
-            if (height < 500 && lock && prevPage > 0) {
-                decrementPage();
-                console.log(prevPage + " " + nextPage);
-                lock = false;
-                url = "/api/products/" + productId + "/comments?page=" + prevPage + "&pagePerNum=" + pagePerNum;
-                commentModel.getCommentsByProductId(url, productId, nextPage, preppendComments);
-                lock = true;
+            if(!prevLock){
+                var height = $(window).scrollTop();
+                if (height < 200) {
+                    if(prevPage == 1){
+                        prevLock = true;
+                    } else {
+                        deleteElement("._comment", 1);
+                        decrementPage();
+                        commentModel.getCommentsByProductId(productId, prevPage, pagePerNum, preppendComments);
+                    }
+                    nextLock = false;
+                    console.log(prevPage + " " + nextPage);
+                }
             }
         })
     },
 
-    incrementPage = function(){
+    deleteElement = function (id, index) {
+        $(id).eq(index).remove();
+    },
+
+    incrementPage = function () {
         prevPage++;
         nextPage++;
     },
 
-    decrementPage = function(){
-        if(prevPage > 0){
+    decrementPage = function () {
+        if (prevPage > 0) {
             prevPage--;
             nextPage--;
+        } else {
+            prevLock = false;
         }
     }
 
     return {
-        init : init,
-        setUpScroll : setUpScroll,
-        setDownScroll : setDownScroll
-
+        init: init,
+        setUpScroll: setUpScroll,
+        setDownScroll: setDownScroll
     }
 
 });

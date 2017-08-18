@@ -9,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
@@ -26,8 +27,8 @@ public class DetailViewController {
     }
 
 
-    @GetMapping("/{productId}") //TODO Integer를 int로??
-    public String detailView(Model model,@PathVariable Integer productId) {
+    @GetMapping("/{productId}")
+    public String detailView(Model model, @PathVariable int productId) {
         model.addAttribute("product",productService.getById(productId));
         model.addAttribute("comments",commentService.getByProductId(productId,new PagingHandler(1,3)));
         return "detail";
@@ -42,10 +43,12 @@ public class DetailViewController {
         return "review";
     }
 
+
     @GetMapping("/{productId}/commentWrite")
     public String conmmentWriteView(Model model, @PathVariable int productId){
         model.addAttribute("id", productId);
         model.addAttribute("product", productService.getByProductId(productId));
         return "reviewWrite";
     }
+
 }

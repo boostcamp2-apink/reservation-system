@@ -10,7 +10,8 @@ require.config({
         Extend : '../utils/Extend',
         Booker : 'Booker',
         Ticket : '../components/Ticket',
-        TicketContainer : 'ticketContainer'
+        TicketContainer : 'ticketContainer',
+        ReservationModel : 'reservationModel'
     }
 });
 
