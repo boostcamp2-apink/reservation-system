@@ -54,6 +54,7 @@
                                 </span>
                             </div>
                             <ul class="list_short_review">
+                                <div class="_comment">
                                 <c:forEach var="comment" items="${comments}" varStatus="status">
                                     <li class="list_item">
                                         <div>
@@ -73,6 +74,7 @@
                                         </div>
                                     </li>
                                 </c:forEach>
+                                </div>
                             </ul>
                         </div>
                         <p class="guide"> <i class="spr_book2 ico_bell"></i> <span>네이버 예약을 통해 실제 방문한 이용자가 남긴 평가입니다.</span> </p>
