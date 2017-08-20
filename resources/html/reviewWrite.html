@@ -30,7 +30,7 @@
 				<div class="write_act">
 					<p class="title_star">별점과 이용경험을 남겨주세요.</p>
 					<div class="review_rating rating_point">
-						<div class="rating">
+						<div class="rating _rating">
 							<input type="checkbox" name="rating1" value="0" class="rating_rdo first_star" title="0점">
 							<span class="span hide"></span>
 							<!-- [D] 해당 별점이 선택될 때 그 점수 이하의 input radio는 checked 클래스 추기 -->
@@ -45,7 +45,7 @@
 							<input type="checkbox" name="rating6" value="5" class="rating_rdo" title="5점">
 							<span class="span"></span>
 							<!-- [D] 0점일 때 gray_star 추기 -->
-							<span class="star_rank gray_star">0</span>
+							<span class="star_rank gray_star _ratingScore">0</span>
 						</div>
 					</div>
 				</div>
@@ -76,7 +76,7 @@
 						</label>
 						<input type="file" class="hidden_input" id="reviewImageFileOpenInput" accept="image/*" multiple>
 						<div class="guide_review">
-							<span>0</span>/400
+							<span id="_reviewTextLength">0</span>/400
 							<span>(최소5자이상)</span>
 						</div>
 					</div>
