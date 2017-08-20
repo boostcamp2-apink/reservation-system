@@ -55,7 +55,7 @@ public class ProductSql {
                     "WHERE p.id = :product_id";
 
     public static final String SELECT_PRICES_BY_PRODUCT_ID =
-            "SELECT pp.price, pp.discount_rate, " +
+            "SELECT pp.id, pp.price, pp.discount_rate, " +
                     "ppt.product_price_type, ppt.description " +
                     "FROM products_prices AS pp INNER JOIN products_prices_types AS ppt " +
                     "ON pp.product_price_type_id = ppt.id " +
