@@ -29,7 +29,8 @@ public class FileDao implements FileMapper {
 
 	public FileDao(DataSource dataSource) {
 		this.jdbc = new NamedParameterJdbcTemplateHandlingNull(dataSource);
-		this.insertAction = new SimpleJdbcInsert(dataSource).withTableName("files").usingGeneratedKeyColumns("id");
+		this.insertAction = new SimpleJdbcInsert(dataSource).withTableName("files")
+				.usingGeneratedKeyColumns("id", "create_date", "modify_date");
 	}
 	
 	
