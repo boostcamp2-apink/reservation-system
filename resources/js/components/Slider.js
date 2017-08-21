@@ -96,7 +96,12 @@ define(['Extend', 'Component'], function (extend, Component) {
                         }
                         delete this.rootTarget.get(0).move;
                         this.isAnimating = false;
+                        this.trigger("change",{
+                            currentIndex : this.currentChildIndex
+                        });
+
                     }.bind(this)
+
                 }
             );
         }

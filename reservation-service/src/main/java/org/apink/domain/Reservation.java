@@ -1,9 +1,10 @@
 package org.apink.domain;
 
 import java.sql.Date;
+import java.util.ArrayList;
 import java.util.List;
 
-public class Reservation {
+public class Reservation extends Product{
     private int id;
     private int productId;
     private int userId;
@@ -16,10 +17,16 @@ public class Reservation {
 
     private List<ReservationTicket> reservationTickets;
 
+    public Reservation() {
+        reservationTickets = new ArrayList<>();
+    }
     public List<ReservationTicket> getReservationTickets() {
         return reservationTickets;
     }
 
+    public void addReservationTicket(ReservationTicket reservationTicket) {
+        reservationTickets.add(reservationTicket);
+    }
     public void setReservationTickets(List<ReservationTicket> reservationTickets) {
         this.reservationTickets = reservationTickets;
     }
@@ -109,6 +116,7 @@ public class Reservation {
                 ", reservationType=" + reservationType +
                 ", totalPrice=" + totalPrice +
                 ", reservationTickets=" + reservationTickets +
+                ", name=" + super.getName() +
                 '}';
     }
 }

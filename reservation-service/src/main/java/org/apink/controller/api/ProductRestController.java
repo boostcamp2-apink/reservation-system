@@ -39,4 +39,9 @@ public class ProductRestController {
                                                   @RequestParam int page, @RequestParam int pagePerNum){
         return commentService.getByProductId(productId, new PagingHandler(page, pagePerNum));
     }
+
+    @PostMapping("/{productId}/comments")
+    public int postCommentsByProductId(@ModelAttribute("comment") CommentVo comment){
+        return commentService.addComment(comment);
+    }
 }

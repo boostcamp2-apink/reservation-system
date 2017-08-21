@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.sql.Date;
 import java.util.List;
+import java.util.Map;
 
 
 @Controller
@@ -33,16 +34,15 @@ public class ReservationController {
     public String reservation(Model model) {
         //TODO Get userId from a session || argumentResolver
         int userId = 1;
-        model.addAttribute("reservations",reservationService.getByUserId(userId,new PagingHandler(1)));
+        Map<Integer,List<Reservation>> filteredMap= reservationService.getByUserId(userId,new PagingHandler(1));
+        model.addAttribute("clock",filteredMap.get(0));
+        model.addAttribute("check",filteredMap.get(1));
+        model.addAttribute("used",filteredMap.get(2));
+        model.addAttribute("cancel",filteredMap.get(3));
         return "myreservation";
     }
 
-    @GetMapping("/test")
-    @ResponseBody
-    public List<Reservation> test() {
-        System.out.println(reservationService.getByUserId(1,new PagingHandler(1)).toString());
-        return reservationService.getByUserId(1,new PagingHandler(1));
-    }
+
 
     @GetMapping("/products/{productId}")
     public String reserveView(@PathVariable int productId, Model model) {
@@ -64,5 +64,14 @@ public class ReservationController {
         reservation.setUserId(userId);
         reservation.setReservationDate(new Date(System.currentTimeMillis()));
         return reservationService.addReservation(reservation);
+    }
+
+    @GetMapping("/cancel/{reservationId}")
+    public String cancelReservation(@PathVariable Integer reservationId) {
+        if(reservationService.cancelReservation(reservationId) != 0) {
+            return "redirect:/reservations";
+        } else {
+            return "redirect:/error";
+        }
     }
 }

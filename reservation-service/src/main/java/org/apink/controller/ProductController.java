@@ -14,13 +14,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
 @RequestMapping("/products")
-public class DetailViewController {
+public class ProductController {
 
     private ProductService productService;
     private CommentService commentService;
 
     @Autowired
-    public DetailViewController(ProductService productService, CommentService commentService) {
+    public ProductController(ProductService productService, CommentService commentService) {
 
         this.productService = productService;
         this.commentService = commentService;
@@ -34,13 +34,20 @@ public class DetailViewController {
         return "detail";
     }
 
-    //TODO 이 컨트롤러를 ProductController로 바꿀 필요가 있어보임
     @GetMapping("/{productId}/comments")
     public String conmmentsView(Model model, @PathVariable int productId){
         model.addAttribute("id", productId);
         model.addAttribute("product", productService.getByProductId(productId));
         model.addAttribute("comments", commentService.getByProductId(productId, new PagingHandler(1,10)));
         return "review";
+    }
+
+
+    @GetMapping("/{productId}/commentWrite")
+    public String conmmentWriteView(Model model, @PathVariable int productId){
+        model.addAttribute("id", productId);
+        model.addAttribute("product", productService.getByProductId(productId));
+        return "reviewWrite";
     }
 
 }

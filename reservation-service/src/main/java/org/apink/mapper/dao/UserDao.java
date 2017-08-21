@@ -26,9 +26,7 @@ public class UserDao implements UserMapper{
         this.jdbc = new NamedParameterJdbcTemplateHandlingNull(dataSource);
         this.insertAction = new SimpleJdbcInsert(dataSource)
                 .withTableName("users")
-                .usingGeneratedKeyColumns("id")
-                .usingGeneratedKeyColumns("create_date")
-                .usingGeneratedKeyColumns("modify_date");
+                .usingGeneratedKeyColumns("id", "create_date", "modify_date");
     }
 
     //Create

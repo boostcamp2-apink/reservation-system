@@ -9,4 +9,6 @@ public interface CommentService {
 
     List<CommentVo> getByProductId(int productId, PagingHandler pagingHandler);
 
+    int addComment(CommentVo commentVo);
+
 }

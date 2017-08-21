@@ -5,7 +5,6 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 public class NaverUser extends User{
 
 
-
 	public NaverUser() {
 		super.setSnsType("naver");
 	}
@@ -23,5 +22,6 @@ public class NaverUser extends User{
 	public void setSnsId(int snsId) {
 		super.setSnsId(snsId);
 	}
-	
+
+
 }
