@@ -1,44 +1,42 @@
-define(['Extend', 'Component'], function (extend, Component) {
+import Component from "@egjs/component";
+import * as $ from "jquery";
 
-    var Rating = extend(Component, {
-        "init": function (rootTarget) {
-            this.rootTarget = $(rootTarget);
-            this.ratingTarget = this.rootTarget.find(".rating_rdo");
-            this.ratingScore = 0;
-            this.setEvent();
+export default class Rating extends Component {
 
+    constructor(rootTarget) {
+        super();
+        this.rootTarget = $(rootTarget);
+        this.ratingTarget = this.rootTarget.find(".rating_rdo");
+        this.ratingScore = 0;
+        this.setEvent();
+    }
 
-        },
+    setEvent() {
+        this.ratingTarget.on("click", this.clickRating.bind(this));
+    }
 
-        setEvent : function(){
-            this.ratingTarget.on("click",this.clickRating.bind(this));
-        },
+    clickRating(e) {
+        e.preventDefault();
+        var clickValue = parseInt(e.target.value, 10);
+        this.drawRating(clickValue);
+        this.trigger("change", {
+            ratingScore: this.ratingScore
+        })
+    }
 
-        clickRating : function(e){
-            e.preventDefault();
-            var clickValue = parseInt(e.target.value,10);
-            this.drawRating(clickValue);
-            this.trigger("change",{
-                ratingScore: this.ratingScore
-            })
-        },
-
-        drawRating : function(clickValue){
-            if( clickValue > this.ratingScore){
-                for(var i = this.ratingScore + 1 ; i<= clickValue;i++){
-                    this.ratingTarget.eq(i).toggleClass("checked");
-                }
-            }else if(clickValue < this.ratingScore){
-                for (var i = clickValue+1 ; i <= this.ratingScore ; i++){
-                    this.ratingTarget.eq(i).toggleClass("checked");
-                }
-            }else if(clickValue === this.ratingScore){
-                this.ratingTarget.eq(clickValue).toggleClass("checked");
-                clickValue--;
+    drawRating(clickValue) {
+        if (clickValue > this.ratingScore) {
+            for (var i = this.ratingScore + 1; i <= clickValue; i++) {
+                this.ratingTarget.eq(i).toggleClass("checked");
             }
-            this.ratingScore = clickValue;
+        } else if (clickValue < this.ratingScore) {
+            for (var i = clickValue + 1; i <= this.ratingScore; i++) {
+                this.ratingTarget.eq(i).toggleClass("checked");
+            }
+        } else if (clickValue === this.ratingScore) {
+            this.ratingTarget.eq(clickValue).toggleClass("checked");
+            clickValue--;
         }
-    });
-
-    return Rating;
-});
+        this.ratingScore = clickValue;
+    }
+}
