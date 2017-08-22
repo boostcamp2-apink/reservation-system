@@ -1,69 +1,67 @@
 // noinspection JSAnnotator
-define(['Extend', 'Component'], function (extend, Component) {
+import Component from '@egjs/component'
+import * as $ from 'jquery'
 
-    var Slider = extend(Component, {
-        "init": function (rootTarget) {
+class Slider extends Component {
+
+        constructor(rootTarget) {
+            super();
             this.rootTarget = $(rootTarget) || this.rootTarget;
             this.SliderTargets = this.rootTarget.children();
             this.targetCount = this.SliderTargets.length;
             this.width = this.SliderTargets.width();
-            this.currentChildIndex;
+            this.currentChildIndex = 0;
             this.isAnimating = false;
             this.createFakeTarget();
             console.log(this.rootTarget);
-        },
+        }
 
-        setButton: function (prev, next) {
+        setButton(prev, next) {
             this.prev = $(prev);
             this.next = $(next);
             this.clickEvent();
-        },
+        }
 
-        setFlicking: function () {
+        setFlicking() {
 
-        },
+        }
 
-        createFakeTarget: function () {
-            var fakeFirstChild = this.rootTarget.children(':first-child').clone();
-            var fakeLastChild = this.rootTarget.children(':last-child').clone();
+        createFakeTarget() {
+            let fakeFirstChild = this.rootTarget.children(':first-child').clone();
+            let fakeLastChild = this.rootTarget.children(':last-child').clone();
             this.rootTarget.append(fakeFirstChild);
             this.rootTarget.prepend(fakeLastChild);
             this.currentChildIndex = 1;
             this.rootTarget.css({"transform": "translate(-" + this.width * this.currentChildIndex + "px,0)"});
 
-        },
+        }
 
-        clickEvent: function () {
+        clickEvent() {
             $(this.prev).on("click", this.clickPrev.bind(this));
             $(this.next).on("click", this.clickNext.bind(this));
-        },
+        }
 
-        clickPrev: function (e) {
+        clickPrev(e) {
             e.preventDefault();
-            if (this.isAnimating) {
-                return;
-            } else {
+            if (!this.isAnimating) {
                 this.isAnimating = true;
                 this.animator('prev');
             }
+        }
 
-        },
-
-        clickNext: function (e) {
+        clickNext(e) {
             e.preventDefault();
-            if (this.isAnimating) {
-                return;
-            } else {
+            if (!this.isAnimating) {
                 this.isAnimating = true;
                 this.animator('next');
             }
 
-        },
+        }
 
         //direction value is "next" or "prev"
-        animator: function (direction) {
-            var moveSize;
-            var moveIndex;
+        animator(direction) {
+            let moveSize;
+            let moveIndex;
             if (direction === "next") {
                 moveSize = -this.width;
                 moveIndex = 1;
@@ -73,8 +71,8 @@ define(['Extend', 'Component'], function (extend, Component) {
             }
             this.transformAnimate(moveSize, moveIndex);
 
-        },
-        transformAnimate: function (moveSize, moveIndex) {
+        }
+        transformAnimate(moveSize, moveIndex) {
             this.rootTarget.animate(
                 {move: moveSize},
                 {
@@ -101,10 +99,7 @@ define(['Extend', 'Component'], function (extend, Component) {
                         });
 
                     }.bind(this)
-
                 }
-            );
+            )
         }
-    });
-    return Slider;
-});
+    }

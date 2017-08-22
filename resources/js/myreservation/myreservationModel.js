@@ -1,65 +1,60 @@
-define([], function () {
-    var clockTarget;
-    var checkTarget;
-    var usedTarget;
-    var cancelTarget;
-    var targetCount;
-    var data;
+import $ from 'jquery'
 
-    function saveData() {
-        targetCount = $('li.item > .on > span').html();
-        return getDataFromDocument();
-    };
+let clockTarget;
+let checkTarget;
+let usedTarget;
+let cancelTarget;
+let targetCount;
+let data;
 
-    function getDataFromDocument() {
-        if (targetCount === '0') {
-            return false;
-        }
-        else {
-            clockTarget = $('li._clock');
-            checkTarget = $('li._check');
-            usedTarget = $('li._used');
-            cancelTarget = $('li._cancel');
-            return true;
-        }
+function getDataFromDocument() {
+    if (targetCount === '0') {
+        return false;
     }
-
-    function getAllData() {
-        data = [];
-        data.push(clockTarget);
-        data.push(checkTarget);
-        data.push(usedTarget);
-        data.push(cancelTarget);
-        return data;
+    else {
+        clockTarget = $('li._clock');
+        checkTarget = $('li._check');
+        usedTarget = $('li._used');
+        cancelTarget = $('li._cancel');
+        return true;
     }
-
-    function getClockAndCheckData() {
-        data = [];
-        data.push(clockTarget);
-        data.push(checkTarget);
-        return data;
-    }
+}
 
 
-    function getUsedData() {
-        data = [];
-        data.push(usedTarget);
-        return data;
-    }
-
-    function getCancelData() {
-        data = [];
-        data.push(cancelTarget);
-        return data;
-    }
+export function saveData() {
+    targetCount = $('li.item > .on > span').html();
+    return getDataFromDocument();
+}
 
 
-    return {
-        saveData: saveData,
-        getAllData: getAllData,
-        getClockAndCheckData: getClockAndCheckData,
-        getUsedData: getUsedData,
-        getCancelData: getCancelData
-    }
-});
+export function getAllData() {
+    data = [];
+    data.push(clockTarget);
+    data.push(checkTarget);
+    data.push(usedTarget);
+    data.push(cancelTarget);
+    return data;
+}
+
+export function getClockAndCheckData() {
+    data = [];
+    data.push(clockTarget);
+    data.push(checkTarget);
+    return data;
+}
+
+
+export function getUsedData() {
+    data = [];
+    data.push(usedTarget);
+    return data;
+}
+
+export function getCancelData() {
+    data = [];
+    data.push(cancelTarget);
+    return data;
+}
+
+
 

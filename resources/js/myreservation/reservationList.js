@@ -1,21 +1,12 @@
-define(['MyreservationModel','ReservationPopup'], function (MyreservationModel,ReservationPopup) {
+import $ from 'jquery'
+import * as MyreservationModel from './myreservationModel'
+import ReservationPopup from './reservationPopup'
 
-    var emptyTarget;
-    var rootTarget;
-    var summaryTargets;
-    var currentSummaryTarget;
 
-    function init() {
-        rootTarget = $('ul._cardList');
-        emptyTarget = getEmptyElement();
-        ReservationPopup.init($('div._popup'));
-        if (!MyreservationModel.saveData()) {
-            drawEmptyTarget();
-        }
-        summaryTargets = $('ul._summaryBoard');
-        currentSummaryTarget = summaryTargets.find('.on');
-        setEvent();
-    }
+    let emptyTarget;
+    let rootTarget;
+    let summaryTargets;
+    let currentSummaryTarget;
 
     function setEvent() {
         summaryTargets.on('click', 'li.item > a', filterHandler);
@@ -24,7 +15,7 @@ define(['MyreservationModel','ReservationPopup'], function (MyreservationModel,R
     }
 
     function cancelReservation(event) {
-        var canceldata = {};
+        let canceldata = {};
         event.preventDefault();
         console.log("cancel");
         ReservationPopup.show($(event.currentTarget).closest('article.card_item'));
@@ -92,8 +83,20 @@ define(['MyreservationModel','ReservationPopup'], function (MyreservationModel,R
             "</div>";
     }
 
-    return {
-        init: init
+class ReservationList{
+
+     static init() {
+        rootTarget = $('ul._cardList');
+        emptyTarget = getEmptyElement();
+        ReservationPopup.init($('div._popup'));
+        if (!MyreservationModel.saveData()) {
+            drawEmptyTarget();
+        }
+        summaryTargets = $('ul._summaryBoard');
+        currentSummaryTarget = summaryTargets.find('.on');
+        setEvent();
     }
 
-});
+
+}
+export default ReservationList

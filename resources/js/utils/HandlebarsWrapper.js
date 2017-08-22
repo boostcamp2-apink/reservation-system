@@ -1,38 +1,33 @@
-define(['Handlebars'],function(Handlebars){
-    var position;
-    var source;
-    var template;
-    var cache = {
+import * as Handlebars from "handlebars"
 
-    };
+let position;
+let source;
+let template;
+let cache = {};
 
-    var createTemplate = function(handlebarsId) {
-        position=$("#"+handlebarsId);
-        source = position.html();
-        template = Handlebars.compile(source);
-        return template;
-    };
+function createTemplate(handlebarsId) {
+    position = $("#" + handlebarsId);
+    source = position.html();
+    template = Handlebars.compile(source);
+    return template;
+}
 
-
-    return {
-        create : function(handlebarsId,data,method,target) {
-            var template = cache[handlebarsId];
-            if(!template){
-                cache[handlebarsId] = createTemplate(handlebarsId);
-                template = cache[handlebarsId];
-            }
-            target[method](template(data));
-        },
-        customHelper : function(helperName, func) {
-            Handlebars.registerHelper(helperName,func);
-        },
-        setPartial: function(partialName,partialHandlebarsId){
-            var partialSource = $(partialHandlebarsId).html();
-            Handlebars.registerPartial(partialName, partialSource);
-        }
+export function create(handlebarsId, data, method, target) {
+    let template = cache[handlebarsId];
+    if (!template) {
+        cache[handlebarsId] = createTemplate(handlebarsId);
+        template = cache[handlebarsId];
     }
+    target[method](template(data));
+}
+export function customHelper(helperName, func) {
+    Handlebars.registerHelper(helperName, func);
+}
+export function setPartial(partialName, partialHandlebarsId) {
+    let partialSource = $(partialHandlebarsId).html();
+    Handlebars.registerPartial(partialName, partialSource);
+}
 
-});
 
 
 
