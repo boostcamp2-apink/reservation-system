@@ -18,7 +18,7 @@ public class CommentRestController {
     }
 
     @PostMapping
-    public int postCommentByProductId(@RequestBody CommentVo comment){
+    public int addCommentByProductId(@RequestBody CommentVo comment){
         return commentService.addComment(comment);
     }
 }

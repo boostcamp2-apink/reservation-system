@@ -1,34 +1,30 @@
-define(['Slider', 'ImagePopup'], function (Slider, ImagePopup) {
+import ImagePopup from "../components/ImagePopup"
+import * as $ from "jquery";
 
-    var popupSlider;
-    var popup;
-    var imagePopup;
-    var $commentImage;
+let popup;
+let imagePopup;
+let $commentImage;
 
-    function init() {
-        popup = "#photoview";
-        $commentImage = $('div.thumb_area');
-        setEvent();
+export function init() {
+    popup = "#photoview";
+    $commentImage = $('div.thumb_area');
+    setEvent();
 
-    }
+}
 
-    function setEvent() {
-        imagePopup =
-            new ImagePopup(popup, popup + " ul.visual_img",'comment-image-template');
-        imagePopup.setSliderButton(popup + ' div.prev_inn > a.btn_prev', popup + ' div.nxt_inn > a.btn_nxt');
+function setEvent() {
+    imagePopup =
+        new ImagePopup(popup, popup + " ul.visual_img",'comment-image-template');
+    imagePopup.setSliderButton(popup + ' div.prev_inn > a.btn_prev', popup + ' div.nxt_inn > a.btn_nxt');
 
-        $commentImage.on("click", clickCommentImage);
-    }
+    $commentImage.on("click", clickCommentImage);
+}
 
-    function clickCommentImage(e) {
-        e.preventDefault();
-        var data = $(e.currentTarget).data("images");
-        imagePopup.popupData(data);
-    }
-
-    return {
-        init: init
-    }
+function clickCommentImage(e) {
+    e.preventDefault();
+    var data = $(e.currentTarget).data("images");
+    imagePopup.popupData(data);
+}
 
 
-});
+
