@@ -405,6 +405,5 @@
     <!--// 취소 팝업 -->
 
 </body>
-<script type="text/javascript" src="/resources/js/node_modules/requirejs/require.js"></script>
-<script type="text/javascript" src="/resources/js/myreservation/myreservation.js"></script>
+<script type="text/javascript" src="/resources/js/bundle/reservationbundle.js"></script>
 </html>
