@@ -1,54 +1,50 @@
-define(['AjaxWrapper'],function(AjaxWrapper){
-    var cache = {};
+import * as AjaxWrapper from "../utils/AjaxWrapper"
 
-    function postImage(data,callback){
-        var postImageUrl = "/files";
+let cache = {};
 
-        var formData = new FormData();
-        formData.append("file",data);
+export function postImage(data, callback) {
+    let postImageUrl = "/files";
 
-        AjaxWrapper.postFormFileData(postImageUrl,formData).then(function(result){
+    let formData = new FormData();
+    formData.append("file", data);
+
+    AjaxWrapper.postFormFileData(postImageUrl, formData).then(function (result) {
+        callback(result);
+    });
+
+}
+
+export function postCommentData(data, callback) {
+    let postImageUrl = "/api/comments/";
+
+    // var commentData = {
+    //     "comment" : data
+    // };
+
+    AjaxWrapper.postData(postImageUrl, data)
+        .then(function (result) {
             callback(result);
+        }, function (error) {
+            alert("실패하였습니다");
         });
 
+}
+
+export function getImageByFileId(fileId, callback) {
+
+    let url = "/api/categories/" + categoryId + "/products?page=" + page;
+    let data = cache[url];
+
+    if (data) {
+        callback(data);
+    } else {
+        AjaxWrapper.getData(url).then(function (result) {
+            cache[url] = result;
+            callback(result);
+        });
     }
-
-    function postCommentData(data,callback){
-        var postImageUrl = "/api/comments/";
-
-        // var commentData = {
-        //     "comment" : data
-        // };
-
-        AjaxWrapper.postData(postImageUrl,data)
-            .then(function(result){
-                callback(result);
-            },function(error){
-                alert("실패하였습니다");
-            });
-
-    }
-
-    function getImageByFileId(fileId,callback){
-
-        var url = "/api/categories/"+categoryId+"/products?page="+page;
-        var data = cache[url];
-
-        if(data){
-            callback(data);
-        }else{
-            AjaxWrapper.getData(url).then(function(result){
-                cache[url] = result;
-                callback(result);
-            });
-        }
-    }
-
-    return {
-        getImageByFileId : getImageByFileId,
-        postImage : postImage,
-        postCommentData : postCommentData
-    }
+}
 
 
-});
+
+
