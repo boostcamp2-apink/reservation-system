@@ -166,3 +166,25 @@ INSERT INTO products_detail
         (product_id, content)
     VALUES
             (10, "내용이 없습니다.");
+            
+--products_prices_types            
+insert into products_prices_types (product_price_type, description) values ("일반", "성인 (만 19세 이상) 덕수궁 입장료 포함");
+insert into products_prices_types (product_price_type, description) values ("청소년", "청소년(만7세~만18세) 덕수궁 입장료 포함");
+insert into products_prices_types (product_price_type, description) values ("어린이", "미취학 아동(만 48개월 이상) 덕수궁 입장료 포함");
+
+-- products_prices
+insert into products_prices (product_id, product_price_type_id, price, discount_rate)
+values (1, 1, 10000, 10);
+insert into products_prices (product_id, product_price_type_id, price, discount_rate)
+values (1, 2, 7000, 10);
+insert into products_prices (product_id, product_price_type_id, price, discount_rate)
+values (1, 3, 4000, 10);
+
+insert into products_prices (product_id, product_price_type_id, price, discount_rate)
+values (2, 1, 12000, 5);
+insert into products_prices (product_id, product_price_type_id, price, discount_rate)
+values (2, 2, 8000, 5);
+
+--users 
+insert into users (username, email, tel, nickname, sns_id, sns_type, sns_profile, admin_flag)
+values ("윤주형", "juhyung@naver.com", "010-2222-2222", "pink", "Facebook", "Facebook", "Facebook", 0);

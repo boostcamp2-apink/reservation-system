@@ -2,17 +2,18 @@ define(['Handlebars'],function(Handlebars){
     var position;
     var source;
     var template;
+    var cache = {
+
+    };
 
     var createTemplate = function(handlebarsId) {
-        position=$(handlebarsId);
+        position=$("#"+handlebarsId);
         source = position.html();
         template = Handlebars.compile(source);
         return template;
     };
 
-    var cache = {
 
-    };
     return {
         create : function(handlebarsId,data,method,target) {
             var template = cache[handlebarsId];
@@ -20,8 +21,7 @@ define(['Handlebars'],function(Handlebars){
                 cache[handlebarsId] = createTemplate(handlebarsId);
                 template = cache[handlebarsId];
             }
-
-            $(target)[method](template(data));
+            target[method](template(data));
         },
         customHelper : function(helperName, func) {
             Handlebars.registerHelper(helperName,func);

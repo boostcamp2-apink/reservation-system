@@ -74,9 +74,10 @@ CREATE TABLE PRODUCTS_DETAIL(
 );
 
 CREATE TABLE PRODUCTS_PRICES_TYPES(
-	`id` INT NOT NULL AUTO_INCREMENT,
-    `product_price_type` VARCHAR(255) NOT NULL,
-    PRIMARY KEY(`id`)
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `product_price_type` VARCHAR(50) NOT NULL,
+  `description` VARCHAR(250) NOT NULL,
+  PRIMARY KEY(`id`)
 );
 -- price_type : 1, 일반  2 :청소년 3: 어린이 , CODE 테이블이 사실 필요하다.
 CREATE TABLE PRODUCTS_PRICES (
@@ -93,7 +94,6 @@ CREATE TABLE PRODUCTS_PRICES (
 );
 
 
-
 CREATE TABLE FILES (
   `id` INT NOT NULL AUTO_INCREMENT,
   `user_id` INT NOT NULL,
@@ -102,11 +102,12 @@ CREATE TABLE FILES (
   `file_length` INT NOT NULL,
   `content_type` VARCHAR(255) NOT NULL,
   `delete_flag` INT(1) NOT NULL,
-  `create_date` DATETIME DEFAULT CURRENT_TIMESTAMP NOT NULL,
-  `modify_date` DATETIME DEFAULT CURRENT_TIMESTAMP NOT NULL,
+  `create_date` DATETIME DEFAULT CURRENT_TIMESTAMP,
+  `modify_date` DATETIME DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY(`id`),
   FOREIGN KEY(`user_id`) REFERENCES USERS(`id`)
 );
+
 
 -- type : 대표이미지 - 1 , 부가이미지 - 2
 -- delete_flag 0 :삭제안됨, 1: 삭제된 이미지

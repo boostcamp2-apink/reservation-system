@@ -6,7 +6,6 @@ public class MainPageProductVo extends Product {
 
     private String placeName;
 
-
     public String getPlaceName() {
         return placeName;
     }
@@ -15,12 +14,4 @@ public class MainPageProductVo extends Product {
         this.placeName = placeName;
     }
 
-    @Override
-    public String toString() {
-
-        return super.toString() +
-                "MainPageProductVo{" +
-                "placeName='" + placeName + '\'' +
-                '}';
-    }
 }

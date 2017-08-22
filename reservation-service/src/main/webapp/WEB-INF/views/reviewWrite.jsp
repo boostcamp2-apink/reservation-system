@@ -25,17 +25,17 @@
 				<a href="#" class="btn_my"> <span title="내 예약">MY</span> </a>
 			</header>
 		</div>
-		<div class="ct">
+		<div class="ct" id ="_reviewContainer" data-productId="${id}">
 			<div class="ct_wrap">
 				<div class="top_title review_header">
 					<a href="#" class="btn_back" title="이전 화면으로 이동"> <i class="fn fn-backward1"></i> </a>
-					<h2><span class="title">클림트 인사이드</span></h2>
+					<h2><span class="title">${product.name}</span></h2>
 				</div>
 				<!-- 리뷰 별점 -->
 				<div class="write_act">
 					<p class="title_star">별점과 이용경험을 남겨주세요.</p>
 					<div class="review_rating rating_point">
-						<div class="rating">
+						<div class="rating _rating">
 							<input type="checkbox" name="rating1" value="0" class="rating_rdo first_star" title="0점">
 							<span class="span hide"></span>
 							<!-- [D] 해당 별점이 선택될 때 그 점수 이하의 input radio는 checked 클래스 추기 -->
@@ -50,7 +50,7 @@
 							<input type="checkbox" name="rating6" value="5" class="rating_rdo" title="5점">
 							<span class="span"></span>
 							<!-- [D] 0점일 때 gray_star 추기 -->
-							<span class="star_rank gray_star">0</span>
+							<span class="star_rank gray_star _ratingScore">0</span>
 						</div>
 					</div>
 				</div>
@@ -81,7 +81,7 @@
 						</label>
 						<input type="file" class="hidden_input" id="reviewImageFileOpenInput" accept="image/*" multiple>
 						<div class="guide_review">
-							<span>0</span>/400
+							<span id="_reviewTextLength" >0</span>/400
 							<span>(최소5자이상)</span>
 						</div>
 					</div>
@@ -90,41 +90,7 @@
 					<div class="review_photos review_photos_write">
 						<div class="item_preview_thumbs">
 							<ul class="lst_thumb">
-								<li class="item">
-									<a href="#" class="anchor">
-										<span class="spr_book ico_del">삭제</span>
-									</a>
-									<img src="http://naverbooking.phinf.naver.net/20170306_3/1488772023601A4195_JPEG/image.jpg?type=f300_300" width="130" alt="" class="item_thumb">
-									<span class="img_border"></span>
-								</li>
-								<li class="item">
-									<a href="#" class="anchor">
-										<span class="spr_book ico_del">삭제</span>
-									</a>
-									<img src="http://naverbooking.phinf.naver.net/20170306_3/1488772023601A4195_JPEG/image.jpg?type=f300_300" width="130" alt="" class="item_thumb">
-									<span class="img_border"></span>
-								</li>
-								<li class="item">
-									<a href="#" class="anchor">
-										<span class="spr_book ico_del">삭제</span>
-									</a>
-									<img src="http://naverbooking.phinf.naver.net/20170306_3/1488772023601A4195_JPEG/image.jpg?type=f300_300" width="130" alt="" class="item_thumb">
-									<span class="img_border"></span>
-								</li>
-								<li class="item">
-									<a href="#" class="anchor">
-										<span class="spr_book ico_del">삭제</span>
-									</a>
-									<img src="http://naverbooking.phinf.naver.net/20170306_3/1488772023601A4195_JPEG/image.jpg?type=f300_300" width="130" alt="" class="item_thumb">
-									<span class="img_border"></span>
-								</li>
-								<li class="item">
-									<a href="#" class="anchor">
-										<span class="spr_book ico_del">삭제</span>
-									</a>
-									<img src="http://naverbooking.phinf.naver.net/20170306_3/1488772023601A4195_JPEG/image.jpg?type=f300_300" width="130" alt="" class="item_thumb">
-									<span class="img_border"></span>
-								</li>
+
 							</ul>
 						</div>
 					</div>
@@ -150,6 +116,21 @@
 			<span class="copyright">© NAVER Corp.</span>
 		</div>
 	</footer>
+
+	<script id="uploaded-image-template" type="text/apink-handlebars-template">
+		<li class="item">
+			<a href="#" class="anchor _del" data-fileId="{{this}}">
+				<span class="spr_book ico_del">삭제</span>
+			</a>
+			<img src="/files/{{this}}" width="130" alt="" class="item_thumb">
+			<span class="img_border"></span>
+		</li>
+	</script>
+
+
+
+	<script type="text/javascript" src="/resources/js/node_modules/requirejs/require.js"></script>
+	<script type="text/javascript" src="/resources/js/reviewWrite/reviewWrite.js"></script>
 </body>
 
 </html>

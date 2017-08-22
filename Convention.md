@@ -80,7 +80,7 @@ URI|method|기능
 3.Controller, Service
 ==================
 
-추가(c): register  
+추가(c): add  
 읽기(r): get  
 수정(u): modify  
 삭제(d): remove  

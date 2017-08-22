@@ -24,7 +24,7 @@ define([], function( ) {
         return extendClass;
     };
 
-    return {
-        extend: extend
-    };
+    return extend;
 });
+
+
