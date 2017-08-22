@@ -164,7 +164,6 @@
         </div>
     </footer>
 
-    <script type="text/javascript" src="/resources/js/node_modules/requirejs/require.js"></script>
     <script type="text/javascript" src="/resources/js/reserve/reserve.js"></script>
 
 </body>

@@ -57,7 +57,7 @@
                                     <li class="list_item">
                                         <div>
                                             <div class="review_area">
-                                                <div class="thumb_area" data-images="[1,2,3,4]"> <!-- data-images=${comment.images} -->
+                                                <div class="thumb_area" data-images=${comment.images}>
                                                     <a href="#" class="thumb" title="이미지 크게 보기"> <img width="90" height="90" class="img_vertical_top" src="/files/1" alt="리뷰이미지"> </a> <span class="img_count">1</span>                                                </div>
                                                 <h4 class="resoc_name">${product.name}</h4>
                                                 <p class="review">${comment.comment}</p>
@@ -90,6 +90,51 @@
 	            <span class="copyright">© NAVER Corp.</span>
 	        </div>
 	    </footer>
+
+
+    <div id="photoview" style="display:none;">
+        <a class="popup_close" style = "color:white;">닫기</a>
+        <div class="pagination">
+            <div class="bg_pagination"></div>
+            <div class="figure_pagination">
+                <span class="num popup_image_num">1</span>
+                <span class="num off ">/ <span class="popup_total_image_num">3</span></span>
+            </div>
+        </div>
+        <div class="group_visual">
+            <div>
+                <div class="container_visual" style="width: 414px;">
+                    <ul class="visual_img">
+
+                    </ul>
+
+                </div>
+                <div class="prev">
+                    <div class="prev_inn">
+                        <a href="#" class="btn_prev" title="이전">
+                            <!-- [D] 첫 이미지 이면 off 클래스 추가 -->
+                            <i class="spr_book2 ico_arr6_lt off"></i>
+                        </a>
+                    </div>
+                </div>
+                <div class="nxt">
+                    <div class="nxt_inn">
+                        <a href="#" class="btn_nxt" title="다음">
+                            <i class="spr_book2 ico_arr6_rt"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script id="comment-image-template" type="text/apink-handlebars-template">
+        {{#each this}}
+        <li class="item" style="width: 414px;">
+            <img alt="" class="img_thumb" src="/files/{{this}}"> <span class="img_bg"></span>
+        </li>
+        {{/each}}
+    </script>
 
     <script type="text/javascript" src="/resources/js/node_modules/requirejs/require.js"></script>
     <script type="text/javascript" src="/resources/js/comment/comment.js"></script>

@@ -1,15 +1,8 @@
-define(['AjaxWrapper'],function(AjaxWrapper){
+import * as AjaxWrapper from "../utils/AjaxWrapper"
 
-    function addReservation(data){
+export function addReservation(data) {
 
-        AjaxWrapper.postData("/reservations", data).then(function(result){
-            $(location).attr('href', "/reservations");
-        });
-    }
-
-    return {
-        addReservation : addReservation
-    }
-
-
-});
+    AjaxWrapper.postData("/reservations", data).then(function (result) {
+        $(location).attr('href', "/reservations");
+    });
+}
