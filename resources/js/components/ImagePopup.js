@@ -3,7 +3,7 @@ import * as HandlebarsWrapper from "../utils/HandlebarsWrapper";
 import Slider from "./Slider"
 
 export default class ImagePopup extends Component {
-    constructor(rootTarget, dataTarget, handleBarsId) {
+    constructor({rootTarget, dataTarget, handleBarsId}) {
         super();
         this.rootTarget = $(rootTarget);
         this.dataTarget = $(dataTarget);
@@ -18,11 +18,11 @@ export default class ImagePopup extends Component {
 
     setSlider() {
         var slider = new Slider(this.dataTarget);
-        slider.on("change", this.updateImageCount.bind(this));
+        slider.on("change",() => this.updateImageCount);
         return slider;
     }
 
-    setSliderButton(prev, next) {
+    setSliderButton({prev, next}) {
         this.slider.setButton(prev, next);
     }
 
@@ -39,12 +39,12 @@ export default class ImagePopup extends Component {
     }
 
     setEvent() {
-        this.close.on("click", this.clickClose.bind(this));
+        this.close.on("click", e => this.clickClose);
 
     }
 
-    updateImageCount(data) {
-        this.currentImageNum.text(data.currentIndex);
+    updateImageCount({currentIndex}) {
+        this.currentImageNum.text(currentIndex);
     }
 
     clickClose() {

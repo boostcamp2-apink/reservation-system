@@ -64,7 +64,7 @@ function submitComment() {
         images: imagesFileId
     };
 
-    reviewWriteModel.postCommentData(commentData, redirectUrl);
+    reviewWriteModel.postCommentData({data:commentData, callback:redirectUrl});
 }
 
 function redirectUrl() {
@@ -82,7 +82,7 @@ function deleteImage(e) {
 }
 
 function uploadImage(e) {
-    reviewWriteModel.postImage(e.currentTarget.files[0], drawImage);
+    reviewWriteModel.postImage({data:e.currentTarget.files[0],callback: drawImage});
 }
 
 function drawImage(data) {

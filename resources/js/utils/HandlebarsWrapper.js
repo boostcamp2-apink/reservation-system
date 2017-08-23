@@ -1,3 +1,5 @@
+import dasd from "handlebars/lib/handlebars";
+
 define(['Handlebars'],function(Handlebars){
     var position;
     var source;

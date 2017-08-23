@@ -14,10 +14,9 @@ export function init() {
 
 function setEvent() {
     slider = new Slider(root + ' ul.visual_img');
-    slider.setButton(root + ' div.prev_inn > a.btn_prev', root + ' div.nxt_inn > a.btn_nxt');
+    slider.setButton({prev:root + ' div.prev_inn > a.btn_prev',next: root + ' div.nxt_inn > a.btn_nxt'});
     setImageCountEvent();
     $moreContent.find('a.bk_more').on("click", clickMoreDetail);
-
 }
 
 function clickMoreDetail(e) {
@@ -31,6 +30,6 @@ function setImageCountEvent() {
     slider.on("change", updateImageCount);
 }
 
-function updateImageCount(data) {
-    $imageNum.text(data.currentIndex);
+function updateImageCount({currentIndex}) {
+    $imageNum.text(currentIndex);
 }
