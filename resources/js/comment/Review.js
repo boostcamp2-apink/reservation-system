@@ -1,97 +1,93 @@
-define(['HandlebarsWrapper', 'CommentModel'], function (HandlebarsWrapper, commentModel) {
+import * as HandlebarsWrapper from '../utils/HandlebarsWrapper'
+import * as Scroll from './Scroll'
+import * as commentModel from './commentModel'
 
-    var productId;
-    var prevPage;
-    var nextPage;
-    var pagePerNum;
-    var target;
-    var commentDivSize;
-    var nextLock;
-    var prevLock;
+let productId;
+let prevPage;
+let nextPage;
+let pagePerNum;
+let target;
+let commentDivSize;
+let nextLock;
+let prevLock;
+let scroll;
 
-    init = function () {
+export function init() {
 
-        productId = 1;
-        prevPage = 0;
-        nextPage = 1;
-        pagePerNum = 10;
-        target = $("ul.list_short_review");
-        commentDivSize = $("div._comment").height;
-        nextLock = false;
-        prevLock = true;
-    }
+    productId = $(".header_tit").data("product_id");
+    prevPage = 0;
+    nextPage = 1;
+    pagePerNum = 10;
+    target = $("ul.list_short_review");
+    commentDivSize = $("div._comment").height;
+    nextLock = false;
+    prevLock = true;
+    scroll = new Scroll();
+    scroll.setDownScroll(getNextComments);
+    scroll.setUpScroll(getPrevComments)
+}
 
-    appendComments = function (result, flag) {
-        console.log(result);
-        if (flag) {
-            if (prevPage > 1) {
-                deleteElement("._comment", 0);
-            }
-            HandlebarsWrapper.create("comment-comment-template", result, "append", target);
-        } else {
-            nextLock = true;
-            decrementPage();
+function appendComments(result, flag) {
+    console.log(result);
+    if (flag) {
+        if (prevPage > 1) {
+            deleteElement("._comment", 0);
         }
-    },
+        HandlebarsWrapper.create("comment-comment-template", result, "append", target);
+    } else {
+        nextLock = true;
+        decrementPage();
+    }
+}
 
-    preppendComments = function (result) {
-        HandlebarsWrapper.create("comment-comment-template", result, "prepend", target);
-    },
+function preppendComments(result) {
+    HandlebarsWrapper.create("comment-comment-template", result, "prepend", target);
+}
 
-    setDownScroll = function () {
-        $(window).scroll(function () {
-            if (!nextLock) {
-                if ($(document).height() == $(window).scrollTop() + $(window).height()) {
-                    incrementPage();
-                    prevLock = false;
-                    console.log(prevPage + " " + nextPage);
-                    commentModel.getCommentsByProductId(productId, nextPage, pagePerNum, appendComments);
-                }
-            }
-        })
-    },
 
-    setUpScroll = function () {
-        $(window).scroll(function() {
-            if(!prevLock){
-                var height = $(window).scrollTop();
-                if (height < 200) {
-                    if(prevPage == 1){
-                        prevLock = true;
-                    } else {
-                        deleteElement("._comment", 1);
-                        decrementPage();
-                        commentModel.getCommentsByProductId(productId, prevPage, pagePerNum, preppendComments);
-                    }
-                    nextLock = false;
-                    console.log(prevPage + " " + nextPage);
-                }
-            }
-        })
-    },
-
-    deleteElement = function (id, index) {
-        $(id).eq(index).remove();
-    },
-
-    incrementPage = function () {
-        prevPage++;
-        nextPage++;
-    },
-
-    decrementPage = function () {
-        if (prevPage > 0) {
-            prevPage--;
-            nextPage--;
-        } else {
+function getNextComments() {
+    if (!nextLock) {
+        console.log("next");
+        if ($(document).height() == $(window).scrollTop() + $(window).height()) {
+            incrementPage();
             prevLock = false;
+            commentModel.getCommentsByProductId(productId, nextPage, pagePerNum, appendComments);
         }
     }
+}
 
-    return {
-        init: init,
-        setUpScroll: setUpScroll,
-        setDownScroll: setDownScroll
+
+function getPrevComments() {
+    if (!prevLock) {
+        console.log("prev");
+        var height = $(window).scrollTop();
+        if (height < 200) {
+            if (prevPage == 1) {
+                prevLock = true;
+            } else {
+                deleteElement("._comment", 1);
+                decrementPage();
+                commentModel.getCommentsByProductId(productId, prevPage, pagePerNum, preppendComments);
+            }
+            nextLock = false;
+        }
     }
+}
 
-});
+function deleteElement(id, index) {
+    $(id).eq(index).remove();
+}
+
+function incrementPage() {
+    prevPage++;
+    nextPage++;
+}
+
+function decrementPage() {
+    if (prevPage > 0) {
+        prevPage--;
+        nextPage--;
+    } else {
+        prevLock = false;
+    }
+}

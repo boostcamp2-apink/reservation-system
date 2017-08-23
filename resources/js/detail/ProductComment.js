@@ -1,5 +1,5 @@
 import ImagePopup from "../components/ImagePopup"
-import $ from "jquery";
+import $ from "jquery"
 
 let popup;
 let imagePopup;
