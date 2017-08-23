@@ -20,7 +20,4 @@ require(['jquery', 'Scroll', 'Review'],function($, Scroll, Review){
 
     Review.init();
 
-    Review.setDownScroll();
-    Review.setUpScroll();
-
 });

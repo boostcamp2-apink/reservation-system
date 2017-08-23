@@ -1,4 +1,5 @@
-import * as Handlebars from "handlebars"
+import * as $ from 'jquery'
+import Handlebars from "handlerbars/lib"
 
 let position;
 let source;

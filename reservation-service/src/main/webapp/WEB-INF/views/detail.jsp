@@ -291,8 +291,7 @@
         {{/each}}
     </script>
 
-    <script type="text/javascript" src="/resources/js/node_modules/requirejs/require.js"></script>
-    <script type="text/javascript" src="/resources/js/detail/detail.js"></script>
+    <script type="text/javascript" src="/resources/js/bundle/detailbundle.js"></script>
 </body>
 
 </html>

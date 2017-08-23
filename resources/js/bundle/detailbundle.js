@@ -60,7 +60,7 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 8);
+/******/ 	return __webpack_require__(__webpack_require__.s = 4);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -10324,261 +10324,594 @@ return jQuery;
 
 
 /***/ }),
-/* 1 */,
-/* 2 */,
-/* 3 */,
-/* 4 */,
-/* 5 */,
-/* 6 */,
-/* 7 */,
-/* 8 */
+/* 1 */
+/***/ (function(module, exports, __webpack_require__) {
+
+/*!
+ * Copyright (c) 2017 NAVER Corp.
+ * @egjs/component project is licensed under the MIT license
+ * 
+ * @egjs/component JavaScript library
+ * http://naver.github.io/egjs/component
+ * 
+ * @version 2.0.0
+ */
+(function webpackUniversalModuleDefinition(root, factory) {
+	if(true)
+		module.exports = factory();
+	else if(typeof define === 'function' && define.amd)
+		define([], factory);
+	else if(typeof exports === 'object')
+		exports["Component"] = factory();
+	else
+		root["eg"] = root["eg"] || {}, root["eg"]["Component"] = factory();
+})(this, function() {
+return /******/ (function(modules) { // webpackBootstrap
+/******/ 	// The module cache
+/******/ 	var installedModules = {};
+/******/
+/******/ 	// The require function
+/******/ 	function __webpack_require__(moduleId) {
+/******/
+/******/ 		// Check if module is in cache
+/******/ 		if(installedModules[moduleId]) {
+/******/ 			return installedModules[moduleId].exports;
+/******/ 		}
+/******/ 		// Create a new module (and put it into the cache)
+/******/ 		var module = installedModules[moduleId] = {
+/******/ 			i: moduleId,
+/******/ 			l: false,
+/******/ 			exports: {}
+/******/ 		};
+/******/
+/******/ 		// Execute the module function
+/******/ 		modules[moduleId].call(module.exports, module, module.exports, __webpack_require__);
+/******/
+/******/ 		// Flag the module as loaded
+/******/ 		module.l = true;
+/******/
+/******/ 		// Return the exports of the module
+/******/ 		return module.exports;
+/******/ 	}
+/******/
+/******/
+/******/ 	// expose the modules object (__webpack_modules__)
+/******/ 	__webpack_require__.m = modules;
+/******/
+/******/ 	// expose the module cache
+/******/ 	__webpack_require__.c = installedModules;
+/******/
+/******/ 	// define getter function for harmony exports
+/******/ 	__webpack_require__.d = function(exports, name, getter) {
+/******/ 		if(!__webpack_require__.o(exports, name)) {
+/******/ 			Object.defineProperty(exports, name, {
+/******/ 				configurable: false,
+/******/ 				enumerable: true,
+/******/ 				get: getter
+/******/ 			});
+/******/ 		}
+/******/ 	};
+/******/
+/******/ 	// getDefaultExport function for compatibility with non-harmony modules
+/******/ 	__webpack_require__.n = function(module) {
+/******/ 		var getter = module && module.__esModule ?
+/******/ 			function getDefault() { return module['default']; } :
+/******/ 			function getModuleExports() { return module; };
+/******/ 		__webpack_require__.d(getter, 'a', getter);
+/******/ 		return getter;
+/******/ 	};
+/******/
+/******/ 	// Object.prototype.hasOwnProperty.call
+/******/ 	__webpack_require__.o = function(object, property) { return Object.prototype.hasOwnProperty.call(object, property); };
+/******/
+/******/ 	// __webpack_public_path__
+/******/ 	__webpack_require__.p = "";
+/******/
+/******/ 	// Load entry module and return exports
+/******/ 	return __webpack_require__(__webpack_require__.s = 0);
+/******/ })
+/************************************************************************/
+/******/ ([
+/* 0 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var _Component = __webpack_require__(1);
+
+var _Component2 = _interopRequireDefault(_Component);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
+
+_Component2["default"].VERSION = "2.0.0";
+module.exports = _Component2["default"];
+
+/***/ }),
+/* 1 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+exports.__esModule = true;
+
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+/**
+ * Copyright (c) 2015 NAVER Corp.
+ * egjs projects are licensed under the MIT license
+ */
+
+/**
+ * A class used to manage events and options in a component
+ * @ko 컴포넌트의 이벤트와 옵션을 관리할 수 있게 하는 클래스
+ * @alias eg.Component
+ */
+var Component = function () {
+	/**
+  * @support {"ie": "7+", "ch" : "latest", "ff" : "latest",  "sf" : "latest", "edge" : "latest", "ios" : "7+", "an" : "2.1+ (except 3.x)"}
+  */
+	function Component() {
+		_classCallCheck(this, Component);
+
+		this._eventHandler = {};
+		this.options = {};
+	}
+	/**
+  * Triggers a custom event.
+  * @ko 커스텀 이벤트를 발생시킨다
+  * @param {String} eventName The name of the custom event to be triggered <ko>발생할 커스텀 이벤트의 이름</ko>
+  * @param {Object} customEvent Event data to be sent when triggering a custom event <ko>커스텀 이벤트가 발생할 때 전달할 데이터</ko>
+  * @return {Boolean} Indicates whether the event has occurred. If the stop() method is called by a custom event handler, it will return false and prevent the event from occurring. <ko>이벤트 발생 여부. 커스텀 이벤트 핸들러에서 stop() 메서드를 호출하면 'false'를 반환하고 이벤트 발생을 중단한다.</ko>
+  * @example
+ class Some extends eg.Component {
+  some(){
+    this.trigger("hi");// fire hi event.
+  }
+ }
+  */
+
+
+	Component.prototype.trigger = function trigger(eventName) {
+		var customEvent = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
+
+		var handlerList = this._eventHandler[eventName] || [];
+		var hasHandlerList = handlerList.length > 0;
+
+		if (!hasHandlerList) {
+			return true;
+		}
+
+		// If detach method call in handler in first time then handeler list calls.
+		handlerList = handlerList.concat();
+
+		customEvent.eventType = eventName;
+
+		var isCanceled = false;
+		var arg = [customEvent];
+		var i = 0;
+
+		customEvent.stop = function () {
+			isCanceled = true;
+		};
+
+		for (var _len = arguments.length, restParam = Array(_len > 2 ? _len - 2 : 0), _key = 2; _key < _len; _key++) {
+			restParam[_key - 2] = arguments[_key];
+		}
+
+		if (restParam.length >= 1) {
+			arg = arg.concat(restParam);
+		}
+
+		for (i = 0; handlerList[i]; i++) {
+			handlerList[i].apply(this, arg);
+		}
+
+		return !isCanceled;
+	};
+	/**
+  * Executed event just one time.
+  * @ko 이벤트가 한번만 실행된다.
+  * @param {eventName} eventName The name of the event to be attached <ko>등록할 이벤트의 이름</ko>
+  * @param {Function} handlerToAttach The handler function of the event to be attached <ko>등록할 이벤트의 핸들러 함수</ko>
+  * @return {eg.Component} An instance of a component itself<ko>컴포넌트 자신의 인스턴스</ko>
+  * @example
+ class Some extends eg.Component {
+  hi() {
+    alert("hi");
+  }
+  thing() {
+    this.once("hi", this.hi);
+  }
+ }
+ var some = new Some();
+ some.thing();
+ some.trigger("hi");
+ // fire alert("hi");
+ some.trigger("hi");
+ // Nothing happens
+  */
+
+
+	Component.prototype.once = function once(eventName, handlerToAttach) {
+		if ((typeof eventName === "undefined" ? "undefined" : _typeof(eventName)) === "object" && typeof handlerToAttach === "undefined") {
+			var eventHash = eventName;
+			var i = void 0;
+
+			for (i in eventHash) {
+				this.once(i, eventHash[i]);
+			}
+			return this;
+		} else if (typeof eventName === "string" && typeof handlerToAttach === "function") {
+			var self = this;
+
+			this.on(eventName, function listener() {
+				for (var _len2 = arguments.length, arg = Array(_len2), _key2 = 0; _key2 < _len2; _key2++) {
+					arg[_key2] = arguments[_key2];
+				}
+
+				handlerToAttach.apply(self, arg);
+				self.off(eventName, listener);
+			});
+		}
+
+		return this;
+	};
+
+	/**
+  * Checks whether an event has been attached to a component.
+  * @ko 컴포넌트에 이벤트가 등록됐는지 확인한다.
+  * @param {String} eventName The name of the event to be attached <ko>등록 여부를 확인할 이벤트의 이름</ko>
+  * @return {Boolean} Indicates whether the event is attached. <ko>이벤트 등록 여부</ko>
+  * @example
+ class Some extends eg.Component {
+  some() {
+    this.hasOn("hi");// check hi event.
+  }
+ }
+  */
+
+
+	Component.prototype.hasOn = function hasOn(eventName) {
+		return !!this._eventHandler[eventName];
+	};
+
+	/**
+  * Attaches an event to a component.
+  * @ko 컴포넌트에 이벤트를 등록한다.
+  * @param {eventName} eventName The name of the event to be attached <ko>등록할 이벤트의 이름</ko>
+  * @param {Function} handlerToAttach The handler function of the event to be attached <ko>등록할 이벤트의 핸들러 함수</ko>
+  * @return {eg.Component} An instance of a component itself<ko>컴포넌트 자신의 인스턴스</ko>
+  * @example
+ class Some extends eg.Component {
+  hi() {
+    console.log("hi");
+  }
+  some() {
+    this.on("hi",this.hi); //attach event
+  }
+ }
+ */
+
+
+	Component.prototype.on = function on(eventName, handlerToAttach) {
+		if ((typeof eventName === "undefined" ? "undefined" : _typeof(eventName)) === "object" && typeof handlerToAttach === "undefined") {
+			var eventHash = eventName;
+			var name = void 0;
+
+			for (name in eventHash) {
+				this.on(name, eventHash[name]);
+			}
+			return this;
+		} else if (typeof eventName === "string" && typeof handlerToAttach === "function") {
+			var handlerList = this._eventHandler[eventName];
+
+			if (typeof handlerList === "undefined") {
+				this._eventHandler[eventName] = [];
+				handlerList = this._eventHandler[eventName];
+			}
+
+			handlerList.push(handlerToAttach);
+		}
+
+		return this;
+	};
+	/**
+  * Detaches an event from the component.
+  * @ko 컴포넌트에 등록된 이벤트를 해제한다
+  * @param {eventName} eventName The name of the event to be detached <ko>해제할 이벤트의 이름</ko>
+  * @param {Function} handlerToDetach The handler function of the event to be detached <ko>해제할 이벤트의 핸들러 함수</ko>
+  * @return {eg.Component} An instance of a component itself <ko>컴포넌트 자신의 인스턴스</ko>
+  * @example
+ class Some extends eg.Component {
+  hi() {
+    console.log("hi");
+  }
+  some() {
+    this.off("hi",this.hi); //detach event
+  }
+ }
+  */
+
+
+	Component.prototype.off = function off(eventName, handlerToDetach) {
+		// All event detach.
+		if (typeof eventName === "undefined") {
+			this._eventHandler = {};
+			return this;
+		}
+
+		// All handler of specific event detach.
+		if (typeof handlerToDetach === "undefined") {
+			if (typeof eventName === "string") {
+				this._eventHandler[eventName] = undefined;
+				return this;
+			} else {
+				var eventHash = eventName;
+				var name = void 0;
+
+				for (name in eventHash) {
+					this.off(name, eventHash[name]);
+				}
+				return this;
+			}
+		}
+
+		// The handler of specific event detach.
+		var handlerList = this._eventHandler[eventName];
+
+		if (handlerList) {
+			var k = void 0;
+			var handlerFunction = void 0;
+
+			for (k = 0; (handlerFunction = handlerList[k]) !== undefined; k++) {
+				if (handlerFunction === handlerToDetach) {
+					handlerList = handlerList.splice(k, 1);
+					break;
+				}
+			}
+		}
+
+		return this;
+	};
+
+	return Component;
+}();
+
+exports["default"] = Component;
+module.exports = exports["default"];
+
+/***/ })
+/******/ ]);
+});
+//# sourceMappingURL=component.js.map
+
+/***/ }),
+/* 2 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (immutable) */ __webpack_exports__["a"] = create;
+/* unused harmony export customHelper */
+/* unused harmony export setPartial */
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_jquery__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_jquery___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_jquery__);
+throw new Error("Cannot find module \"handlerbars/lib\"");
+
+
+
+let position;
+let source;
+let template;
+let cache = {};
+
+function createTemplate(handlebarsId) {
+    position = __WEBPACK_IMPORTED_MODULE_0_jquery__("#" + handlebarsId);
+    source = position.html();
+    template = __WEBPACK_IMPORTED_MODULE_1_handlerbars_lib___default.a.compile(source);
+    return template;
+}
+
+function create(handlebarsId, data, method, target) {
+    let template = cache[handlebarsId];
+    if (!template) {
+        cache[handlebarsId] = createTemplate(handlebarsId);
+        template = cache[handlebarsId];
+    }
+    target[method](template(data));
+}
+function customHelper(helperName, func) {
+    __WEBPACK_IMPORTED_MODULE_1_handlerbars_lib___default.a.registerHelper(helperName, func);
+}
+function setPartial(partialName, partialHandlebarsId) {
+    let partialSource = __WEBPACK_IMPORTED_MODULE_0_jquery__(partialHandlebarsId).html();
+    __WEBPACK_IMPORTED_MODULE_1_handlerbars_lib___default.a.registerPartial(partialName, partialSource);
+}
+
+
+
+
+
+
+/***/ }),
+/* 3 */
+/***/ (function(module, exports) {
+
+throw new Error("Module parse failed: C:\\Users\\Kim Seong Jin\\Desktop\\Apink\\reservation-system\\resources\\js\\components\\Slider.js Unexpected token (86:140)\nYou may need an appropriate loader to handle this file type.\n|                     },\r\n| \r\n|                     step: now => this.rootTarget.css({\"transform\": \"translate(\" + (-(this.width * this.currentChildIndex) + now) + \"px,0)\"});\r\n|                     ,\r\n| \r");
+
+/***/ }),
+/* 4 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__reservationList__ = __webpack_require__(9);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__ProductComment__ = __webpack_require__(5);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__ProductDetail__ = __webpack_require__(7);
 
-__WEBPACK_IMPORTED_MODULE_0__reservationList__["a" /* default */].init();
+
+
+__WEBPACK_IMPORTED_MODULE_0__ProductComment__["a" /* init */]();
+__WEBPACK_IMPORTED_MODULE_1__ProductDetail__["a" /* init */]();
 
 /***/ }),
-/* 9 */
+/* 5 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_jquery__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_jquery___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_jquery__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__myreservationModel__ = __webpack_require__(10);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__reservationPopup__ = __webpack_require__(11);
+/* harmony export (immutable) */ __webpack_exports__["a"] = init;
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__components_ImagePopup__ = __webpack_require__(6);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_jquery__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_jquery___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_jquery__);
 
 
 
+let popup;
+let imagePopup;
+let $commentImage;
 
-
-    let emptyTarget;
-    let rootTarget;
-    let summaryTargets;
-    let currentSummaryTarget;
-
-    function setEvent() {
-        summaryTargets.on('click', 'li.item > a', filterHandler);
-        rootTarget.on('click', '._btnCancel', cancelReservation);
-        rootTarget.on('click', '._btnReview', addReview);
-    }
-
-    function cancelReservation(event) {
-        let canceldata = {};
-        event.preventDefault();
-        console.log("cancel");
-        __WEBPACK_IMPORTED_MODULE_2__reservationPopup__["a" /* default */].show(__WEBPACK_IMPORTED_MODULE_0_jquery__(event.currentTarget).closest('article.card_item'));
-    }
-
-    function addReview(event) {
-        event.preventDefault();
-        console.log("review");
-    }
-
-    function filterHandler(event) {
-        var clickedTarget = __WEBPACK_IMPORTED_MODULE_0_jquery__(event.currentTarget);
-        if (!clickedTarget.hasClass('on')) {
-            currentSummaryTarget.removeClass('on');
-            clickedTarget.addClass('on');
-            currentSummaryTarget = clickedTarget;
-
-            drawTarget(findClass(currentSummaryTarget));
-        }
-    }
-
-    function findClass(target) {
-        if (target.hasClass('_all')) {
-            return "all";
-        } else if (target.hasClass('_clockAndCheck')) {
-            return "clockAndCheck"
-        } else if (target.hasClass('_used')) {
-            return "used"
-        } else if (target.hasClass('_cancel')) {
-            return "cancel"
-        }
-    }
-
-    function drawTarget(className) {
-        if (__WEBPACK_IMPORTED_MODULE_0_jquery__('a._' + className + '> span').html() === '0') {
-            drawEmptyTarget();
-        } else {
-            var data;
-            switch (className) {
-                case "all":
-                    data = __WEBPACK_IMPORTED_MODULE_1__myreservationModel__["a" /* getAllData */]();
-                    break;
-                case "clockAndCheck":
-                    data=__WEBPACK_IMPORTED_MODULE_1__myreservationModel__["c" /* getClockAndCheckData */]();
-                    break;
-                case "used":
-                    data=__WEBPACK_IMPORTED_MODULE_1__myreservationModel__["d" /* getUsedData */]();
-                    break;
-                case "cancel":
-                    data=__WEBPACK_IMPORTED_MODULE_1__myreservationModel__["b" /* getCancelData */]();
-                    break;
-            }
-
-            rootTarget.html(data);
-        }
-    }
-
-    function drawEmptyTarget() {
-        rootTarget.html(emptyTarget);
-    }
-
-    //template string
-    function getEmptyElement() {
-        return "<br><div class=\'err\'> <i class=\'spr_book ico_info_nolist\'></i>" +
-            "<h1 class=\'tit\'>예약 리스트가 없습니다</h1>\n" +
-            "</div>";
-    }
-
-class ReservationList{
-
-     static init() {
-        rootTarget = __WEBPACK_IMPORTED_MODULE_0_jquery__('ul._cardList');
-        emptyTarget = getEmptyElement();
-        __WEBPACK_IMPORTED_MODULE_2__reservationPopup__["a" /* default */].init(__WEBPACK_IMPORTED_MODULE_0_jquery__('div._popup'));
-        if (!__WEBPACK_IMPORTED_MODULE_1__myreservationModel__["e" /* saveData */]()) {
-            drawEmptyTarget();
-        }
-        summaryTargets = __WEBPACK_IMPORTED_MODULE_0_jquery__('ul._summaryBoard');
-        currentSummaryTarget = summaryTargets.find('.on');
-        setEvent();
-    }
-
+function init() {
+    popup = "#photoview";
+    $commentImage = __WEBPACK_IMPORTED_MODULE_1_jquery__('div.thumb_area');
+    setEvent();
 
 }
-/* harmony default export */ __webpack_exports__["a"] = (ReservationList);
-
-
-/***/ }),
-/* 10 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony export (immutable) */ __webpack_exports__["e"] = saveData;
-/* harmony export (immutable) */ __webpack_exports__["a"] = getAllData;
-/* harmony export (immutable) */ __webpack_exports__["c"] = getClockAndCheckData;
-/* harmony export (immutable) */ __webpack_exports__["d"] = getUsedData;
-/* harmony export (immutable) */ __webpack_exports__["b"] = getCancelData;
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_jquery__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_jquery___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_jquery__);
-
-
-let clockTarget;
-let checkTarget;
-let usedTarget;
-let cancelTarget;
-let targetCount;
-
-
-function getDataFromDocument() {
-    if (targetCount === '0') {
-        return false;
-    }
-    else {
-        clockTarget = __WEBPACK_IMPORTED_MODULE_0_jquery__('li._clock');
-        checkTarget = __WEBPACK_IMPORTED_MODULE_0_jquery__('li._check');
-        usedTarget = __WEBPACK_IMPORTED_MODULE_0_jquery__('li._used');
-        cancelTarget = __WEBPACK_IMPORTED_MODULE_0_jquery__('li._cancel');
-        return true;
-    }
-}
-
-
-function saveData() {
-    targetCount = __WEBPACK_IMPORTED_MODULE_0_jquery__('li.item > .on > span').html();
-    console.log(targetCount);
-    return getDataFromDocument();
-}
-
-
-function getAllData() {
-    const data = [];
-    data.push(clockTarget);
-    data.push(checkTarget);
-    data.push(usedTarget);
-    data.push(cancelTarget);
-    return data;
-}
-
-function getClockAndCheckData() {
-    const data = [];
-    data.push(clockTarget);
-    data.push(checkTarget);
-    return data;
-}
-
-
-function getUsedData() {
-    const data = [];
-    data.push(usedTarget);
-    return data;
-}
-
-function getCancelData() {
-    const data = [];
-    data.push(cancelTarget);
-    return data;
-}
-
-
-
-
-
-/***/ }),
-/* 11 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_jquery__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_jquery___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_jquery__);
-
-
-let popupTarget;
-let popupTitle;
-let popupDate;
-let reservationId;
 
 function setEvent() {
-    popupTarget.on('click','.popup_btn_close',closePopup);
-    popupTarget.on('click','.btn_gray',closePopup);
-    popupTarget.on('click','.btn_green',cancelReservation);
+    imagePopup =
+        new __WEBPACK_IMPORTED_MODULE_0__components_ImagePopup__["a" /* default */](popup, popup + " ul.visual_img",'comment-image-template');
+    //String Template
+    imagePopup.setSliderButton({prev :'popup + \' div.prev_inn > a.btn_prev'
+        , next: ", popup + ' div.nxt_inn > a.btn_nxt'"});
+
+    $commentImage.on("click", clickCommentImage);
 }
 
-function cancelReservation() {
-    event.preventDefault();
-    location.href = "/reservations/cancel/"+reservationId;
-}
-function closePopup(event) {
-    event.preventDefault();
-    popupTarget.toggle();
+function clickCommentImage(e) {
+    e.preventDefault();
+    var data = __WEBPACK_IMPORTED_MODULE_1_jquery__(e.currentTarget).data("images");
+    imagePopup.popupData(data);
 }
 
-class ReservationPopup{
 
 
-    static init(target) {
-        popupTarget = target;
-        popupTitle = popupTarget.find('.pop_tit > span');
-        popupDate = popupTarget.find('.pop_tit > small');
-        setEvent();
+
+
+/***/ }),
+/* 6 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__egjs_component__ = __webpack_require__(1);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__egjs_component___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__egjs_component__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__utils_HandlebarsWrapper__ = __webpack_require__(2);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__Slider__ = __webpack_require__(3);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__Slider___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2__Slider__);
+
+
+
+
+class ImagePopup extends __WEBPACK_IMPORTED_MODULE_0__egjs_component___default.a {
+    constructor(rootTarget, dataTarget, handleBarsId) {
+        super();
+        this.rootTarget = $(rootTarget);
+        this.dataTarget = $(dataTarget);
+        this.handleBarsId = handleBarsId;
+        this.close = this.rootTarget.find(".popup_close");
+        this.totalImageNum = this.rootTarget.find(".popup_total_image_num");
+        this.currentImageNum = this.rootTarget.find(".popup_image_num");
+        this.slider = this.setSlider();
+        this.setEvent();
+
     }
 
+    setSlider() {
+        var slider = new __WEBPACK_IMPORTED_MODULE_2__Slider__["default"](this.dataTarget);
+        slider.on("change", this.updateImageCount.bind(this));
+        return slider;
+    }
 
-    static show(target) {
-        reservationId = target.find('._reservationId').text();
-        popupTitle.text(target.find('div.card_detail > .tit').text());
-        popupDate.text(target.find('li:first-child > .item_dsc').text());
-        popupTarget.toggle();
-        console.log(reservationId);
+    setSliderButton({prev, next}) {
+        this.slider.setButton(prev,next);
+    }
+
+    setSliderFlicking() {
+        this.slider.setFlicking();
+    }
+
+    popupData(data) {
+        __WEBPACK_IMPORTED_MODULE_1__utils_HandlebarsWrapper__["a" /* create */](this.handleBarsId, data, "append", this.dataTarget);
+        this.slider.init(this.dataTarget);
+        this.currentImageNum.text(1);
+        this.totalImageNum.text(data.length);
+        this.rootTarget.fadeIn();
+    }
+
+    setEvent() {
+        this.close.on("click", this.clickClose.bind(this));
 
     }
+
+    updateImageCount(data) {
+        this.currentImageNum.text(data.currentIndex);
+    }
+
+    clickClose() {
+        this.rootTarget.fadeOut();
+        this.dataTarget.empty();
+    }
 }
-/* harmony default export */ __webpack_exports__["a"] = (ReservationPopup);
+/* harmony export (immutable) */ __webpack_exports__["a"] = ImagePopup;
+
+
+
+/***/ }),
+/* 7 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (immutable) */ __webpack_exports__["a"] = init;
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__components_Slider__ = __webpack_require__(3);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__components_Slider___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__components_Slider__);
+
+
+let slider;
+let $moreContent;
+let $imageNum;
+let root;
+
+function init() {
+    $moreContent = $(".section_store_details");
+    $imageNum = $("#image_num");
+    root = '.section_visual';
+    setEvent();
+}
+
+function setEvent() {
+    slider = new __WEBPACK_IMPORTED_MODULE_0__components_Slider__["default"](root + ' ul.visual_img');
+    slider.setButton(root + ' div.prev_inn > a.btn_prev', root + ' div.nxt_inn > a.btn_nxt');
+    setImageCountEvent();
+    $moreContent.find('a.bk_more').on("click", clickMoreDetail);
+
+}
+
+function clickMoreDetail(e) {
+    e.preventDefault();
+    $moreContent.find("div.store_details").toggleClass("close3");
+    $(e.currentTarget).css("display", "none");
+    $(e.currentTarget).siblings("a").css("display", "");
+}
+
+function setImageCountEvent() {
+    slider.on("change", updateImageCount);
+}
+
+function updateImageCount(data) {
+    $imageNum.text(data.currentIndex);
+}
+
 
 /***/ })
 /******/ ]);

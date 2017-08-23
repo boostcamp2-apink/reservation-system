@@ -27,8 +27,8 @@ class Slider extends Component {
         }
 
         createFakeTarget() {
-            let fakeFirstChild = this.rootTarget.children(':first-child').clone();
-            let fakeLastChild = this.rootTarget.children(':last-child').clone();
+            const fakeFirstChild = this.rootTarget.children(':first-child').clone();
+            const fakeLastChild = this.rootTarget.children(':last-child').clone();
             this.rootTarget.append(fakeFirstChild);
             this.rootTarget.prepend(fakeLastChild);
             this.currentChildIndex = 1;
@@ -37,8 +37,8 @@ class Slider extends Component {
         }
 
         clickEvent() {
-            $(this.prev).on("click", this.clickPrev.bind(this));
-            $(this.next).on("click", this.clickNext.bind(this));
+            $(this.prev).on("click", e => this.clickPrev(e));
+            $(this.next).on("click", e => this.clickNext(e));
         }
 
         clickPrev(e) {
@@ -59,7 +59,7 @@ class Slider extends Component {
         }
 
         //direction value is "next" or "prev"
-        animator(direction) {
+        animator(direction = "left") {
             let moveSize;
             let moveIndex;
             if (direction === "next") {
@@ -77,15 +77,14 @@ class Slider extends Component {
                 {move: moveSize},
                 {
                     duration: 1000,
-                    start: function () {
+                    start: ()=>{
                         if (this.currentChildIndex === this.targetCount && moveIndex === 1) {
                             this.currentChildIndex = 0;
                         }
-                    }.bind(this),
+                    },
 
-                    step: function (now) {
-                        this.rootTarget.css({"transform": "translate(" + (-(this.width * this.currentChildIndex) + now) + "px,0)"});
-                    }.bind(this),
+                    step: now => this.rootTarget.css({"transform": "translate(" + (-(this.width * this.currentChildIndex) + now) + "px,0)"});
+                    ,
 
                     complete: function () {
                         this.currentChildIndex += moveIndex;

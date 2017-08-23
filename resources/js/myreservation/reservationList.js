@@ -1,4 +1,4 @@
-import $ from 'jquery'
+import * as $ from 'jquery'
 import * as MyreservationModel from './myreservationModel'
 import ReservationPopup from './reservationPopup'
 
@@ -77,6 +77,7 @@ import ReservationPopup from './reservationPopup'
         rootTarget.html(emptyTarget);
     }
 
+    //template string
     function getEmptyElement() {
         return "<br><div class=\'err\'> <i class=\'spr_book ico_info_nolist\'></i>" +
             "<h1 class=\'tit\'>예약 리스트가 없습니다</h1>\n" +

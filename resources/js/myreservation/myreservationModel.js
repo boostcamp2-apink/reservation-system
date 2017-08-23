@@ -1,11 +1,11 @@
-import $ from 'jquery'
+import * as $ from 'jquery'
 
 let clockTarget;
 let checkTarget;
 let usedTarget;
 let cancelTarget;
 let targetCount;
-let data;
+
 
 function getDataFromDocument() {
     if (targetCount === '0') {
@@ -23,12 +23,13 @@ function getDataFromDocument() {
 
 export function saveData() {
     targetCount = $('li.item > .on > span').html();
+    console.log(targetCount);
     return getDataFromDocument();
 }
 
 
 export function getAllData() {
-    data = [];
+    const data = [];
     data.push(clockTarget);
     data.push(checkTarget);
     data.push(usedTarget);
@@ -37,7 +38,7 @@ export function getAllData() {
 }
 
 export function getClockAndCheckData() {
-    data = [];
+    const data = [];
     data.push(clockTarget);
     data.push(checkTarget);
     return data;
@@ -45,13 +46,13 @@ export function getClockAndCheckData() {
 
 
 export function getUsedData() {
-    data = [];
+    const data = [];
     data.push(usedTarget);
     return data;
 }
 
 export function getCancelData() {
-    data = [];
+    const data = [];
     data.push(cancelTarget);
     return data;
 }

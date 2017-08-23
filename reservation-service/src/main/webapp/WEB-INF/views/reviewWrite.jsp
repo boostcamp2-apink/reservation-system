@@ -129,8 +129,7 @@
 
 
 
-	<script type="text/javascript" src="/resources/js/node_modules/requirejs/require.js"></script>
-	<script type="text/javascript" src="/resources/js/reviewWrite/reviewWrite.js"></script>
+	<script type="text/javascript" src="/resources/js/bundle/reviewWritebundle.js"></script>
 </body>
 
 </html>

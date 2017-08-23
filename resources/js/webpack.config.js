@@ -1,16 +1,42 @@
-// webpack.config.js
+// // webpack.config.js
+// module.exports = {
+//
+//     entry: {
+//
+//     },
+//     output: {
+//         filename: './bundle/[name]bundle.js'
+//     }
+// };
+// =======
 module.exports = {
-    resolve : {
-        alias : {
-            MyreservationModel :  './myreservationModel',
-            ReservationList : './reservationList',
-            ReservationPopup : './reservationPopup'
-        }
-    },
     entry: {
-        'myreservation': './myreservation/myreservation.js'
+        "detail" :  './detail/detail.js',
+        "myreservation" : './myreservation/myreservation.js',
+        "reviewWrite" : "./reviewWrite/reviewWrite.js"
+        // "reserve" : './reserve/reserve.js'
     },
+
     output: {
-        filename: './bundle/[name]bundle.js'
+        path: __dirname + '/bundle/',
+        filename: '[name]bundle.js'
+    },
+    devServer: {
+        inline: true,
+        port: 7777,
+        contentBase: __dirname + '/public/'
+    },
+    module: {
+        loaders: [
+            {
+                test: /\.js$/,
+                loader: 'babel-loader',
+                exclude: /node_modules/,
+                query: {
+                    cacheDirectory: true,
+                    presets: ['es2015']
+                }
+            }
+        ]
     }
 };
