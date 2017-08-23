@@ -83,10 +83,11 @@ class Slider extends Component {
                         }
                     },
 
-                    step: now => this.rootTarget.css({"transform": "translate(" + (-(this.width * this.currentChildIndex) + now) + "px,0)"});
-                    ,
+                    step: now => {
+                        this.rootTarget.css({"transform": "translate(" + (-(this.width * this.currentChildIndex) + now) + "px,0)"});
+                    },
 
-                    complete: function () {
+                    complete: () => {
                         this.currentChildIndex += moveIndex;
                         if (this.currentChildIndex === 0 && moveIndex === -1) {
                             this.currentChildIndex = this.targetCount;
@@ -96,8 +97,7 @@ class Slider extends Component {
                         this.trigger("change",{
                             currentIndex : this.currentChildIndex
                         });
-
-                    }.bind(this)
+                    }
                 }
             )
         }
