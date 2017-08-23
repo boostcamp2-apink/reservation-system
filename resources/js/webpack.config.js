@@ -17,17 +17,17 @@ module.exports = {
         port: 7777,
         contentBase: __dirname + '/public/'
     },
-    module: {
-        loaders: [
-            {
-                test: /\.js$/,
-                loader: 'babel-loader',
-                exclude: /node_modules/,
-                query: {
-                    cacheDirectory: true,
-                    presets: ['es2015']
-                }
-            }
-        ]
-    }
+    // module: {
+    //     loaders: [
+    //         {
+    //             test: /\.js$/,
+    //             loader: 'babel-loader',
+    //             exclude: /node_modules/,
+    //             query: {
+    //                 cacheDirectory: true,
+    //                 presets: ['es2015']
+    //             }
+    //         }
+    //     ]
+    // }
 };

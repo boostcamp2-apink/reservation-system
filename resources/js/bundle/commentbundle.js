@@ -60,7 +60,7 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 44);
+/******/ 	return __webpack_require__(__webpack_require__.s = 53);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -15663,149 +15663,135 @@ function postFormFileData(url, data) {
 /* 41 */,
 /* 42 */,
 /* 43 */,
-/* 44 */
+/* 44 */,
+/* 45 */,
+/* 46 */,
+/* 47 */,
+/* 48 */,
+/* 49 */,
+/* 50 */,
+/* 51 */,
+/* 52 */,
+/* 53 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__Write__ = __webpack_require__(45);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__Review__ = __webpack_require__(54);
 
 
-__WEBPACK_IMPORTED_MODULE_0__Write__["a" /* init */]();
+__WEBPACK_IMPORTED_MODULE_0__Review__["a" /* init */]();
 
 /***/ }),
-/* 45 */
+/* 54 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony export (immutable) */ __webpack_exports__["a"] = init;
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__components_Rating__ = __webpack_require__(46);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__reviewWriteModel__ = __webpack_require__(47);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__utils_HandlebarsWrapper__ = __webpack_require__(8);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__utils_HandlebarsWrapper__ = __webpack_require__(8);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__Scroll__ = __webpack_require__(55);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__commentModel__ = __webpack_require__(56);
 
 
 
 
 let productId;
-
-let rootTarget;
-let ratingScoreTarget;
-let ratingTarget;
-let reviewContentTarget;
-let reviewTextTarget;
-let reviewTextLengthTarget;
-let reviewFooterTarget;
-let imageUploadTarget;
-let uploadedImageTarget;
-let submitBtnTarget;
-
-let reviewTextLength;
-let ratingScore;
-
-let imagesFileId;
-
-let rating;
-
+let prevPage;
+let nextPage;
+let pagePerNum;
+let target;
+let commentDivSize;
+let nextLock;
+let prevLock;
+let scroll;
 
 function init() {
-    rootTarget = $("#_reviewContainer");
-    ratingTarget = rootTarget.find("._rating");
-    ratingScoreTarget = ratingTarget.find("._ratingScore");
-    reviewContentTarget = rootTarget.find(".review_contents");
-    reviewTextTarget = reviewContentTarget.find(".review_textarea");
-    reviewFooterTarget = rootTarget.find(".review_write_footer_wrap");
-    reviewTextLengthTarget = reviewFooterTarget.find("#_reviewTextLength");
-    imageUploadTarget = reviewFooterTarget.find(".hidden_input");
-    uploadedImageTarget = rootTarget.find(".lst_thumb");
-    submitBtnTarget = rootTarget.find(".bk_btn");
 
-    ratingScore = 0;
-    reviewTextLength = 0;
-
-    imagesFileId = [];
-
-    productId = rootTarget.data("productid");
-
-    setEvent();
+    productId = $(".header_tit").data("product_id");
+    prevPage = 0;
+    nextPage = 1;
+    pagePerNum = 10;
+    target = $("ul.list_short_review");
+    commentDivSize = $("div._comment").height;
+    nextLock = false;
+    prevLock = true;
+    scroll = new __WEBPACK_IMPORTED_MODULE_1__Scroll__();
+    scroll.setDownScroll(getNextComments);
+    scroll.setUpScroll(getPrevComments)
 }
 
-function setEvent() {
-    rating = new __WEBPACK_IMPORTED_MODULE_0__components_Rating__["a" /* default */](ratingTarget);
-    rating.on("change", updateRatingScore);
-    reviewContentTarget.on("click", ".review_write_info", clickContent);
-    reviewTextTarget.on("keyup", keyupText);
-    imageUploadTarget.on("change", uploadImage);
-    uploadedImageTarget.on("click", "._del", deleteImage);
-    submitBtnTarget.on("click", submitComment);
-}
-
-function submitComment() {
-    let commentData = {
-        productId: productId,
-        userId: 1,
-        score: ratingScore,
-        comment: reviewTextTarget[0].value,
-        images: imagesFileId
-    };
-
-    __WEBPACK_IMPORTED_MODULE_1__reviewWriteModel__["a" /* postCommentData */]({data:commentData, callback:redirectUrl});
-}
-
-function redirectUrl() {
-    alert("리뷰 등록 성공하였습니다.");
-    //$(location).attr('href',url);
-
-}
-
-function deleteImage(e) {
-    e.preventDefault();
-    let target = $(e.currentTarget);
-    let index = imagesFileId.indexOf(target.data("fileId"));
-    imagesFileId.splice(index, 1);
-    target.closest("li").remove();
-}
-
-function uploadImage(e) {
-    __WEBPACK_IMPORTED_MODULE_1__reviewWriteModel__["b" /* postImage */]({data:e.currentTarget.files[0],callback: drawImage});
-}
-
-function drawImage(data) {
-    let imageFileId = data[0];
-    imagesFileId.push(imageFileId);
-    __WEBPACK_IMPORTED_MODULE_2__utils_HandlebarsWrapper__["a" /* create */]('uploaded-image-template', imageFileId, "append", uploadedImageTarget);
-}
-
-function keyupText(e) {
-    reviewTextLength = e.currentTarget.value.length;
-    reviewTextLengthTarget.text(reviewTextLength);
-}
-
-function clickContent(e) {
-    e.preventDefault();
-    $(e.currentTarget).css("display", "none");
-    reviewTextTarget.focus();
-}
-
-function updateRatingScore(data) {
-    if (ratingScore === 0 || data.ratingScore === 0) {
-        ratingScoreTarget.toggleClass("gray_star");
+function appendComments(result, flag) {
+    console.log(result);
+    if (flag) {
+        if (prevPage > 1) {
+            deleteElement("._comment", 0);
+        }
+        __WEBPACK_IMPORTED_MODULE_0__utils_HandlebarsWrapper__["a" /* create */]("comment-comment-template", result, "append", target);
+    } else {
+        nextLock = true;
+        decrementPage();
     }
+}
 
-    ratingScore = data.ratingScore;
-
-    ratingScoreTarget.text(ratingScore);
+function preppendComments(result) {
+    __WEBPACK_IMPORTED_MODULE_0__utils_HandlebarsWrapper__["a" /* create */]("comment-comment-template", result, "prepend", target);
 }
 
 
+function getNextComments() {
+    if (!nextLock) {
+        console.log("next");
+        if ($(document).height() == $(window).scrollTop() + $(window).height()) {
+            incrementPage();
+            prevLock = false;
+            __WEBPACK_IMPORTED_MODULE_2__commentModel__["a" /* getCommentsByProductId */](productId, nextPage, pagePerNum, appendComments);
+        }
+    }
+}
 
 
+function getPrevComments() {
+    if (!prevLock) {
+        console.log("prev");
+        var height = $(window).scrollTop();
+        if (height < 200) {
+            if (prevPage == 1) {
+                prevLock = true;
+            } else {
+                deleteElement("._comment", 1);
+                decrementPage();
+                __WEBPACK_IMPORTED_MODULE_2__commentModel__["a" /* getCommentsByProductId */](productId, prevPage, pagePerNum, preppendComments);
+            }
+            nextLock = false;
+        }
+    }
+}
+
+function deleteElement(id, index) {
+    $(id).eq(index).remove();
+}
+
+function incrementPage() {
+    prevPage++;
+    nextPage++;
+}
+
+function decrementPage() {
+    if (prevPage > 0) {
+        prevPage--;
+        nextPage--;
+    } else {
+        prevLock = false;
+    }
+}
 
 
 /***/ }),
-/* 46 */
+/* 55 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__egjs_component__ = __webpack_require__(5);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__egjs_component___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__egjs_component__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_jquery__ = __webpack_require__(2);
@@ -15813,91 +15799,53 @@ function updateRatingScore(data) {
 
 
 
-class Rating extends __WEBPACK_IMPORTED_MODULE_0__egjs_component___default.a {
 
-    constructor({rootTarget}) {
-        super();
-        this.rootTarget = __WEBPACK_IMPORTED_MODULE_1_jquery__(rootTarget);
-        this.ratingTarget = this.rootTarget.find(".rating_rdo");
-        this.ratingScore = 0;
-        this.setEvent();
-    }
+class Scroll extends __WEBPACK_IMPORTED_MODULE_0__egjs_component___default()() {
 
-    setEvent() {
-        this.ratingTarget.on("click", e => this.clickRating);
-    }
-
-    clickRating(e) {
-        e.preventDefault();
-        var clickValue = parseInt(e.target.value, 10);
-        this.drawRating(clickValue);
-        this.trigger("change", {
-            ratingScore: this.ratingScore
+    setDownScroll(callback) {
+        __WEBPACK_IMPORTED_MODULE_1_jquery___default()(window).scroll(function () {
+            callback();
         })
     }
 
-    drawRating(clickValue) {
-        if (clickValue > this.ratingScore) {
-            for (var i = this.ratingScore + 1; i <= clickValue; i++) {
-                this.ratingTarget.eq(i).toggleClass("checked");
-            }
-        } else if (clickValue < this.ratingScore) {
-            for (var i = clickValue + 1; i <= this.ratingScore; i++) {
-                this.ratingTarget.eq(i).toggleClass("checked");
-            }
-        } else if (clickValue === this.ratingScore) {
-            this.ratingTarget.eq(clickValue).toggleClass("checked");
-            clickValue--;
-        }
-        this.ratingScore = clickValue;
+    setUpScroll(callback) {
+        __WEBPACK_IMPORTED_MODULE_1_jquery___default()(window).scroll(function () {
+            callback();
+        })
     }
 }
-/* harmony export (immutable) */ __webpack_exports__["a"] = Rating;
+/* harmony export (immutable) */ __webpack_exports__["Scroll"] = Scroll;
+;
 
 
 /***/ }),
-/* 47 */
+/* 56 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony export (immutable) */ __webpack_exports__["b"] = postImage;
-/* harmony export (immutable) */ __webpack_exports__["a"] = postCommentData;
+/* harmony export (immutable) */ __webpack_exports__["a"] = getCommentsByProductId;
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__utils_AjaxWrapper__ = __webpack_require__(34);
 
 
 let cache = {};
 
-function postImage({data,callback}) {
-    let postImageUrl = "/files";
+function getCommentsByProductId(productId, page, pagePerNum, callback) {
 
-    let formData = new FormData();
-    formData.append("file", data);
+    let data = cache[page];
+    let url = "/api/products/" + productId + "/comments?page=" + page + "&pagePerNum=" + pagePerNum;
 
-    __WEBPACK_IMPORTED_MODULE_0__utils_AjaxWrapper__["c" /* postFormFileData */]({url:postImageUrl,data: formData}).then(function (result) {
-        callback(result);
-    });
-
-}
-
-function postCommentData({data,callback}) {
-    let postImageUrl = "/api/comments/";
-
-    // var commentData = {
-    //     "comment" : data
-    // };
-
-    __WEBPACK_IMPORTED_MODULE_0__utils_AjaxWrapper__["b" /* postData */]({url: postImageUrl,data: data})
-        .then(function (result) {
-            callback(result);
-        }, function (error) {
-            alert("실패하였습니다");
+    if (data) {
+        callback(data);
+    } else {
+        __WEBPACK_IMPORTED_MODULE_0__utils_AjaxWrapper__["a" /* getData */](url).then(function (result) {
+            cache[page] = result;
+            callback(result, true);
+        }).catch(function (result) {
+            console.log(result, false);
+            callback(0);
         });
-
+    }
 }
-
-
-
-
 
 
 

@@ -165,7 +165,7 @@
     </footer>
 
     <%--<script type="text/javascript" src="/resources/js/reserve/reserve.js"></script>--%>
-    <script type="text/javascript" src="/resources/js/public/reservebundle.js"></script>
+    <script type="text/javascript" src="/resources/js/bundle/reservebundle.js"></script>
 
 </body>
 

@@ -2,7 +2,7 @@
 import Component from '@egjs/component'
 import * as $ from 'jquery'
 
-class Slider extends Component {
+export default class Slider extends Component {
 
         constructor(rootTarget) {
             super();
