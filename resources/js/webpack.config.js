@@ -1,15 +1,12 @@
 module.exports = {
-    entry: './detail/detail.js',
+    entry: {
+        reserve : './reserve/reserve.js',
+        comment : './comment/comment.js'
+    },
 
     output: {
         path: __dirname + '/public/',
-        filename: 'bundle.js'
-    },
-
-    devServer: {
-        inline: true,
-        port: 7777,
-        contentBase: __dirname + '/public/'
+        filename: '[name]bundle.js'
     },
 
     module: {

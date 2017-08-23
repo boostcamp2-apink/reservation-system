@@ -1,4 +1,5 @@
-import * as AjaxWrapper from "../utils/AjaxWrapper"
+import * as AjaxWrapper from "../utils/AjaxWrapper";
+import $ from 'jquery'
 
 export function addReservation(data) {
 

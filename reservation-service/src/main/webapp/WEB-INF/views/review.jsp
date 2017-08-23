@@ -136,8 +136,7 @@
         {{/each}}
     </script>
 
-    <script type="text/javascript" src="/resources/js/node_modules/requirejs/require.js"></script>
-    <script type="text/javascript" src="/resources/js/comment/comment.js"></script>
+    <script type="text/javascript" src="/resources/js/public/commentbundle.js"></script>
     <script id="comment-comment-template" type="text/apink-handlebars-template">
         <div class="_comment">
         {{#each this}}

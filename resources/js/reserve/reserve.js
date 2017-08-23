@@ -1,4 +1,3 @@
-import $ from "jquery"
 import * as Booker from "./Booker"
 import * as TicketContainer from "./TicketContainer"
 

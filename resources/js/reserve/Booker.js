@@ -1,6 +1,5 @@
-
-import * as $ from "jquery"
-import reservationModel from "./reservationModel"
+import * as reservationModel from "./reservationModel"
+import $ from 'jquery'
 
 let name;
 let tel;
@@ -11,6 +10,7 @@ let ticketTarget;
 let totalTicket = 0;
 let priceTarget;
 let totalPrice = 0;
+let isOpen;
 
 export function init() {
 
@@ -32,7 +32,7 @@ export function init() {
 
 function showAgreement(e) {
     e.preventDefault();
-    var target = $(e.target).closest("div.agreement");
+    const target = $(e.target).closest("div.agreement");
     isOpen = target.hasClass("open");
     if (isOpen == false) {
         target.addClass("open");
@@ -43,13 +43,13 @@ function showAgreement(e) {
 
 function isValid() {
 
-    var nf_tel = /^0(2|\d\d)-\d{3,4}-\d{4}$/;
-    var nf_email = /^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/i;
+    const nf_tel = /^0(2|\d\d)-\d{3,4}-\d{4}$/;
+    const nf_email = /^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/i;
 
     if ((name.val() != undefined) && nf_tel.test(tel.val()) &&
         nf_email.test(email.val()) && (totalTicket > 0) && agreement.is(":checked")) {
         reservBtn.removeClass("disable");
-        $(".bk_btn").on("click", postData());
+        $(".bk_btn").on("click", postData);
     } else {
         reservBtn.addClass("disable");
         $(".bk_btn").off("click");
@@ -58,8 +58,9 @@ function isValid() {
 
 function postData() {
 
-    var reservationTickets = [];
-    for (var i = 0; i < $(".qty").length; i++) {
+    const len = $(".qty").length;
+    let reservationTickets = [];
+    for (let i = 0; i < len; i++) {
         reservationTickets[i] = {
             count: $(".count_control_input").eq(i).val(),
             productPriceId: $(".qty").eq(i).data("pid")
@@ -86,7 +87,3 @@ export function updateTicket(sign, price) {
     isValid();
 }
 
-return {
-    init: init,
-    updateTicket: updateTicket
-}
