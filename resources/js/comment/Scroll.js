@@ -1,21 +1,18 @@
-define(['Extend', 'Component'], function (extend, Component) {
+import Component from "@egjs/component";
+import $ from "jquery";
 
-    return extend(Component, {
-        "init": function (rootTarget) {
 
-        },
+export class Scroll extends Component() {
 
-        setDownScroll : function (callback) {
-            $(window).scroll(function () {
-                callback();
-            })
-        },
+    setDownScroll(callback) {
+        $(window).scroll(function () {
+            callback();
+        })
+    }
 
-        setUpScroll : function (callback) {
-            $(window).scroll(function() {
-                callback();
-            })
-        },
-    });
-
-});
+    setUpScroll(callback) {
+        $(window).scroll(function () {
+            callback();
+        })
+    }
+};

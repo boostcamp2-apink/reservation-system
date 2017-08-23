@@ -3,7 +3,7 @@ import * as $ from "jquery";
 
 export default class Rating extends Component {
 
-    constructor(rootTarget) {
+    constructor({rootTarget}) {
         super();
         this.rootTarget = $(rootTarget);
         this.ratingTarget = this.rootTarget.find(".rating_rdo");
@@ -12,7 +12,7 @@ export default class Rating extends Component {
     }
 
     setEvent() {
-        this.ratingTarget.on("click", this.clickRating.bind(this));
+        this.ratingTarget.on("click", e => this.clickRating);
     }
 
     clickRating(e) {

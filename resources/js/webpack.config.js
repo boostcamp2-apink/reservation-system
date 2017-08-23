@@ -1,19 +1,10 @@
-// // webpack.config.js
-// module.exports = {
-//
-//     entry: {
-//
-//     },
-//     output: {
-//         filename: './bundle/[name]bundle.js'
-//     }
-// };
-// =======
 module.exports = {
     entry: {
         "detail" :  './detail/detail.js',
         "myreservation" : './myreservation/myreservation.js',
-        "reviewWrite" : "./reviewWrite/reviewWrite.js"
+        "reviewWrite" : "./reviewWrite/reviewWrite.js",
+        reserve : './reserve/reserve.js',
+        comment : './comment/comment.js'
         // "reserve" : './reserve/reserve.js'
     },
 
