@@ -60,12 +60,11 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 28);
+/******/ 	return __webpack_require__(__webpack_require__.s = 6);
 /******/ })
 /************************************************************************/
-/******/ ({
-
-/***/ 0:
+/******/ ([
+/* 0 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
@@ -10325,8 +10324,7 @@ return jQuery;
 
 
 /***/ }),
-
-/***/ 1:
+/* 1 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /*!
@@ -10692,8 +10690,7 @@ module.exports = exports["default"];
 //# sourceMappingURL=component.js.map
 
 /***/ }),
-
-/***/ 2:
+/* 2 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -10734,125 +10731,7 @@ function postFormFileData(url, data) {
 }
 
 /***/ }),
-
-/***/ 28:
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__Review__ = __webpack_require__(29);
-
-
-__WEBPACK_IMPORTED_MODULE_0__Review__["a" /* init */]();
-
-/***/ }),
-
-/***/ 29:
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony export (immutable) */ __webpack_exports__["a"] = init;
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__utils_HandlebarsWrapper__ = __webpack_require__(3);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__Scroll__ = __webpack_require__(30);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__commentModel__ = __webpack_require__(31);
-
-
-
-
-let productId;
-let prevPage;
-let nextPage;
-let pagePerNum;
-let target;
-let commentDivSize;
-let nextLock;
-let prevLock;
-let scroll;
-
-function init() {
-
-    productId = $(".header_tit").data("product_id");
-    prevPage = 0;
-    nextPage = 1;
-    pagePerNum = 10;
-    target = $("ul.list_short_review");
-    commentDivSize = $("div._comment").height;
-    nextLock = false;
-    prevLock = true;
-    scroll = new __WEBPACK_IMPORTED_MODULE_1__Scroll__();
-    scroll.setDownScroll(getNextComments);
-    scroll.setUpScroll(getPrevComments)
-}
-
-function appendComments(result, flag) {
-    console.log(result);
-    if (flag) {
-        if (prevPage > 1) {
-            deleteElement("._comment", 0);
-        }
-        __WEBPACK_IMPORTED_MODULE_0__utils_HandlebarsWrapper__["a" /* create */]("comment-comment-template", result, "append", target);
-    } else {
-        nextLock = true;
-        decrementPage();
-    }
-}
-
-function preppendComments(result) {
-    __WEBPACK_IMPORTED_MODULE_0__utils_HandlebarsWrapper__["a" /* create */]("comment-comment-template", result, "prepend", target);
-}
-
-
-function getNextComments() {
-    if (!nextLock) {
-        console.log("next");
-        if ($(document).height() == $(window).scrollTop() + $(window).height()) {
-            incrementPage();
-            prevLock = false;
-            __WEBPACK_IMPORTED_MODULE_2__commentModel__["a" /* getCommentsByProductId */](productId, nextPage, pagePerNum, appendComments);
-        }
-    }
-}
-
-
-function getPrevComments() {
-    if (!prevLock) {
-        console.log("prev");
-        var height = $(window).scrollTop();
-        if (height < 200) {
-            if (prevPage == 1) {
-                prevLock = true;
-            } else {
-                deleteElement("._comment", 1);
-                decrementPage();
-                __WEBPACK_IMPORTED_MODULE_2__commentModel__["a" /* getCommentsByProductId */](productId, prevPage, pagePerNum, preppendComments);
-            }
-            nextLock = false;
-        }
-    }
-}
-
-function deleteElement(id, index) {
-    $(id).eq(index).remove();
-}
-
-function incrementPage() {
-    prevPage++;
-    nextPage++;
-}
-
-function decrementPage() {
-    if (prevPage > 0) {
-        prevPage--;
-        nextPage--;
-    } else {
-        prevLock = false;
-    }
-}
-
-
-/***/ }),
-
-/***/ 3:
+/* 3 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -10918,73 +10797,7 @@ function setPartial(partialName, partialHandlebarsId) {
 
 
 /***/ }),
-
-/***/ 30:
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__egjs_component__ = __webpack_require__(1);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__egjs_component___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__egjs_component__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_jquery__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_jquery___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_jquery__);
-
-
-
-
-class Scroll extends __WEBPACK_IMPORTED_MODULE_0__egjs_component___default()() {
-
-    setDownScroll(callback) {
-        __WEBPACK_IMPORTED_MODULE_1_jquery___default()(window).scroll(function () {
-            callback();
-        })
-    }
-
-    setUpScroll(callback) {
-        __WEBPACK_IMPORTED_MODULE_1_jquery___default()(window).scroll(function () {
-            callback();
-        })
-    }
-}
-/* harmony export (immutable) */ __webpack_exports__["Scroll"] = Scroll;
-;
-
-
-/***/ }),
-
-/***/ 31:
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony export (immutable) */ __webpack_exports__["a"] = getCommentsByProductId;
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__utils_AjaxWrapper__ = __webpack_require__(2);
-
-
-let cache = {};
-
-function getCommentsByProductId(productId, page, pagePerNum, callback) {
-
-    let data = cache[page];
-    let url = "/api/products/" + productId + "/comments?page=" + page + "&pagePerNum=" + pagePerNum;
-
-    if (data) {
-        callback(data);
-    } else {
-        __WEBPACK_IMPORTED_MODULE_0__utils_AjaxWrapper__["a" /* getData */](url).then(function (result) {
-            cache[page] = result;
-            callback(result, true);
-        }).catch(function (result) {
-            console.log(result, false);
-            callback(0);
-        });
-    }
-}
-
-
-
-/***/ }),
-
-/***/ 4:
+/* 4 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /**!
@@ -15828,6 +15641,772 @@ return /******/ (function(modules) { // webpackBootstrap
 });
 ;
 
-/***/ })
+/***/ }),
+/* 5 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
 
-/******/ });
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__egjs_component__ = __webpack_require__(1);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__egjs_component___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__egjs_component__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_jquery__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_jquery___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_jquery__);
+// noinspection JSAnnotator
+
+
+
+class Slider extends __WEBPACK_IMPORTED_MODULE_0__egjs_component___default.a {
+
+    constructor(rootTarget) {
+        super();
+        this.rootTarget = __WEBPACK_IMPORTED_MODULE_1_jquery__(rootTarget);
+        this.init();
+
+    }
+
+    init() {
+        this.SliderTargets = this.rootTarget.children();
+        this.targetCount = this.SliderTargets.length;
+        this.width = this.SliderTargets.width();
+        this.currentChildIndex = 0;
+        this.isAnimating = false;
+        this.createFakeTarget();
+    }
+
+    setButton({prev, next}) {
+        this.prev = __WEBPACK_IMPORTED_MODULE_1_jquery__(prev);
+        this.next = __WEBPACK_IMPORTED_MODULE_1_jquery__(next);
+        this.clickEvent();
+    }
+
+    setFlicking() {
+
+    }
+
+    createFakeTarget() {
+        const fakeFirstChild = this.rootTarget.children(':first-child').clone();
+        const fakeLastChild = this.rootTarget.children(':last-child').clone();
+        this.rootTarget.append(fakeFirstChild);
+        this.rootTarget.prepend(fakeLastChild);
+        this.currentChildIndex = 1;
+        this.rootTarget.css({"transform": "translate(-" + this.width * this.currentChildIndex + "px,0)"});
+
+    }
+
+    clickEvent() {
+        __WEBPACK_IMPORTED_MODULE_1_jquery__(this.prev).on("click", e => this.clickPrev(e));
+        __WEBPACK_IMPORTED_MODULE_1_jquery__(this.next).on("click", e => this.clickNext(e));
+    }
+
+    clickPrev(e) {
+        e.preventDefault();
+        if (!this.isAnimating) {
+            this.isAnimating = true;
+            this.animator('prev');
+        }
+    }
+
+    clickNext(e) {
+        e.preventDefault();
+        if (!this.isAnimating) {
+            this.isAnimating = true;
+            this.animator('next');
+        }
+
+    }
+
+    //direction value is "next" or "prev"
+    animator(direction = "left") {
+        let moveSize;
+        let moveIndex;
+        if (direction === "next") {
+            moveSize = -this.width;
+            moveIndex = 1;
+        } else if (direction === "prev") {
+            moveSize = this.width;
+            moveIndex = -1;
+        }
+        this.transformAnimate(moveSize, moveIndex);
+
+    }
+
+    transformAnimate(moveSize, moveIndex) {
+        this.rootTarget.animate(
+            {move: moveSize},
+            {
+                duration: 1000,
+                start: () => {
+                    if (this.currentChildIndex === this.targetCount && moveIndex === 1) {
+                        this.currentChildIndex = 0;
+                    }
+                },
+
+                step: now => {
+                    this.rootTarget.css({"transform": "translate(" + (-(this.width * this.currentChildIndex) + now) + "px,0)"});
+                },
+
+                complete: () => {
+                    this.currentChildIndex += moveIndex;
+                    if (this.currentChildIndex === 0 && moveIndex === -1) {
+                        this.currentChildIndex = this.targetCount;
+                    }
+                    delete this.rootTarget.get(0).move;
+                    this.isAnimating = false;
+                    this.trigger("change", {
+                        currentIndex: this.currentChildIndex
+                    });
+                }
+            }
+        )
+    }
+}
+/* harmony export (immutable) */ __webpack_exports__["a"] = Slider;
+
+
+/***/ }),
+/* 6 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__ProductList__ = __webpack_require__(7);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__components_Slider__ = __webpack_require__(5);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__mainTimeout__ = __webpack_require__(10);
+
+
+
+
+
+__WEBPACK_IMPORTED_MODULE_0__ProductList__["a" /* init */]();
+const slider = new __WEBPACK_IMPORTED_MODULE_1__components_Slider__["a" /* default */]('ul.visual_img');
+
+slider.setButton({prev: 'div.prev_inn > a.btn_pre_e', next: 'div.nxt_inn > a.btn_nxt_e'});
+
+__WEBPACK_IMPORTED_MODULE_2__mainTimeout__["a" /* init */](slider.animator.bind(slider, "next"));
+__WEBPACK_IMPORTED_MODULE_2__mainTimeout__["b" /* setSafetySector */]('._safetySector');
+
+
+/***/ }),
+/* 7 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (immutable) */ __webpack_exports__["a"] = init;
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__mainpageModel__ = __webpack_require__(8);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__utils_HandlebarsWrapper__ = __webpack_require__(3);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_jquery__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_jquery___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_jquery__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__components_Spinner__ = __webpack_require__(9);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__components_Spinner___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3__components_Spinner__);
+
+
+
+
+
+let page;
+let activeCategoryIndex;
+let left;
+let right;
+let categories;
+let productCountTarget;
+let productCount;
+let spintarget;
+let spinner;
+
+function setEvent() {
+    __WEBPACK_IMPORTED_MODULE_2_jquery___default()(categories).on("click", "a", changeCategory);
+    __WEBPACK_IMPORTED_MODULE_2_jquery___default()(window).on("scroll", scrollUpdate);
+}
+
+function scrollUpdate(e) {
+    let top = __WEBPACK_IMPORTED_MODULE_2_jquery___default()(".more .btn").offset().top;
+    let scrollIndex = window.scrollY + window.innerHeight;
+    if ((productCount > page * 10) && scrollIndex > top - 100) {
+        page++;
+        // MainpageModel.getProductsByCategoryId(activeCategoryIndex, page, drawProducts);
+        __WEBPACK_IMPORTED_MODULE_0__mainpageModel__["a" /* getProductsByCategoryId */](activeCategoryIndex,page).then(drawProducts);
+    }
+}
+
+function changeCategory(e) {
+    activeCategory(e.currentTarget);
+    page = 1;
+    // MainpageModel.getProductsByCategoryId(activeCategoryIndex, page, removeAndDrawProducts);
+    __WEBPACK_IMPORTED_MODULE_0__mainpageModel__["a" /* getProductsByCategoryId */](activeCategoryIndex, page).then(removeAndDrawProducts);
+}
+
+function activeCategory(target) {
+    categories.find("li[data-category=" + activeCategoryIndex + "] a").removeClass("active");
+    __WEBPACK_IMPORTED_MODULE_2_jquery___default()(target).addClass("active");
+    activeCategoryIndex = __WEBPACK_IMPORTED_MODULE_2_jquery___default()(target).closest("li").data("category");
+
+}
+
+function drawProducts(data) {
+    let leftData = [];
+    let rightData = [];
+    let leftPromise;
+    let rightPromise;
+
+    for (let i = 0, l = data.length; i < l; i++) {
+        if (i % 2 === 0) {
+            leftData.push(data[i]);
+        } else {
+            rightData.push(data[i]);
+        }
+    }
+
+    spinner.spin(spintarget);
+    leftPromise = __WEBPACK_IMPORTED_MODULE_1__utils_HandlebarsWrapper__["a" /* create */]("product-main-template", leftData, "append", left);
+    rightPromise = __WEBPACK_IMPORTED_MODULE_1__utils_HandlebarsWrapper__["a" /* create */]("product-main-template", rightData, "append", right);
+    Promise.all([leftPromise, rightPromise]).then(function(result) {
+        console.log(result);
+        spinner.stop();
+    });
+
+    productCount = categories.find("li[data-category=" + activeCategoryIndex + "]").data("productcount")
+    productCountTarget.html(productCount);
+
+}
+
+function removeAndDrawProducts(data) {
+    left.empty();
+    right.empty();
+    drawProducts(data);
+}
+
+function init() {
+    page = 1;
+    activeCategoryIndex = 0;
+    categories = __WEBPACK_IMPORTED_MODULE_2_jquery___default()(".event_tab_lst");
+    left = __WEBPACK_IMPORTED_MODULE_2_jquery___default()("#left_box");
+    right = __WEBPACK_IMPORTED_MODULE_2_jquery___default()("#right_box");
+    productCountTarget = __WEBPACK_IMPORTED_MODULE_2_jquery___default()(".event_lst_txt span.pink");
+    productCount = productCountTarget.text();
+
+    let opts = {
+        lines: 13 // The number of lines to draw
+        , length: 28 // The length of each line
+        , width: 14 // The line thickness
+        , radius: 42 // The radius of the inner circle
+        , scale: 1 // Scales overall size of the spinner
+        , corners: 1 // Corner roundness (0..1)
+        , color: '#000' // #rgb or #rrggbb or array of colors
+        , opacity: 0.25 // Opacity of the lines
+        , rotate: 0 // The rotation offset
+        , direction: 1 // 1: clockwise, -1: counterclockwise
+        , speed: 1 // Rounds per second
+        , trail: 60 // Afterglow percentage
+        , fps: 20 // Frames per second when using setTimeout() as a fallback for CSS
+        , zIndex: 2e9 // The z-index (defaults to 2000000000)
+        , className: 'spinner' // The CSS class to assign to the spinner
+        , top: '50%' // Top position relative to parent
+        , left: '50%' // Left position relative to parent
+        , shadow: false // Whether to render a shadow
+        , hwaccel: false // Whether to use hardware acceleration
+        , position: 'fixed' // Element positioning
+    };
+    spintarget = document.getElementById('container')
+    spinner = new __WEBPACK_IMPORTED_MODULE_3__components_Spinner__(opts)
+    setEvent();
+}
+
+
+/***/ }),
+/* 8 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (immutable) */ __webpack_exports__["a"] = getProductsByCategoryId;
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__utils_AjaxWrapper__ = __webpack_require__(2);
+
+
+let cache = {};
+
+function getProductsByCategoryId(categoryId, page) {
+
+    let url = "/api/categories/" + categoryId + "/products?page=" + page;
+    let data = cache[url];
+
+    return new Promise(function (resolve, reject) {
+        if (data) {
+            resolve(data);
+        } else {
+            __WEBPACK_IMPORTED_MODULE_0__utils_AjaxWrapper__["a" /* getData */](url)
+                .then(function (result) {
+                    cache[url] = result;
+                    resolve(result);
+                })
+                .catch(function (error) {
+                    reject(error);
+                })
+        }
+    })
+}
+
+
+
+/***/ }),
+/* 9 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_RESULT__;/**
+ * Copyright (c) 2011-2014 Felix Gnass
+ * Licensed under the MIT license
+ * http://spin.js.org/
+ *
+ * Example:
+ var opts = {
+      lines: 12             // The number of lines to draw
+    , length: 7             // The length of each line
+    , width: 5              // The line thickness
+    , radius: 10            // The radius of the inner circle
+    , scale: 1.0            // Scales overall size of the spinner
+    , corners: 1            // Roundness (0..1)
+    , color: '#000'         // #rgb or #rrggbb
+    , opacity: 1/4          // Opacity of the lines
+    , rotate: 0             // Rotation offset
+    , direction: 1          // 1: clockwise, -1: counterclockwise
+    , speed: 1              // Rounds per second
+    , trail: 100            // Afterglow percentage
+    , fps: 20               // Frames per second when using setTimeout()
+    , zIndex: 2e9           // Use a high z-index by default
+    , className: 'spinner'  // CSS class to assign to the element
+    , top: '50%'            // center vertically
+    , left: '50%'           // center horizontally
+    , shadow: false         // Whether to render a shadow
+    , hwaccel: false        // Whether to use hardware acceleration (might be buggy)
+    , position: 'absolute'  // Element positioning
+    }
+ var target = document.getElementById('foo')
+ var spinner = new Spinner(opts).spin(target)
+ */
+;(function (root, factory) {
+
+    /* CommonJS */
+    if (typeof module == 'object' && module.exports) module.exports = factory()
+
+    /* AMD module */
+    else if (true) !(__WEBPACK_AMD_DEFINE_FACTORY__ = (factory),
+				__WEBPACK_AMD_DEFINE_RESULT__ = (typeof __WEBPACK_AMD_DEFINE_FACTORY__ === 'function' ?
+				(__WEBPACK_AMD_DEFINE_FACTORY__.call(exports, __webpack_require__, exports, module)) :
+				__WEBPACK_AMD_DEFINE_FACTORY__),
+				__WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__))
+
+    /* Browser global */
+    else root.Spinner = factory()
+}(this, function () {
+    "use strict"
+
+    var prefixes = ['webkit', 'Moz', 'ms', 'O'] /* Vendor prefixes */
+        , animations = {} /* Animation rules keyed by their name */
+        , useCssAnimations /* Whether to use CSS animations or setTimeout */
+        , sheet /* A stylesheet to hold the @keyframe or VML rules. */
+
+    /**
+     * Utility function to create elements. If no tag name is given,
+     * a DIV is created. Optionally properties can be passed.
+     */
+    function createEl (tag, prop) {
+        var el = document.createElement(tag || 'div')
+            , n
+
+        for (n in prop) el[n] = prop[n]
+        return el
+    }
+
+    /**
+     * Appends children and returns the parent.
+     */
+    function ins (parent /* child1, child2, ...*/) {
+        for (var i = 1, n = arguments.length; i < n; i++) {
+            parent.appendChild(arguments[i])
+        }
+
+        return parent
+    }
+
+    /**
+     * Creates an opacity keyframe animation rule and returns its name.
+     * Since most mobile Webkits have timing issues with animation-delay,
+     * we create separate rules for each line/segment.
+     */
+    function addAnimation (alpha, trail, i, lines) {
+        var name = ['opacity', trail, ~~(alpha * 100), i, lines].join('-')
+            , start = 0.01 + i/lines * 100
+            , z = Math.max(1 - (1-alpha) / trail * (100-start), alpha)
+            , prefix = useCssAnimations.substring(0, useCssAnimations.indexOf('Animation')).toLowerCase()
+            , pre = prefix && '-' + prefix + '-' || ''
+
+        if (!animations[name]) {
+            sheet.insertRule(
+                '@' + pre + 'keyframes ' + name + '{' +
+                '0%{opacity:' + z + '}' +
+                start + '%{opacity:' + alpha + '}' +
+                (start+0.01) + '%{opacity:1}' +
+                (start+trail) % 100 + '%{opacity:' + alpha + '}' +
+                '100%{opacity:' + z + '}' +
+                '}', sheet.cssRules.length)
+
+            animations[name] = 1
+        }
+
+        return name
+    }
+
+    /**
+     * Tries various vendor prefixes and returns the first supported property.
+     */
+    function vendor (el, prop) {
+        var s = el.style
+            , pp
+            , i
+
+        prop = prop.charAt(0).toUpperCase() + prop.slice(1)
+        if (s[prop] !== undefined) return prop
+        for (i = 0; i < prefixes.length; i++) {
+            pp = prefixes[i]+prop
+            if (s[pp] !== undefined) return pp
+        }
+    }
+
+    /**
+     * Sets multiple style properties at once.
+     */
+    function css (el, prop) {
+        for (var n in prop) {
+            el.style[vendor(el, n) || n] = prop[n]
+        }
+
+        return el
+    }
+
+    /**
+     * Fills in default values.
+     */
+    function merge (obj) {
+        for (var i = 1; i < arguments.length; i++) {
+            var def = arguments[i]
+            for (var n in def) {
+                if (obj[n] === undefined) obj[n] = def[n]
+            }
+        }
+        return obj
+    }
+
+    /**
+     * Returns the line color from the given string or array.
+     */
+    function getColor (color, idx) {
+        return typeof color == 'string' ? color : color[idx % color.length]
+    }
+
+    // Built-in defaults
+
+    var defaults = {
+        lines: 12             // The number of lines to draw
+        , length: 7             // The length of each line
+        , width: 5              // The line thickness
+        , radius: 10            // The radius of the inner circle
+        , scale: 1.0            // Scales overall size of the spinner
+        , corners: 1            // Roundness (0..1)
+        , color: '#000'         // #rgb or #rrggbb
+        , opacity: 1/4          // Opacity of the lines
+        , rotate: 0             // Rotation offset
+        , direction: 1          // 1: clockwise, -1: counterclockwise
+        , speed: 1              // Rounds per second
+        , trail: 100            // Afterglow percentage
+        , fps: 20               // Frames per second when using setTimeout()
+        , zIndex: 2e9           // Use a high z-index by default
+        , className: 'spinner'  // CSS class to assign to the element
+        , top: '50%'            // center vertically
+        , left: '50%'           // center horizontally
+        , shadow: false         // Whether to render a shadow
+        , hwaccel: false        // Whether to use hardware acceleration (might be buggy)
+        , position: 'absolute'  // Element positioning
+    }
+
+    /** The constructor */
+    function Spinner (o) {
+        this.opts = merge(o || {}, Spinner.defaults, defaults)
+    }
+
+    // Global defaults that override the built-ins:
+    Spinner.defaults = {}
+
+    merge(Spinner.prototype, {
+        /**
+         * Adds the spinner to the given target element. If this instance is already
+         * spinning, it is automatically removed from its previous target b calling
+         * stop() internally.
+         */
+        spin: function (target) {
+            this.stop()
+
+            var self = this
+                , o = self.opts
+                , el = self.el = createEl(null, {className: o.className})
+
+            css(el, {
+                position: o.position
+                , width: 0
+                , zIndex: o.zIndex
+                , left: o.left
+                , top: o.top
+            })
+
+            if (target) {
+                target.insertBefore(el, target.firstChild || null)
+            }
+
+            el.setAttribute('role', 'progressbar')
+            self.lines(el, self.opts)
+
+            if (!useCssAnimations) {
+                // No CSS animation support, use setTimeout() instead
+                var i = 0
+                    , start = (o.lines - 1) * (1 - o.direction) / 2
+                    , alpha
+                    , fps = o.fps
+                    , f = fps / o.speed
+                    , ostep = (1 - o.opacity) / (f * o.trail / 100)
+                    , astep = f / o.lines
+
+                ;(function anim () {
+                    i++
+                    for (var j = 0; j < o.lines; j++) {
+                        alpha = Math.max(1 - (i + (o.lines - j) * astep) % f * ostep, o.opacity)
+
+                        self.opacity(el, j * o.direction + start, alpha, o)
+                    }
+                    self.timeout = self.el && setTimeout(anim, ~~(1000 / fps))
+                })()
+            }
+            return self
+        }
+
+        /**
+         * Stops and removes the Spinner.
+         */
+        , stop: function () {
+            var el = this.el
+            if (el) {
+                clearTimeout(this.timeout)
+                if (el.parentNode) el.parentNode.removeChild(el)
+                this.el = undefined
+            }
+            return this
+        }
+
+        /**
+         * Internal method that draws the individual lines. Will be overwritten
+         * in VML fallback mode below.
+         */
+        , lines: function (el, o) {
+            var i = 0
+                , start = (o.lines - 1) * (1 - o.direction) / 2
+                , seg
+
+            function fill (color, shadow) {
+                return css(createEl(), {
+                    position: 'absolute'
+                    , width: o.scale * (o.length + o.width) + 'px'
+                    , height: o.scale * o.width + 'px'
+                    , background: color
+                    , boxShadow: shadow
+                    , transformOrigin: 'left'
+                    , transform: 'rotate(' + ~~(360/o.lines*i + o.rotate) + 'deg) translate(' + o.scale*o.radius + 'px' + ',0)'
+                    , borderRadius: (o.corners * o.scale * o.width >> 1) + 'px'
+                })
+            }
+
+            for (; i < o.lines; i++) {
+                seg = css(createEl(), {
+                    position: 'absolute'
+                    , top: 1 + ~(o.scale * o.width / 2) + 'px'
+                    , transform: o.hwaccel ? 'translate3d(0,0,0)' : ''
+                    , opacity: o.opacity
+                    , animation: useCssAnimations && addAnimation(o.opacity, o.trail, start + i * o.direction, o.lines) + ' ' + 1 / o.speed + 's linear infinite'
+                })
+
+                if (o.shadow) ins(seg, css(fill('#000', '0 0 4px #000'), {top: '2px'}))
+                ins(el, ins(seg, fill(getColor(o.color, i), '0 0 1px rgba(0,0,0,.1)')))
+            }
+            return el
+        }
+
+        /**
+         * Internal method that adjusts the opacity of a single line.
+         * Will be overwritten in VML fallback mode below.
+         */
+        , opacity: function (el, i, val) {
+            if (i < el.childNodes.length) el.childNodes[i].style.opacity = val
+        }
+
+    })
+
+
+    function initVML () {
+
+        /* Utility function to create a VML tag */
+        function vml (tag, attr) {
+            return createEl('<' + tag + ' xmlns="urn:schemas-microsoft.com:vml" class="spin-vml">', attr)
+        }
+
+        // No CSS transforms but VML support, add a CSS rule for VML elements:
+        sheet.addRule('.spin-vml', 'behavior:url(#default#VML)')
+
+        Spinner.prototype.lines = function (el, o) {
+            var r = o.scale * (o.length + o.width)
+                , s = o.scale * 2 * r
+
+            function grp () {
+                return css(
+                    vml('group', {
+                        coordsize: s + ' ' + s
+                        , coordorigin: -r + ' ' + -r
+                    })
+                    , { width: s, height: s }
+                )
+            }
+
+            var margin = -(o.width + o.length) * o.scale * 2 + 'px'
+                , g = css(grp(), {position: 'absolute', top: margin, left: margin})
+                , i
+
+            function seg (i, dx, filter) {
+                ins(
+                    g
+                    , ins(
+                        css(grp(), {rotation: 360 / o.lines * i + 'deg', left: ~~dx})
+                        , ins(
+                            css(
+                                vml('roundrect', {arcsize: o.corners})
+                                , { width: r
+                                    , height: o.scale * o.width
+                                    , left: o.scale * o.radius
+                                    , top: -o.scale * o.width >> 1
+                                    , filter: filter
+                                }
+                            )
+                            , vml('fill', {color: getColor(o.color, i), opacity: o.opacity})
+                            , vml('stroke', {opacity: 0}) // transparent stroke to fix color bleeding upon opacity change
+                        )
+                    )
+                )
+            }
+
+            if (o.shadow)
+                for (i = 1; i <= o.lines; i++) {
+                    seg(i, -2, 'progid:DXImageTransform.Microsoft.Blur(pixelradius=2,makeshadow=1,shadowopacity=.3)')
+                }
+
+            for (i = 1; i <= o.lines; i++) seg(i)
+            return ins(el, g)
+        }
+
+        Spinner.prototype.opacity = function (el, i, val, o) {
+            var c = el.firstChild
+            o = o.shadow && o.lines || 0
+            if (c && i + o < c.childNodes.length) {
+                c = c.childNodes[i + o]; c = c && c.firstChild; c = c && c.firstChild
+                if (c) c.opacity = val
+            }
+        }
+    }
+
+    if (typeof document !== 'undefined') {
+        sheet = (function () {
+            var el = createEl('style', {type : 'text/css'})
+            ins(document.getElementsByTagName('head')[0], el)
+            return el.sheet || el.styleSheet
+        }())
+
+        var probe = css(createEl('group'), {behavior: 'url(#default#VML)'})
+
+        if (!vendor(probe, 'transform') && probe.adj) initVML()
+        else useCssAnimations = vendor(probe, 'animation')
+    }
+
+    return Spinner
+
+}));
+
+/***/ }),
+/* 10 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (immutable) */ __webpack_exports__["a"] = init;
+/* harmony export (immutable) */ __webpack_exports__["b"] = setSafetySector;
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_jquery__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_jquery___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_jquery__);
+
+
+let timeout;
+let interval;
+let targetFunction;
+let intervalDuration;
+let timeoutDuration;
+
+function setEvent() {
+    __WEBPACK_IMPORTED_MODULE_0_jquery___default()(window).focus(onTimer);
+    __WEBPACK_IMPORTED_MODULE_0_jquery___default()(window).blur(offAll);
+
+}
+
+function offInterval() {
+    console.log('offInterval');
+    clearInterval(interval);
+    interval = 0;
+}
+
+function onInterval() {
+    timeout = 0;
+    if (interval !== 0) {
+        return;
+    }
+    console.log('onInterval');
+    interval = setInterval(targetFunction, intervalDuration);
+}
+
+function offTimeout() {
+    console.log('offTimeout');
+    clearTimeout(timeout);
+    timeout = 0;
+}
+
+function onTimeout() {
+    if (timeout !== 0) {
+        return;
+    }
+    console.log('onTimeout');
+    timeout = setTimeout(onInterval, timeoutDuration);
+}
+
+function offAll() {
+    console.log("off");
+    offInterval();
+    offTimeout();
+}
+
+function onTimer() {
+    onTimeout();
+}
+
+function init(target) {
+    targetFunction = target;
+    intervalDuration = 2000;
+    timeoutDuration = 4000;
+    timeout = 0;
+    interval = 0;
+    onInterval();
+    setEvent();
+}
+
+function setSafetySector(target) {
+    __WEBPACK_IMPORTED_MODULE_0_jquery___default()(target).on("mouseenter", offAll);
+    __WEBPACK_IMPORTED_MODULE_0_jquery___default()(target).on("mouseleave", onTimer);
+}
+
+/***/ })
+/******/ ]);

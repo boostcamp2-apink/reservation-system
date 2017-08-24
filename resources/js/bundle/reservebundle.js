@@ -60,12 +60,11 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 48);
+/******/ 	return __webpack_require__(__webpack_require__.s = 23);
 /******/ })
 /************************************************************************/
-/******/ ({
-
-/***/ 2:
+/******/ ([
+/* 0 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
@@ -10325,168 +10324,7 @@ return jQuery;
 
 
 /***/ }),
-
-/***/ 34:
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony export (immutable) */ __webpack_exports__["a"] = getData;
-/* harmony export (immutable) */ __webpack_exports__["b"] = postData;
-/* harmony export (immutable) */ __webpack_exports__["c"] = postFormFileData;
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_jquery__ = __webpack_require__(2);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_jquery___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_jquery__);
-
-
-function getData(url) {
-    return __WEBPACK_IMPORTED_MODULE_0_jquery__["ajax"]({
-        url: url,
-        dataType: 'json',
-        type: 'GET'
-    })
-}
-
-function postData(url, data) {
-    return __WEBPACK_IMPORTED_MODULE_0_jquery__["ajax"]({
-        url: url,
-        contentType: "application/json; charset=UTF-8",
-        dataType: 'json',
-        data: JSON.stringify(data),
-        type: 'POST'
-    })
-
-}
-
-function postFormFileData(url, data) {
-    return __WEBPACK_IMPORTED_MODULE_0_jquery__["ajax"]({
-        url: url,
-        processData: false,
-        contentType: false,
-        data: data,
-        type: 'POST'
-    })
-}
-
-/***/ }),
-
-/***/ 48:
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__Booker__ = __webpack_require__(49);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__TicketContainer__ = __webpack_require__(51);
-
-
-
-__WEBPACK_IMPORTED_MODULE_0__Booker__["a" /* init */]();
-__WEBPACK_IMPORTED_MODULE_1__TicketContainer__["a" /* init */](__WEBPACK_IMPORTED_MODULE_0__Booker__["b" /* updateTicket */]);
-
-
-/***/ }),
-
-/***/ 49:
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony export (immutable) */ __webpack_exports__["a"] = init;
-/* harmony export (immutable) */ __webpack_exports__["b"] = updateTicket;
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__reservationModel__ = __webpack_require__(50);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_jquery__ = __webpack_require__(2);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_jquery___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_jquery__);
-
-
-
-let name;
-let tel;
-let email;
-let agreement;
-let reservBtn;
-let ticketTarget;
-let totalTicket = 0;
-let priceTarget;
-let totalPrice = 0;
-let isOpen;
-
-function init() {
-
-    __WEBPACK_IMPORTED_MODULE_1_jquery___default()("div.agreement > a.btn_agreement").on("click", showAgreement);
-
-    reservBtn = __WEBPACK_IMPORTED_MODULE_1_jquery___default()(".box_bk_btn .bk_btn_wrap");
-    name = __WEBPACK_IMPORTED_MODULE_1_jquery___default()(".form_wrap #name");
-    tel = __WEBPACK_IMPORTED_MODULE_1_jquery___default()(".form_wrap #tel");
-    email = __WEBPACK_IMPORTED_MODULE_1_jquery___default()(".form_wrap #email");
-    agreement = __WEBPACK_IMPORTED_MODULE_1_jquery___default()('.chk_agree');
-    agreement.on("click", function () {
-        isValid();
-    })
-    ticketTarget = __WEBPACK_IMPORTED_MODULE_1_jquery___default()("span#total_ticket");
-    priceTarget = __WEBPACK_IMPORTED_MODULE_1_jquery___default()("span#total_price");
-
-    isValid();
-}
-
-function showAgreement(e) {
-    e.preventDefault();
-    const target = __WEBPACK_IMPORTED_MODULE_1_jquery___default()(e.target).closest("div.agreement");
-    isOpen = target.hasClass("open");
-    if (isOpen == false) {
-        target.addClass("open");
-    } else {
-        target.removeClass("open");
-    }
-}
-
-function isValid() {
-
-    const nf_tel = /^0(2|\d\d)-\d{3,4}-\d{4}$/;
-    const nf_email = /^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/i;
-
-    if ((name.val() != undefined) && nf_tel.test(tel.val()) &&
-        nf_email.test(email.val()) && (totalTicket > 0) && agreement.is(":checked")) {
-        reservBtn.removeClass("disable");
-        __WEBPACK_IMPORTED_MODULE_1_jquery___default()(".bk_btn").on("click", postData);
-    } else {
-        reservBtn.addClass("disable");
-        __WEBPACK_IMPORTED_MODULE_1_jquery___default()(".bk_btn").off("click");
-    }
-}
-
-function postData() {
-
-    const len = __WEBPACK_IMPORTED_MODULE_1_jquery___default()(".qty").length;
-    let reservationTickets = [];
-    for (let i = 0; i < len; i++) {
-        reservationTickets[i] = {
-            count: __WEBPACK_IMPORTED_MODULE_1_jquery___default()(".count_control_input").eq(i).val(),
-            productPriceId: __WEBPACK_IMPORTED_MODULE_1_jquery___default()(".qty").eq(i).data("pid")
-        }
-    }
-    var data = {
-        productId: 1,
-        reservationName: name.val(),
-        reservationTel: tel.val(),
-        reservationEmail: email.val(),
-        reservationType: 0,
-        totalPrice: totalPrice,
-        reservationTickets: reservationTickets
-    };
-
-    __WEBPACK_IMPORTED_MODULE_0__reservationModel__["a" /* addReservation */](data);
-}
-
-function updateTicket(sign, price) {
-    totalTicket += sign;
-    totalPrice += sign * price;
-    ticketTarget.text(totalTicket);
-    priceTarget.text(totalPrice);
-    isValid();
-}
-
-
-
-/***/ }),
-
-/***/ 5:
+/* 1 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /*!
@@ -10852,14 +10690,190 @@ module.exports = exports["default"];
 //# sourceMappingURL=component.js.map
 
 /***/ }),
+/* 2 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
 
-/***/ 50:
+"use strict";
+/* harmony export (immutable) */ __webpack_exports__["a"] = getData;
+/* harmony export (immutable) */ __webpack_exports__["b"] = postData;
+/* harmony export (immutable) */ __webpack_exports__["c"] = postFormFileData;
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_jquery__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_jquery___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_jquery__);
+
+
+function getData(url) {
+    return __WEBPACK_IMPORTED_MODULE_0_jquery__["ajax"]({
+        url: url,
+        dataType: 'json',
+        type: 'GET'
+    })
+}
+
+function postData(url, data) {
+    return __WEBPACK_IMPORTED_MODULE_0_jquery__["ajax"]({
+        url: url,
+        contentType: "application/json; charset=UTF-8",
+        dataType: 'json',
+        data: JSON.stringify(data),
+        type: 'POST'
+    })
+
+}
+
+function postFormFileData(url, data) {
+    return __WEBPACK_IMPORTED_MODULE_0_jquery__["ajax"]({
+        url: url,
+        processData: false,
+        contentType: false,
+        data: data,
+        type: 'POST'
+    })
+}
+
+/***/ }),
+/* 3 */,
+/* 4 */,
+/* 5 */,
+/* 6 */,
+/* 7 */,
+/* 8 */,
+/* 9 */,
+/* 10 */,
+/* 11 */,
+/* 12 */,
+/* 13 */,
+/* 14 */,
+/* 15 */,
+/* 16 */,
+/* 17 */,
+/* 18 */,
+/* 19 */,
+/* 20 */,
+/* 21 */,
+/* 22 */,
+/* 23 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__Booker__ = __webpack_require__(24);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__TicketContainer__ = __webpack_require__(26);
+
+
+
+__WEBPACK_IMPORTED_MODULE_0__Booker__["a" /* init */]();
+__WEBPACK_IMPORTED_MODULE_1__TicketContainer__["a" /* init */](__WEBPACK_IMPORTED_MODULE_0__Booker__["b" /* updateTicket */]);
+
+
+/***/ }),
+/* 24 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (immutable) */ __webpack_exports__["a"] = init;
+/* harmony export (immutable) */ __webpack_exports__["b"] = updateTicket;
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__reservationModel__ = __webpack_require__(25);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_jquery__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_jquery___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_jquery__);
+
+
+
+let name;
+let tel;
+let email;
+let agreement;
+let reservBtn;
+let ticketTarget;
+let totalTicket = 0;
+let priceTarget;
+let totalPrice = 0;
+let isOpen;
+
+function init() {
+
+    __WEBPACK_IMPORTED_MODULE_1_jquery___default()("div.agreement > a.btn_agreement").on("click", showAgreement);
+
+    reservBtn = __WEBPACK_IMPORTED_MODULE_1_jquery___default()(".box_bk_btn .bk_btn_wrap");
+    name = __WEBPACK_IMPORTED_MODULE_1_jquery___default()(".form_wrap #name");
+    tel = __WEBPACK_IMPORTED_MODULE_1_jquery___default()(".form_wrap #tel");
+    email = __WEBPACK_IMPORTED_MODULE_1_jquery___default()(".form_wrap #email");
+    agreement = __WEBPACK_IMPORTED_MODULE_1_jquery___default()('.chk_agree');
+    agreement.on("click", function () {
+        isValid();
+    })
+    ticketTarget = __WEBPACK_IMPORTED_MODULE_1_jquery___default()("span#total_ticket");
+    priceTarget = __WEBPACK_IMPORTED_MODULE_1_jquery___default()("span#total_price");
+
+    isValid();
+}
+
+function showAgreement(e) {
+    e.preventDefault();
+    const target = __WEBPACK_IMPORTED_MODULE_1_jquery___default()(e.target).closest("div.agreement");
+    isOpen = target.hasClass("open");
+    if (isOpen == false) {
+        target.addClass("open");
+    } else {
+        target.removeClass("open");
+    }
+}
+
+function isValid() {
+
+    const nf_tel = /^0(2|\d\d)-\d{3,4}-\d{4}$/;
+    const nf_email = /^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/i;
+
+    if ((name.val() != undefined) && nf_tel.test(tel.val()) &&
+        nf_email.test(email.val()) && (totalTicket > 0) && agreement.is(":checked")) {
+        reservBtn.removeClass("disable");
+        __WEBPACK_IMPORTED_MODULE_1_jquery___default()(".bk_btn").on("click", postData);
+    } else {
+        reservBtn.addClass("disable");
+        __WEBPACK_IMPORTED_MODULE_1_jquery___default()(".bk_btn").off("click");
+    }
+}
+
+function postData() {
+
+    const len = __WEBPACK_IMPORTED_MODULE_1_jquery___default()(".qty").length;
+    let reservationTickets = [];
+    for (let i = 0; i < len; i++) {
+        reservationTickets[i] = {
+            count: __WEBPACK_IMPORTED_MODULE_1_jquery___default()(".count_control_input").eq(i).val(),
+            productPriceId: __WEBPACK_IMPORTED_MODULE_1_jquery___default()(".qty").eq(i).data("pid")
+        }
+    }
+    var data = {
+        productId: 1,
+        reservationName: name.val(),
+        reservationTel: tel.val(),
+        reservationEmail: email.val(),
+        reservationType: 0,
+        totalPrice: totalPrice,
+        reservationTickets: reservationTickets
+    };
+
+    __WEBPACK_IMPORTED_MODULE_0__reservationModel__["a" /* addReservation */](data);
+}
+
+function updateTicket(sign, price) {
+    totalTicket += sign;
+    totalPrice += sign * price;
+    ticketTarget.text(totalTicket);
+    priceTarget.text(totalPrice);
+    isValid();
+}
+
+
+
+/***/ }),
+/* 25 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony export (immutable) */ __webpack_exports__["a"] = addReservation;
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__utils_AjaxWrapper__ = __webpack_require__(34);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_jquery__ = __webpack_require__(2);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__utils_AjaxWrapper__ = __webpack_require__(2);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_jquery__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_jquery___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_jquery__);
 
 
@@ -10872,14 +10886,13 @@ function addReservation(data) {
 }
 
 /***/ }),
-
-/***/ 51:
+/* 26 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony export (immutable) */ __webpack_exports__["a"] = init;
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__components_Ticket__ = __webpack_require__(52);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_jquery__ = __webpack_require__(2);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__components_Ticket__ = __webpack_require__(27);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_jquery__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_jquery___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_jquery__);
 
 
@@ -10907,14 +10920,13 @@ function createTickets(callback) {
 
 
 /***/ }),
-
-/***/ 52:
+/* 27 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__egjs_component__ = __webpack_require__(5);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__egjs_component__ = __webpack_require__(1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__egjs_component___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__egjs_component__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_jquery__ = __webpack_require__(2);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_jquery__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_jquery___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_jquery__);
 
 
@@ -10998,5 +11010,4 @@ class Ticket extends __WEBPACK_IMPORTED_MODULE_0__egjs_component___default.a {
 
 
 /***/ })
-
-/******/ });
+/******/ ]);
