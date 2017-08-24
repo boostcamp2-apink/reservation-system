@@ -1,10 +1,11 @@
 module.exports = {
     entry: {
+        "mainpage" : './mainpage/mainpage.js',
         "detail" :  './detail/detail.js',
         "myreservation" : './myreservation/myreservation.js',
         "reviewWrite" : "./reviewWrite/reviewWrite.js",
-        reserve : './reserve/reserve.js',
-        comment : './comment/comment.js'
+        'reserve' : './reserve/reserve.js',
+        'comment' : './comment/comment.js'
         // "reserve" : './reserve/reserve.js'
     },
 
