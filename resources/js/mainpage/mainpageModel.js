@@ -1,24 +1,25 @@
-define(['AjaxWrapper'],function(AjaxWrapper){
-    var cache = {};
+import * as AjaxWrapper from '../utils/AjaxWrapper'
 
-    function getProductsByCategoryId(categoryId,page,callback){
+let cache = {};
 
-        var url = "/api/categories/"+categoryId+"/products?page="+page;
-        var data = cache[url];
+export function getProductsByCategoryId(categoryId, page) {
 
-        if(data){
-            callback(data);
-        }else{
-            AjaxWrapper.getData(url).then(function(result){
-                cache[url] = result;
-                callback(result);
-            });
+    let url = "/api/categories/" + categoryId + "/products?page=" + page;
+    let data = cache[url];
+
+    return new Promise(function (resolve, reject) {
+        if (data) {
+            resolve(data);
+        } else {
+            AjaxWrapper.getData(url)
+                .then(function (result) {
+                    cache[url] = result;
+                    resolve(result);
+                })
+                .catch(function (error) {
+                    reject(error);
+                })
         }
-    }
+    })
+}
 
-    return {
-        getProductsByCategoryId : getProductsByCategoryId
-    }
-
-
-});
