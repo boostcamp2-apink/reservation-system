@@ -10709,7 +10709,7 @@ function getData(url) {
     })
 }
 
-function postData(url, data) {
+function postData({url, data}) {
     return __WEBPACK_IMPORTED_MODULE_0_jquery__["ajax"]({
         url: url,
         contentType: "application/json; charset=UTF-8",
@@ -10720,7 +10720,7 @@ function postData(url, data) {
 
 }
 
-function postFormFileData(url, data) {
+function postFormFileData({url, data}) {
     return __WEBPACK_IMPORTED_MODULE_0_jquery__["ajax"]({
         url: url,
         processData: false,

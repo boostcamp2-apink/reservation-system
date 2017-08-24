@@ -10709,7 +10709,7 @@ function getData(url) {
     })
 }
 
-function postData(url, data) {
+function postData({url, data}) {
     return __WEBPACK_IMPORTED_MODULE_0_jquery__["ajax"]({
         url: url,
         contentType: "application/json; charset=UTF-8",
@@ -10720,7 +10720,7 @@ function postData(url, data) {
 
 }
 
-function postFormFileData(url, data) {
+function postFormFileData({url, data}) {
     return __WEBPACK_IMPORTED_MODULE_0_jquery__["ajax"]({
         url: url,
         processData: false,
@@ -10768,18 +10768,22 @@ function longTake() {
     }
 }
 
+
+
 function create(handlebarsId, data, method, target) {
-    longTake();
     let template = cache[handlebarsId];
     return new Promise(function (resolve, reject) {
-        if (!template) {
-            cache[handlebarsId] = createTemplate(handlebarsId);
-            template = cache[handlebarsId];
-        }
-        target[method](template(data));
-        resolve("success");
+        setTimeout(function () {
+            if (!template) {
+                cache[handlebarsId] = createTemplate(handlebarsId);
+                template = cache[handlebarsId];
+            }
+            target[method](template(data));
+            resolve("success");
+        }, 3000);
     });
 }
+
 
 
 function customHelper(helperName, func) {
@@ -15822,7 +15826,7 @@ function scrollUpdate(e) {
     let scrollIndex = window.scrollY + window.innerHeight;
     if ((productCount > page * 10) && scrollIndex > top - 100) {
         page++;
-        // MainpageModel.getProductsByCategoryId(activeCategoryIndex, page, drawProducts);
+        __WEBPACK_IMPORTED_MODULE_0__mainpageModel__["a" /* getProductsByCategoryId */](activeCategoryIndex, page, drawProducts);
         __WEBPACK_IMPORTED_MODULE_0__mainpageModel__["a" /* getProductsByCategoryId */](activeCategoryIndex,page).then(drawProducts);
     }
 }
@@ -15838,7 +15842,6 @@ function activeCategory(target) {
     categories.find("li[data-category=" + activeCategoryIndex + "] a").removeClass("active");
     __WEBPACK_IMPORTED_MODULE_2_jquery___default()(target).addClass("active");
     activeCategoryIndex = __WEBPACK_IMPORTED_MODULE_2_jquery___default()(target).closest("li").data("category");
-
 }
 
 function drawProducts(data) {
@@ -15859,19 +15862,19 @@ function drawProducts(data) {
     leftPromise = __WEBPACK_IMPORTED_MODULE_1__utils_HandlebarsWrapper__["a" /* create */]("product-main-template", leftData, "append", left);
     rightPromise = __WEBPACK_IMPORTED_MODULE_1__utils_HandlebarsWrapper__["a" /* create */]("product-main-template", rightData, "append", right);
     Promise.all([leftPromise, rightPromise]).then(function(result) {
-        console.log(result);
         spinner.stop();
     });
-
     productCount = categories.find("li[data-category=" + activeCategoryIndex + "]").data("productcount")
     productCountTarget.html(productCount);
-
 }
 
 function removeAndDrawProducts(data) {
     left.empty();
     right.empty();
     drawProducts(data);
+}
+function setSpinnerOption(){
+
 }
 
 function init() {
@@ -15924,8 +15927,8 @@ let cache = {};
 
 function getProductsByCategoryId(categoryId, page) {
 
-    let url = "/api/categories/" + categoryId + "/products?page=" + page;
-    let data = cache[url];
+    const url = "/api/categories/" + categoryId + "/products?page=" + page;
+    const data = cache[url];
 
     return new Promise(function (resolve, reject) {
         if (data) {

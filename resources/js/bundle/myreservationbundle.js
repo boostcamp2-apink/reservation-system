@@ -10456,6 +10456,7 @@ class ReservationList{
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
+/* unused harmony export getDataFromDocument */
 /* harmony export (immutable) */ __webpack_exports__["e"] = saveData;
 /* harmony export (immutable) */ __webpack_exports__["a"] = getAllData;
 /* harmony export (immutable) */ __webpack_exports__["c"] = getClockAndCheckData;

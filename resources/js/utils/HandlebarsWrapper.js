@@ -24,18 +24,22 @@ function longTake() {
     }
 }
 
+
+
 export function create(handlebarsId, data, method, target) {
-    longTake();
     let template = cache[handlebarsId];
     return new Promise(function (resolve, reject) {
-        if (!template) {
-            cache[handlebarsId] = createTemplate(handlebarsId);
-            template = cache[handlebarsId];
-        }
-        target[method](template(data));
-        resolve("success");
+        setTimeout(function () {
+            if (!template) {
+                cache[handlebarsId] = createTemplate(handlebarsId);
+                template = cache[handlebarsId];
+            }
+            target[method](template(data));
+            resolve("success");
+        }, 3000);
     });
 }
+
 
 
 export function customHelper(helperName, func) {

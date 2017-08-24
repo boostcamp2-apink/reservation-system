@@ -7,7 +7,7 @@ let cancelTarget;
 let targetCount;
 
 
-function getDataFromDocument() {
+export function getDataFromDocument() {
     if (targetCount === '0') {
         return false;
     }

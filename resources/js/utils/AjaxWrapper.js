@@ -8,7 +8,7 @@ export function getData(url) {
     })
 }
 
-export function postData(url, data) {
+export function postData({url, data}) {
     return $.ajax({
         url: url,
         contentType: "application/json; charset=UTF-8",
@@ -19,7 +19,7 @@ export function postData(url, data) {
 
 }
 
-export function postFormFileData(url, data) {
+export function postFormFileData({url, data}) {
     return $.ajax({
         url: url,
         processData: false,

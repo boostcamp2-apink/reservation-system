@@ -4,8 +4,8 @@ let cache = {};
 
 export function getProductsByCategoryId(categoryId, page) {
 
-    let url = "/api/categories/" + categoryId + "/products?page=" + page;
-    let data = cache[url];
+    const url = "/api/categories/" + categoryId + "/products?page=" + page;
+    const data = cache[url];
 
     return new Promise(function (resolve, reject) {
         if (data) {

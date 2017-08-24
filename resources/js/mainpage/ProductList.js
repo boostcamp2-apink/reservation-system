@@ -23,7 +23,7 @@ function scrollUpdate(e) {
     let scrollIndex = window.scrollY + window.innerHeight;
     if ((productCount > page * 10) && scrollIndex > top - 100) {
         page++;
-        // MainpageModel.getProductsByCategoryId(activeCategoryIndex, page, drawProducts);
+        MainpageModel.getProductsByCategoryId(activeCategoryIndex, page, drawProducts);
         MainpageModel.getProductsByCategoryId(activeCategoryIndex,page).then(drawProducts);
     }
 }
@@ -39,7 +39,6 @@ function activeCategory(target) {
     categories.find("li[data-category=" + activeCategoryIndex + "] a").removeClass("active");
     $(target).addClass("active");
     activeCategoryIndex = $(target).closest("li").data("category");
-
 }
 
 function drawProducts(data) {
@@ -60,19 +59,19 @@ function drawProducts(data) {
     leftPromise = HandlebarsWrapper.create("product-main-template", leftData, "append", left);
     rightPromise = HandlebarsWrapper.create("product-main-template", rightData, "append", right);
     Promise.all([leftPromise, rightPromise]).then(function(result) {
-        console.log(result);
         spinner.stop();
     });
-
     productCount = categories.find("li[data-category=" + activeCategoryIndex + "]").data("productcount")
     productCountTarget.html(productCount);
-
 }
 
 function removeAndDrawProducts(data) {
     left.empty();
     right.empty();
     drawProducts(data);
+}
+function setSpinnerOption(){
+
 }
 
 export function init() {

@@ -10728,18 +10728,22 @@ function longTake() {
     }
 }
 
+
+
 function create(handlebarsId, data, method, target) {
-    longTake();
     let template = cache[handlebarsId];
     return new Promise(function (resolve, reject) {
-        if (!template) {
-            cache[handlebarsId] = createTemplate(handlebarsId);
-            template = cache[handlebarsId];
-        }
-        target[method](template(data));
-        resolve("success");
+        setTimeout(function () {
+            if (!template) {
+                cache[handlebarsId] = createTemplate(handlebarsId);
+                template = cache[handlebarsId];
+            }
+            target[method](template(data));
+            resolve("success");
+        }, 3000);
     });
 }
+
 
 
 function customHelper(helperName, func) {
@@ -15823,15 +15827,11 @@ class ImagePopup extends __WEBPACK_IMPORTED_MODULE_0__egjs_component___default.a
     }
 
     popupData(data) {
-        showSpiner();
         __WEBPACK_IMPORTED_MODULE_1__utils_HandlebarsWrapper__["a" /* create */](this.handleBarsId, data, "append", this.dataTarget);
         this.slider.init(this.dataTarget);
         this.currentImageNum.text(1);
         this.totalImageNum.text(data.length);
         this.rootTarget.fadeIn();
-        deleteSpiner();
-
-
 
     }
 
