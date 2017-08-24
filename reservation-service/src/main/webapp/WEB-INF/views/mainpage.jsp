@@ -157,8 +157,7 @@
         </li>
         {{/each}}
     </script>
-    <script type="text/javascript" src="/resources/js/node_modules/requirejs/require.js"></script>
-    <script type="text/javascript" src="/resources/js/mainpage/mainpage.js"></script>
+    <script type="text/javascript" src="/resources/js/bundle/mainpagebundle.js"></script>
 </body>
 
 </html>
