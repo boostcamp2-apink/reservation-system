@@ -1,6 +1,7 @@
 import Rating from "../components/Rating";
 import * as reviewWriteModel from "./reviewWriteModel";
 import * as HandlebarsWrapper from "../utils/HandlebarsWrapper";
+import * as $ from 'jquery'
 
 let productId;
 

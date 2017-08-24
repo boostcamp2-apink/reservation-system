@@ -1,5 +1,5 @@
 import * as AjaxWrapper from "../utils/AjaxWrapper"
-
+import * as $ from 'jquery'
 let cache = {};
 
 export function postImage({data,callback}) {

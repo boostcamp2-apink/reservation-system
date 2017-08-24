@@ -1,90 +1,67 @@
-define([], function () {
+import $ from 'jquery'
 
-    var timeout;
-    var interval;
-    var targetFunction;
-    var intervalDuration;
-    var timeoutDuration;
+let timeout;
+let interval;
+let targetFunction;
+let intervalDuration;
+let timeoutDuration;
 
-    function init(target) {
-        targetFunction = target;
-        intervalDuration = 2000;
-        timeoutDuration = 4000;
-        timeout = 0;
-        interval = 0;
-        onInterval();
-        setEvent();
+function setEvent() {
+    $(window).focus(onTimer);
+    $(window).blur(offAll);
+
+}
+
+function offInterval() {
+    console.log('offInterval');
+    clearInterval(interval);
+    interval = 0;
+}
+
+function onInterval() {
+    timeout = 0;
+    if (interval !== 0) {
+        return;
     }
+    console.log('onInterval');
+    interval = setInterval(targetFunction, intervalDuration);
+}
 
-    function setSafetySector(target) {
-        $(target).on("mouseenter",offAll);
-        $(target).on("mouseleave",onTimer);
+function offTimeout() {
+    console.log('offTimeout');
+    clearTimeout(timeout);
+    timeout = 0;
+}
+
+function onTimeout() {
+    if (timeout !== 0) {
+        return;
     }
-    function setEvent() {
-        $(window).focus(onTimer);
-        $(window).blur(offAll);
+    console.log('onTimeout');
+    timeout = setTimeout(onInterval, timeoutDuration);
+}
 
-    }
+function offAll() {
+    console.log("off");
+    offInterval();
+    offTimeout();
+}
 
-    function offInterval() {
-        console.log('offInterval');
-        clearInterval(interval);
-        interval = 0;
-    }
+function onTimer() {
+    onTimeout();
+}
 
-    function onInterval() {
-        timeout = 0;
-        if (interval != 0) {
-           return ;
-        }
-        console.log('onInterval');
-        interval = setInterval(targetFunction, intervalDuration);
-    }
+export function init(target) {
+    targetFunction = target;
+    intervalDuration = 2000;
+    timeoutDuration = 4000;
+    timeout = 0;
+    interval = 0;
+    onInterval();
+    setEvent();
+}
 
-    function offTimeout() {
-        console.log('offTimeout');
-        clearTimeout(timeout);
-        timeout = 0;
-    }
-
-    function onTimeout() {
-        if (timeout != 0) {
-            return ;
-        }
-        console.log('onTimeout');
-        timeout = setTimeout(onInterval, timeoutDuration);
-    }
-
-    function offAll() {
-        console.log("off");
-        offInterval();
-        offTimeout();
-    }
-
-    function onTimer () {
-        onTimeout();
-    }
-
-    return {
-        init: init,
-        setSafetySector : setSafetySector
-
-    }
-
-
-    // Rolling.prototype.offRolling = function () {
-    //     this.rootTarget.off("");
-    // };
-    //
-    // Rolling.prototype.timeoutRolling = function () {
-    //     clearInterval(this.intervalId);
-    //     clearTimeout(this.timeoutId);
-    //
-    //     this.timeoutId = setTimeout(function () {
-    //         this.intervalId = setInterval(this.nxtRolling.bind(this), 2000);
-    //     }.bind(this), 4000);
-    // };
-    // Rolling.prototype.intervalRolling = function () {
-    //     this.intervalId = setInterval(this.nxtRolling.bind(this), 2000);
-    // };
-});
+export function setSafetySector(target) {
+    $(target).on("mouseenter", offAll);
+    $(target).on("mouseleave", onTimer);
+}

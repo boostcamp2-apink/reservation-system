@@ -36,6 +36,7 @@ export default class ImagePopup extends Component {
         this.currentImageNum.text(1);
         this.totalImageNum.text(data.length);
         this.rootTarget.fadeIn();
+
     }
 
     setEvent() {
